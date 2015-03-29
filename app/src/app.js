@@ -1,15 +1,21 @@
 'use strict';
 
 angular.module('myFanPageApp', [
-  'ngRoute'
+  'ngRoute',
+  'facebook'
 ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'src/common/views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+
+.config(function(FacebookProvider) {
+  FacebookProvider.init('YOUR_APP_ID');
+})
+
+.config(function ($routeProvider) {
+  $routeProvider
+    .when('/', {
+      templateUrl: 'src/common/views/main.html',
+      controller: 'MainCtrl'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+});

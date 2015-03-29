@@ -2,7 +2,7 @@
 
 angular.module('myFanPageApp').constant('FanPageConfig', {
 
-	fanPageId: '',
+	fanPageId: 'myfanpageapp',
 	template: 'default',
 	coverPicture: true,
 
@@ -16,7 +16,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			photoPage: {
 				active: true,
 				name: 'Photos',
-				album: ''
+				album: "Website's pictures"
 			},
 			blogPage: {
 				active: true,
