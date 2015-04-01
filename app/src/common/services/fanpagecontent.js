@@ -4,7 +4,7 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
 
   var th = this;
 
-  this.pages: [
+  this.pages = [
 
     {
       hashtag: '#ourservices',

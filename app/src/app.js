@@ -6,6 +6,7 @@ angular.module('myFanPageApp', [
 ])
 
 .config(function(FacebookProvider, FanPageConfig) {
+  FacebookProvider.setSdkVersion('v2.3');
   FacebookProvider.init(FanPageConfig.fanPageId);
 })
 
