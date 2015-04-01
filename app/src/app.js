@@ -5,15 +5,15 @@ angular.module('myFanPageApp', [
   'facebook'
 ])
 
-.config(function(FacebookProvider) {
-  FacebookProvider.init('YOUR_APP_ID');
+.config(function(FacebookProvider, FanPageConfig) {
+  FacebookProvider.init(FanPageConfig.fanPageId);
 })
 
-.config(function ($routeProvider) {
+.config(function ($routeProvider, FanPageConfig) {
   $routeProvider
     .when('/', {
-      templateUrl: 'src/common/views/main.html',
-      controller: 'MainCtrl'
+      templateUrl: 'src/webcontent/views/templates/'+FanPageConfig.template+'/main.html',
+      controller: 'WebContentCtrl'
     })
     .otherwise({
       redirectTo: '/'
