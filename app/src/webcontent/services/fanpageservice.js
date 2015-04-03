@@ -1,21 +1,76 @@
 'use strict';
 
-angular.module('myFanPageApp').factory('FanPageService', function (Facebook, $q, $log) {
+angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $http) {
 
-  // Private API
-  var publicApi = null;
+	// Private API
+	var publicApi = null;
 
-  // Public API
-  var FanPageService = function() { // constructor
+	var getAlbum = function() {
 
-    // properties
-    publicApi = this;
+		var d = $q.defer();
+		publicApi.isError = false;
 
-    // methods
+		$http.get('http://graph.facebook.com/myfanpageapp').then(function (res){
+
+			if(res.error){
+
+				publicApi.isError = res.message;
+				return d.reject(res.message);
+
+			}else if (Object.keys(res).length == 0) {
+
+				publicApi.isError = 'No Data Available';
+				return d.reject(publicApi.isError);
+
+			}else {
+				return d.resolve(res);
+			};
 
 
-  };
+		});
 
-  return FanPageService;
+		return d.promise
+
+	};
+
+
+	// Public API
+	var FanPageService = function() { // constructor
+
+		// properties
+		publicApi = this;
+
+		// methods ###
+
+		this.getAboutPage = function() {
+			// body...
+		}
+
+		this.getFeeds = function() {
+			// body...
+		}
+
+		this.getPhotoPage = function() {
+
+			var that = this;
+
+			return getAlbum()
+			.then(function(d) {
+				var idAlbum = d.id;
+				return getPictures();
+			})
+			.then(function(d) {
+
+				d.listOfPicture;
+
+			});
+
+		};
+		//###		
+
+
+	};
+
+	return FanPageService;
 
 });

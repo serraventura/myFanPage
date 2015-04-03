@@ -1,13 +1,11 @@
 'use strict';
 
 angular.module('myFanPageApp', [
-  'ngRoute',
-  'facebook'
+  'ngRoute'
 ])
 
-.config(function(FacebookProvider, FanPageConfig) {
-  FacebookProvider.setSdkVersion('v2.3');
-  FacebookProvider.init(FanPageConfig.fanPageId);
+.config(function() {
+
 })
 
 .config(function ($routeProvider, FanPageConfig) {
