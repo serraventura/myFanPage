@@ -16,7 +16,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			photoPage: {
 				active: true,
 				name: 'Photos',
-				album: "Website"
+				album: 'Website'
 			},
 			blogPage: {
 				active: true,
