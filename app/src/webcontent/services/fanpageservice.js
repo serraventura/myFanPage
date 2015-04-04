@@ -3,7 +3,7 @@
 angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $http, FanPageConfig, FanPageContent) {
 
 	// Private API
-	var publicApi = null;
+	var publicApi = undefined;
 	var URLAPI = 'http://graph.facebook.com';
 
 	var getAlbum = function() {
@@ -11,17 +11,12 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 		var d = $q.defer();
 		publicApi.isError = false;
 
-		$http.get(URLAPI+'/xxxx').then(function (res){
+		$http.get(URLAPI+'/'+FanPageConfig.fanPageId+'/albums').then(function (res){
 
 			if(res.error){
 
 				publicApi.isError = res.message;
 				return d.reject(res.message);
-
-			}else if (Object.keys(res).length == 0) {
-
-				publicApi.isError = 'No Data Available';
-				return d.reject(publicApi.isError);
 
 			}else {
 				return d.resolve(res);
@@ -33,6 +28,49 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 		return d.promise
 
 	};
+
+	var getWebsiteAlbumId = function(data) {
+
+		var albumId = undefined;
+		var len = data.length;
+
+		for (var i = 0; i < len; i++) {
+
+			if ( data[i].name.toLowerCase() == FanPageConfig.menu.statics.photoPage.album.toLowerCase() ) {
+
+				albumId = data[i].id;
+				break;
+
+			};
+
+		};
+
+		return albumId;
+
+	}
+
+	var getPictures = function(idAlbum) {
+
+		var d = $q.defer();
+		publicApi.isError = false;
+
+		$http.get(URLAPI+'/'+idAlbum+'/photos').then(function (res){
+
+			if(res.error){
+
+				publicApi.isError = res.message;
+				return d.reject(res.message);
+
+			}else {
+				return d.resolve(res);
+			};
+
+
+		});
+
+		return d.promise
+
+	}
 
 	// Public API
 	var FanPageService = function() { // constructor
@@ -82,12 +120,25 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 			return getAlbum()
 			.then(function(d) {
-				var idAlbum = d.id;
-				return getPictures();
+				var idAlbum = getWebsiteAlbumId(d.data.data);
+				return getPictures(idAlbum);
 			})
 			.then(function(d) {
 
-				d.listOfPicture;
+				var len = d.data.data.length;
+				var pictures = [];
+
+				for (var i = 0; i < len; i++) {
+					
+					pictures.push({
+						small: d.data.data[i].picture,
+						big: d.data.data[i].source,
+						description: d.data.data[i].name
+					});
+
+				};
+
+				FanPageContent.pictures = pictures;
 
 			});
 
