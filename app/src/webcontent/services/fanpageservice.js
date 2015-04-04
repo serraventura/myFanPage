@@ -1,16 +1,17 @@
 'use strict';
 
-angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $http) {
+angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $http, FanPageConfig, FanPageContent) {
 
 	// Private API
 	var publicApi = null;
+	var URLAPI = 'http://graph.facebook.com';
 
 	var getAlbum = function() {
 
 		var d = $q.defer();
 		publicApi.isError = false;
 
-		$http.get('http://graph.facebook.com/myfanpageapp').then(function (res){
+		$http.get(URLAPI+'/xxxx').then(function (res){
 
 			if(res.error){
 
@@ -33,17 +34,42 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 	};
 
-
 	// Public API
 	var FanPageService = function() { // constructor
 
 		// properties
 		publicApi = this;
+		this.pageContent = FanPageContent;
 
 		// methods ###
+		this.getPageInfos = function() {
 
-		this.getAboutPage = function() {
-			// body...
+			var d = $q.defer();
+			publicApi.isError = false;
+
+			$http.get(URLAPI+'/'+FanPageConfig.fanPageId).then(function (res){
+
+				if(res.error){
+
+					publicApi.isError = res.message;
+					return d.reject(res.message);
+
+				}else {
+
+					FanPageContent.pageDetails.name = res.data.name;
+					FanPageContent.pageDetails.about = res.data.about;
+					FanPageContent.pageDetails.description = res.data.description;
+					FanPageContent.pageDetails.likes = res.data.likes;
+
+					return d.resolve(res);
+
+				};
+
+
+			});
+
+			return d.promise
+
 		}
 
 		this.getFeeds = function() {
