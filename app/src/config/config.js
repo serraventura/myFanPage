@@ -7,33 +7,29 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	coverPicture: true,
 
 	menu: {
-		statics: {
-			aboutPage: {
-				active: true,
-				name: 'About us',
-				location: true
-			},
-			photoPage: {
-				active: true,
-				name: 'Photos',
-				album: 'Website'
-			},
-			blogPage: {
-				active: true,
-				tweetsActive: false,
-				name: 'Blog',
-				hashtag: '#blog'
-			}
+
+		aboutFanPage: {
+			active: true,
+			name: 'About us',
+			location: true
 		},
-		dynamics: [
+		photoFanPage: {
+			active: true,
+			name: 'Photos',
+			album: 'Website'
+		},
+		blogFanPage: {
+			active: true,
+			tweetsActive: false,
+			name: 'Blog',
+			hashtag: '#blog'
+		},
+		services: {
+			active: true,
+			name: 'Services',
+			hashtag: '#ourservices'
+		}
 
-			{
-				name: 'Services',
-				title: 'Our Services',
-				hashtag: '#ourservices'
-			}
-
-		]
 	}
 
 });

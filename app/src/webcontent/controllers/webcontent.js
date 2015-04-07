@@ -6,6 +6,7 @@ angular.module('myFanPageApp')
   	var fanPageService = new FanPageService();
 
 	$scope.pageContent = fanPageService.pageContent;
+	$scope.menuOptions = fanPageService.menuOptions;
 
   	fanPageService.getPageInfos().then(function(res) {
 
@@ -14,6 +15,5 @@ angular.module('myFanPageApp')
   	fanPageService.getPhotoPage().then(function(res) {
   		
   	});
-
 
   });

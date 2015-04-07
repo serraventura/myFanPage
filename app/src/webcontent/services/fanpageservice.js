@@ -36,7 +36,7 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		for (var i = 0; i < len; i++) {
 
-			if ( data[i].name.toLowerCase() == FanPageConfig.menu.statics.photoPage.album.toLowerCase() ) {
+			if ( data[i].name.toLowerCase() == FanPageConfig.menu.photoFanPage.album.toLowerCase() ) {
 
 				albumId = data[i].id;
 				break;
@@ -78,6 +78,7 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 		// properties
 		publicApi = this;
 		this.pageContent = FanPageContent;
+		this.menuOptions = FanPageConfig.menu;
 
 		// methods ###
 		this.getPageInfos = function() {
