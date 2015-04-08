@@ -29,7 +29,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div ng-controller="WebContentCtrl" class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -49,10 +49,12 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="vendor/bower_components/jquery/dist/jquery.js"></script>
     <script src="vendor/bower_components/es5-shim/es5-shim.js"></script>
     <script src="vendor/bower_components/angular/angular.js"></script>
     <script src="vendor/bower_components/json3/lib/json3.js"></script>
     <script src="vendor/bower_components/angular-route/angular-route.js"></script>
+    <script src="vendor/bower_components/angular-resource/angular-resource.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -60,6 +62,7 @@
         <script src="src/app.js"></script>
         <script src="src/webcontent/controllers/webcontent.js"></script>
         <script src="src/webcontent/services/fanpageservice.js"></script>
+        <script src="src/webcontent/services/watchservice.js"></script>
         <script src="src/common/services/fanpagecontent.js"></script>
         <script src="src/config/config.js"></script>
         <!-- endbuild -->

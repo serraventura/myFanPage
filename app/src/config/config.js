@@ -24,7 +24,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			name: 'Blog',
 			hashtag: '#blog'
 		},
-		services: {
+		service: {
 			active: true,
 			name: 'Services',
 			hashtag: '#ourservices'
