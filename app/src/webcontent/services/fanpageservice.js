@@ -29,6 +29,28 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 	};
 
+	var getMenuContentByHashtag = function(res) {
+
+		var arrHashtag = [];
+
+		for (prop in FanPageConfig.menu){
+
+			if(menu[prop].hasOwnProperty('hashtag')){
+				arrHashtag.push(menu[prop].hashtag);
+			}
+
+		};
+
+		if (res.data) {
+
+			for (var i = 0; i < res.data.length; i++) {
+				console.log(res.data[i].message);
+			};
+
+		};
+
+	};
+
 	var getWebsiteAlbumId = function(data) {
 
 		var albumId = undefined;
@@ -111,8 +133,30 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		}
 
-		this.getFeeds = function() {
-			// body...
+		this.getMenuContent = function() {
+
+			var d = $q.defer();
+			publicApi.isError = false;
+
+			$http.get(URLAPI+'/'+FanPageConfig.fanPageId+'/feed').then(function (res){
+
+				if(res.error){
+
+					publicApi.isError = res.message;
+					return d.reject(res.message);
+
+				}else {
+
+					getMenuContentByHashtag(res);
+
+					return d.resolve(res);
+				};
+
+
+			});
+
+			return d.promise
+
 		}
 
 		this.getPhotoPage = function() {

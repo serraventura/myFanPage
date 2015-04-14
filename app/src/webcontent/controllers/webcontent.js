@@ -18,4 +18,8 @@ angular.module('myFanPageApp')
   		
   	});
 
+    fanPageService.getMenuContent().then(function(res) {
+      
+    });
+
   });
