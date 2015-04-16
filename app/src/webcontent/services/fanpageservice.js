@@ -5,6 +5,7 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 	// Private API
 	var publicApi = undefined;
 	var URLAPI = 'http://graph.facebook.com';
+	var sURLAPI = 'https://graph.facebook.com';
 
 	var getAlbum = function() {
 
@@ -32,20 +33,48 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 	var getMenuContentByHashtag = function(res) {
 
 		var arrHashtag = [];
+		var prop;
 
 		for (prop in FanPageConfig.menu){
 
-			if(menu[prop].hasOwnProperty('hashtag')){
-				arrHashtag.push(menu[prop].hashtag);
+			if(FanPageConfig.menu[prop].hasOwnProperty('hashtag')){
+				arrHashtag.push(FanPageConfig.menu[prop].hashtag);
 			}
 
 		};
+	
+		//x.filter(function(item){return item.hashtag=='#ourservices'}).length
+		if (res.data.data) {
 
-		if (res.data) {
+			var hashtagFound;
 
-			for (var i = 0; i < res.data.length; i++) {
-				console.log(res.data[i].message);
+			for (var i = 0; i < res.data.data.length; i++) {
+
+				if (res.data.data[i].message) {
+
+					hashtagFound = arrHashtag.filter(function(item){
+						return (res.data.data[i].message.indexOf(item)!=-1);
+					});
+
+					if (hashtagFound.length>0) {
+
+						FanPageContent.pages.push(
+							{
+							  hashtag: hashtagFound[0],
+							  text: res.data.data[i].message,
+							  pictures: []
+							}
+						);
+
+					};
+
+
+				};
+
+				console.log(res.data.data[i].message);
 			};
+
+			console.log(FanPageContent);
 
 		};
 
@@ -138,7 +167,7 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 			var d = $q.defer();
 			publicApi.isError = false;
 
-			$http.get(URLAPI+'/'+FanPageConfig.fanPageId+'/feed').then(function (res){
+			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token).then(function (res){
 
 				if(res.error){
 
