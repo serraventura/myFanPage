@@ -24,10 +24,11 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
   this.pages = [
 
     {
-      hashtag: '#ourservices',
-      title: '',
-      text: '',
-      pictures: []
+      id: '0300303030',
+      pictureId: '999399393',
+      hashtag: '#anyhashtag',
+      text: 'test test test...',
+      picture: 'http://...'
     }
 
   ];

@@ -45,12 +45,16 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 			hashtagProp = undefined;
 			tweetProp = undefined;
 
-			if(FanPageConfig.menu[prop].hasOwnProperty('hashtag')){
-				hashtagProp = FanPageConfig.menu[prop].hashtag;
-			};
+			if(FanPageConfig.menu[prop].hasOwnProperty('active') && FanPageConfig.menu[prop].active){
 
-			if(FanPageConfig.menu[prop].hasOwnProperty('tweet')){
-				tweetProp = FanPageConfig.menu[prop].tweet;
+				if( FanPageConfig.menu[prop].hasOwnProperty('hashtag') && (FanPageConfig.menu[prop].hashtag.indexOf('#')!=-1) ){
+					hashtagProp = FanPageConfig.menu[prop].hashtag;
+				};
+
+				if(FanPageConfig.menu[prop].hasOwnProperty('tweet')){
+					tweetProp = FanPageConfig.menu[prop].tweet;
+				};
+
 			};
 
 			if (hashtagProp || tweetProp) {
@@ -68,6 +72,7 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 			var hashtagFound;
 			var pageContentFound = 0;
+			var arrFanPageContentPages = [];
 
 			for (var i = 0; i < res.data.length; i++) {
 
@@ -86,11 +91,12 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 						if ( ((pageContentFound>0 && hashtagFound[0].tweet) || pageContentFound==0) ) {
 
-							FanPageContent.pages.push({
+							arrFanPageContentPages.push({
 								id: res.data[i].id,
+								pictureId: res.data[i].object_id,
 								hashtag: hashtagFound[0].hashtag,
 								text: res.data[i].message,
-								pictures: []
+								picture: undefined
 							});
 
 						};
@@ -99,8 +105,10 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 				};
 
-				console.log(res.data[i].message);
+				console.log(res.data[i]);
 			};
+
+			FanPageContent.pages = arrFanPageContentPages;
 
 			console.log(FanPageContent);
 
@@ -169,6 +177,12 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 			var d = $q.defer();
 			publicApi.isError = false;
 
+			if (!FanPageConfig.menu.aboutFanPage.active) {
+				publicApi.isError = true;
+				d.reject('Content not active.');
+				return d.promise;
+			};
+
 			$http.get(URLAPI+'/'+FanPageConfig.fanPageId).then(function (res){
 
 				if(!res.data){
@@ -233,6 +247,14 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 		this.getPhotoPage = function() {
 
 			var that = this;
+			publicApi.isError = false;
+
+			if (!FanPageConfig.menu.photoFanPage.active) {
+				var d = $q.defer();
+				publicApi.isError = true;
+				d.reject('Content not active.');
+				return d.promise;
+			};
 
 			return getAlbum()
 			.then(function(d) {

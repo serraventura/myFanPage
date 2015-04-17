@@ -15,7 +15,7 @@ angular.module('myFanPageApp')
   	});
 
   	fanPageService.getPhotoPage().then(function(res) {
-  		
+
   	});
 
     fanPageService.getMenuContent().then(function(res) {
