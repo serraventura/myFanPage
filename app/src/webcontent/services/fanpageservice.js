@@ -14,16 +14,19 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		$http.get(URLAPI+'/'+FanPageConfig.fanPageId+'/albums').then(function (res){
 
-			if(res.error){
+			if(!res.data.data){
 
-				publicApi.isError = res.message;
-				return d.reject(res.message);
+				publicApi.isError = true;
+				return d.reject('No Data Found.');
 
 			}else {
 				return d.resolve(res);
 			};
 
 
+		}, function (res) {
+			publicApi.isError = true;
+			return d.reject(res);
 		});
 
 		return d.promise
@@ -32,46 +35,71 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 	var getMenuContentByHashtag = function(res) {
 
-		var arrHashtag = [];
+		var arrConfigProp = [];
 		var prop;
+		var	hashtagProp;
+		var	tweetProp;
 
 		for (prop in FanPageConfig.menu){
 
+			hashtagProp = undefined;
+			tweetProp = undefined;
+
 			if(FanPageConfig.menu[prop].hasOwnProperty('hashtag')){
-				arrHashtag.push(FanPageConfig.menu[prop].hashtag);
-			}
+				hashtagProp = FanPageConfig.menu[prop].hashtag;
+			};
+
+			if(FanPageConfig.menu[prop].hasOwnProperty('tweet')){
+				tweetProp = FanPageConfig.menu[prop].tweet;
+			};
+
+			if (hashtagProp || tweetProp) {
+
+				arrConfigProp.push({
+					hashtag: hashtagProp,
+					tweet: tweetProp
+				});
+
+			};
 
 		};
 	
-		//x.filter(function(item){return item.hashtag=='#ourservices'}).length
-		if (res.data.data) {
+		if (res.data) {
 
 			var hashtagFound;
+			var pageContentFound = 0;
 
-			for (var i = 0; i < res.data.data.length; i++) {
+			for (var i = 0; i < res.data.length; i++) {
 
-				if (res.data.data[i].message) {
+				if (res.data[i].message) {
 
-					hashtagFound = arrHashtag.filter(function(item){
-						return (res.data.data[i].message.indexOf(item)!=-1);
+					hashtagFound = arrConfigProp.filter(function(item){
+						return (res.data[i].message.indexOf(item.hashtag)!=-1);
 					});
 
 					if (hashtagFound.length>0) {
 
-						FanPageContent.pages.push(
-							{
-							  hashtag: hashtagFound[0],
-							  text: res.data.data[i].message,
-							  pictures: []
-							}
-						);
+						// check if content is already saved
+						pageContentFound = FanPageContent.pages.filter(function(item){
+							return item.hashtag==hashtagFound[0].hashtag
+						}).length;
+
+						if ( ((pageContentFound>0 && hashtagFound[0].tweet) || pageContentFound==0) ) {
+
+							FanPageContent.pages.push({
+								id: res.data[i].id,
+								hashtag: hashtagFound[0].hashtag,
+								text: res.data[i].message,
+								pictures: []
+							});
+
+						};
 
 					};
 
-
 				};
 
-				console.log(res.data.data[i].message);
+				console.log(res.data[i].message);
 			};
 
 			console.log(FanPageContent);
@@ -107,16 +135,20 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		$http.get(URLAPI+'/'+idAlbum+'/photos').then(function (res){
 
-			if(res.error){
+			if(!res.data.data){
 
-				publicApi.isError = res.message;
-				return d.reject(res.message);
+				publicApi.isError = true;
+				return d.reject('No Data Found.');
 
 			}else {
+				publicApi.isError = false;
 				return d.resolve(res);
 			};
 
 
+		}, function (res) {
+			publicApi.isError = true;
+			return d.reject(res);
 		});
 
 		return d.promise
@@ -139,10 +171,10 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 			$http.get(URLAPI+'/'+FanPageConfig.fanPageId).then(function (res){
 
-				if(res.error){
+				if(!res.data){
 
-					publicApi.isError = res.message;
-					return d.reject(res.message);
+					publicApi.isError = true;
+					return d.reject('No Data Found.');
 
 				}else {
 
@@ -151,11 +183,15 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 					FanPageContent.pageDetails.description = res.data.description;
 					FanPageContent.pageDetails.likes = res.data.likes;
 
+					publicApi.isError = false;
 					return d.resolve(res);
 
 				};
 
 
+			}, function(res) {
+				publicApi.isError = true;
+				return d.reject(res);
 			});
 
 			return d.promise
@@ -167,20 +203,26 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 			var d = $q.defer();
 			publicApi.isError = false;
 
-			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token).then(function (res){
+			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
 
-				if(res.error){
+				if(!res.data.data){
 
-					publicApi.isError = res.message;
-					return d.reject(res.message);
+					publicApi.isError = true;
+					return d.reject('No Data Found.');
 
 				}else {
 
-					getMenuContentByHashtag(res);
+					publicApi.isError = false;
+					getMenuContentByHashtag(res.data);
 
 					return d.resolve(res);
 				};
 
+
+			}, function(res) {
+
+				publicApi.isError = true;
+				return d.reject(res);
 
 			});
 

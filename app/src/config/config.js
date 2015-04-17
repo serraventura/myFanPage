@@ -21,7 +21,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 		},
 		blogFanPage: {
 			active: true,
-			tweetsActive: false,
+			tweet: true,
 			name: 'Blog',
 			hashtag: '#blog'
 		},
