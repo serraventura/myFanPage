@@ -19,6 +19,9 @@ angular.module('myFanPageApp', [
 
 })
 
-.run(function () {
+.run(function(FanPageConfig) {
+
+  namespace.scriptloader.loadJS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
+  namespace.scriptloader.loadCSS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
 
 })
