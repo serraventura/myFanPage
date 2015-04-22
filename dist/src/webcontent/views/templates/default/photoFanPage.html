@@ -1,0 +1,19 @@
+<div>
+	Photo html - default template
+	<hr />
+	{{pageContent.pageDetails.name}}
+	<hr />
+
+	<ul>
+		<li ng-repeat="(id, menu) in menuOptions track by $index">
+			<a href="#{{id}}">{{menu.name}}</a>
+		</li>
+	</ul>
+	<hr />
+
+	<ul>
+		<li ng-repeat="picture in pageContent.pictures track by $index">
+			<a href="{{picture.big}}" target="_blank"><img src="{{picture.small}}" /></a><span>{{picture.description}}</span>
+		</li>
+	</ul>
+</div>

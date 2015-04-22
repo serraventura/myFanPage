@@ -1,4 +1,4 @@
-namespace = window.namespace || {};
+var namespace = window.namespace || {};
 namespace.scriptloader = namespace.scriptloader || {};
 namespace.scriptloader = (function(){
 
