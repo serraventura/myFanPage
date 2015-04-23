@@ -168,8 +168,6 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		// properties
 		publicApi = this;
-		this.pageContent = FanPageContent;
-		this.menuOptions = FanPageConfig.menu;
 
 		// methods ###
 		this.getPageInfos = function() {

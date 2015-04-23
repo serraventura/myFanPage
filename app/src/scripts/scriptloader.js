@@ -1,6 +1,6 @@
-var namespace = window.namespace || {};
-namespace.scriptloader = namespace.scriptloader || {};
-namespace.scriptloader = (function(){
+var myFanPageApp1 = window.myFanPageApp1 || {};
+myFanPageApp1.scriptloader = myFanPageApp1.scriptloader || {};
+myFanPageApp1.scriptloader = (function(){
 
 	return{
 

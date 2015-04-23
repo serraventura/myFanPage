@@ -21,7 +21,7 @@ angular.module('myFanPageApp', [
 
 .run(function(FanPageConfig) {
 
-  namespace.scriptloader.loadJS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
-  namespace.scriptloader.loadCSS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
+  myFanPageApp1.scriptloader.loadJS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
+  myFanPageApp1.scriptloader.loadCSS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
 
 })

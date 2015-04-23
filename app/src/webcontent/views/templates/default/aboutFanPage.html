@@ -1,16 +1,12 @@
 <div>
 	About html - default template
 	<hr />
-	{{pageContent.pageDetails.name}}
+	<page-details value="name"></page-details>
 	<hr />
-	<ul>
-		<li ng-repeat="(id, menu) in menuOptions track by $index">
-			<a href="#{{id}}">{{menu.name}}</a>
-		</li>
-	</ul>
+	<page-menu></page-menu>
 	<hr />
-	{{pageContent.pageDetails.about}}
+	<page-details value="about"></page-details>
 	<hr />
-	{{pageContent.pageDetails.description}}
+	<page-details value="description"></page-details>
 	<hr />
 </div>

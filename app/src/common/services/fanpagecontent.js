@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myFanPageApp').service('FanPageContent', function FanPageContent() {
+angular.module('myFanPageApp').service('FanPageContent', function FanPageContent(FanPageConfig) {
 
   var th = this;
 
@@ -20,6 +20,8 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
     }
 
   ];
+
+  this.menuOptions = FanPageConfig.menu;
 
   this.pages = [
 

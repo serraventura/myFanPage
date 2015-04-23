@@ -1,25 +1,22 @@
 'use strict';
 
 angular.module('myFanPageApp')
-  .controller('WebContentCtrl', function ($scope, FanPageService, WatchService) {
+  .controller('WebContentCtrl', function ($scope, $rootScope, FanPageService, WatchService) {
 
     WatchService.watchRoutes($scope);
 
   	var fanPageService = new FanPageService();
 
-    $scope.pageContent = fanPageService.pageContent;
-    $scope.menuOptions = fanPageService.menuOptions;
-
   	fanPageService.getPageInfos().then(function(res) {
-
+      $rootScope.$broadcast('page-infos-ready');
   	});
 
   	fanPageService.getPhotoPage().then(function(res) {
-
+      $rootScope.$broadcast('page-photo-ready');
   	});
 
     fanPageService.getMenuContent().then(function(res) {
-      
+      $rootScope.$broadcast('menu-content-ready');
     });
 
   });
