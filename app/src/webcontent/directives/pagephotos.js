@@ -12,11 +12,13 @@ angular.module('myFanPageApp')
 
 					scope.pictures = null;
 
-					scope.$on('page-photo-ready', function(event, args) {
+					scope.$watch(function() {
+						return FanPageContent.pictures;
+					}, function(newVal, oldVal) {
 
 						scope.pictures = FanPageContent.pictures;
 
-					});
+					}, true);
 
 				}
 			}

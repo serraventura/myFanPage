@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myFanPageApp')
-	.directive('pageDetails', function (FanPageContent) {
+	.directive('pageDetails', function (FanPageContent, $timeout) {
 		return {
 			template: '<span>{{valueProp}}</span>',
 			restrict: 'E',
@@ -12,7 +12,9 @@ angular.module('myFanPageApp')
 
 					scope.valueProp = null;
 
-					scope.$on('page-infos-ready', function(event, args) {
+					scope.$watch(function() {
+						return FanPageContent.pageDetails;
+					}, function(newVal, oldVal) {
 
 						var pageDetailsProp = (attrs.value||'').toLowerCase();
 
@@ -22,7 +24,8 @@ angular.module('myFanPageApp')
 							scope.valueProp = pageDetailsProp+' details not found.';
 						};
 
-					});
+
+					}, true);
 
 				}
 			}
