@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myFanPageApp')
-	.directive('pageDetails', function (FanPageContent, $timeout) {
+	.directive('pageDetails', function (FanPageContent) {
 		return {
 			template: '<span>{{valueProp}}</span>',
 			restrict: 'E',
