@@ -242,6 +242,70 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		}
 
+		this.getContentByHashtag = function(hashtag) {
+
+			var d = $q.defer();
+			publicApi.isError = false;
+
+			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
+
+				if(!res.data.data){
+
+					publicApi.isError = true;
+					return d.reject('No Data Found.');
+
+				}else {
+
+					publicApi.isError = false;
+
+					if (res.data.data) {
+
+						var pageContentFound = 0;
+						var arrFanPageContentPages = [];
+
+						// check if content is already saved
+						pageContentFound = FanPageContent.pages.filter(function(item){
+							return item.hashtag==hashtag
+						}).length;
+
+						for (var i = 0; i < res.data.length; i++) {
+
+							if (res.data[i].message) {
+
+								if (res.data[i].message.indexOf(hashtag)!=-1) {
+
+									FanPageContent.pages.push({
+										id: res.data[i].id,
+										pictureId: res.data[i].object_id,
+										hashtag: hashtagFound[0].hashtag,
+										text: res.data[i].message,
+										picture: undefined
+									});
+
+								};
+
+
+							};
+
+						};
+
+					};
+
+					return d.resolve(res);
+				};
+
+
+			}, function(res) {
+
+				publicApi.isError = true;
+				return d.reject(res);
+
+			});
+
+			return d.promise
+
+		}
+
 		this.getPhotoPage = function() {
 
 			var that = this;
