@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myFanPageApp')
-	.directive('pageContent', function (FanPageContent, $routeParams) {
+	.directive('pageContent', function (FanPageContent, FanPageService, $routeParams) {
 		return {
 			template: '<p ng-repeat="page in pageContent track by $index">{{page.text}}</p>',
 			restrict: 'E',
@@ -27,10 +27,27 @@ angular.module('myFanPageApp')
 								return item.hashtag == hashtagProp;
 							});
 
-							if (tweetProp === 'true') {
-								scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
+
+							if (itemFound.length==0) {
+
+								FanPageService.getContentByHashtag(hashtagProp).then(function (argument) {
+
+									if (tweetProp === 'true') {
+										scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
+									}else{
+										scope.pageContent = [itemFound[itemProp||0]];
+									};
+
+								});
+								
 							}else{
-								scope.pageContent = [itemFound[itemProp||0]];
+
+								if (tweetProp === 'true') {
+									scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
+								}else{
+									scope.pageContent = [itemFound[itemProp||0]];
+								};
+
 							};
 
 						}else{ //if property hashtag is NOT provided, first do the search by route to find the right hashtag

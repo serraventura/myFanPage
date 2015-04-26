@@ -244,8 +244,19 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 		this.getContentByHashtag = function(hashtag) {
 
+			var pageContentFound = undefined;
 			var d = $q.defer();
 			publicApi.isError = false;
+
+			// check if content is already saved
+			pageContentFound = FanPageContent.pages.filter(function(item){
+				return item.hashtag==hashtag
+			});
+
+			if (pageContentFound.length>0) {
+				d.resolve(pageContentFound);
+				return d.promise;
+			};
 
 			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
 
@@ -258,40 +269,32 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 					publicApi.isError = false;
 
-					if (res.data.data) {
+					for (var i = 0; i < res.data.length; i++) {
 
-						var pageContentFound = 0;
-						var arrFanPageContentPages = [];
+						if (res.data[i].message) {
 
-						// check if content is already saved
-						pageContentFound = FanPageContent.pages.filter(function(item){
-							return item.hashtag==hashtag
-						}).length;
+							if (res.data[i].message.indexOf(hashtag)!=-1) {
 
-						for (var i = 0; i < res.data.length; i++) {
-
-							if (res.data[i].message) {
-
-								if (res.data[i].message.indexOf(hashtag)!=-1) {
-
-									FanPageContent.pages.push({
-										id: res.data[i].id,
-										pictureId: res.data[i].object_id,
-										hashtag: hashtagFound[0].hashtag,
-										text: res.data[i].message,
-										picture: undefined
-									});
-
-								};
-
+								FanPageContent.pages.push({
+									id: res.data[i].id,
+									pictureId: res.data[i].object_id,
+									hashtag: hashtagFound[0].hashtag,
+									text: res.data[i].message,
+									picture: undefined
+								});
 
 							};
+
 
 						};
 
 					};
 
-					return d.resolve(res);
+					pageContentFound = FanPageContent.pages.filter(function(item){
+						return item.hashtag==hashtag
+					});
+
+					return d.resolve(pageContentFound);
 				};
 
 
