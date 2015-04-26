@@ -269,17 +269,17 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 					publicApi.isError = false;
 
-					for (var i = 0; i < res.data.length; i++) {
+					for (var i = 0; i < res.data.data.length; i++) {
 
-						if (res.data[i].message) {
+						if (res.data.data[i].message) {
 
-							if (res.data[i].message.indexOf(hashtag)!=-1) {
+							if (res.data.data[i].message.indexOf(hashtag)!=-1) {
 
 								FanPageContent.pages.push({
-									id: res.data[i].id,
-									pictureId: res.data[i].object_id,
-									hashtag: hashtagFound[0].hashtag,
-									text: res.data[i].message,
+									id: res.data.data[i].id,
+									pictureId: res.data.data[i].object_id,
+									hashtag: hashtag,
+									text: res.data.data[i].message,
 									picture: undefined
 								});
 

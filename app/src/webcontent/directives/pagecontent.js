@@ -17,29 +17,30 @@ angular.module('myFanPageApp')
 					}, function(newVal, oldVal) {
 
 						var hashtagProp = (attrs.hashtag||'').toLowerCase();
-						var tweetProp = (attrs.tweet||true);
 						var itemProp = attrs.item;
 
 						// if property hashtag is provided do the search directly on pages array by hashtag
 						if (hashtagProp!='') {
 
+							var tweetProp = (attrs.tweet||'false');
+
 							var itemFound = FanPageContent.pages.filter(function(item) {
 								return item.hashtag == hashtagProp;
 							});
 
-
 							if (itemFound.length==0) {
 
-								FanPageService.getContentByHashtag(hashtagProp).then(function (argument) {
+								var fanPageService = new FanPageService();
+								fanPageService.getContentByHashtag(hashtagProp).then(function (item) {
 
 									if (tweetProp === 'true') {
-										scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
+										scope.pageContent = itemProp?[item[itemProp]]:item;
 									}else{
-										scope.pageContent = [itemFound[itemProp||0]];
+										scope.pageContent = [item[itemProp||0]];
 									};
 
 								});
-								
+
 							}else{
 
 								if (tweetProp === 'true') {
