@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('myFanPageApp')
-  .controller('WebContentCtrl', function ($scope, $rootScope, FanPageService, WatchService) {
+  .controller('WebContentCtrl', function ($scope, $rootScope, FanPageService, WatchService, FanPageConfig) {
 
     WatchService.watchRoutes($scope);
+
+    $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
 
   	var fanPageService = new FanPageService();
 
