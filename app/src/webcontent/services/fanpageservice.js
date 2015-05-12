@@ -105,12 +105,11 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 
 				};
 
-				console.log(res.data[i]);
 			};
 
 			FanPageContent.pages = arrFanPageContentPages;
 
-			console.log(FanPageContent);
+			console.log('FanPageContent: ', FanPageContent);
 
 		};
 
@@ -195,11 +194,52 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 					FanPageContent.pageDetails.description = res.data.description;
 					FanPageContent.pageDetails.likes = res.data.likes;
 
+					if (res.data.cover) {
+						FanPageContent.pageDetails.cover = res.data.cover.source;
+					};
+
 					publicApi.isError = false;
 					return d.resolve(res);
 
 				};
 
+
+			}, function(res) {
+				publicApi.isError = true;
+				return d.reject(res);
+			});
+
+			return d.promise
+
+		}
+
+		this.getProfilePicture = function() {
+
+			var d = $q.defer();
+			publicApi.isError = false;
+
+			if (!FanPageConfig.profilePicture) {
+				publicApi.isError = true;
+				d.reject('Content not active.');
+				return d.promise;
+			};
+
+			$http.get(URLAPI+'/'+FanPageConfig.fanPageId+'/photos').then(function (res){
+
+				if(!res.data.data){
+
+					publicApi.isError = true;
+					return d.reject('No Data Found.');
+
+				}else {
+
+					FanPageContent.pageDetails.profilePicture.small = res.data.data[0].picture;
+					FanPageContent.pageDetails.profilePicture.big = res.data.data[0].source;
+
+					publicApi.isError = false;
+					return d.resolve(res);
+
+				};
 
 			}, function(res) {
 				publicApi.isError = true;

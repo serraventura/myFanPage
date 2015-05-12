@@ -13,6 +13,10 @@ angular.module('myFanPageApp')
       $rootScope.$broadcast('page-infos-ready');
   	});
 
+    fanPageService.getProfilePicture().then(function(res) {
+      $rootScope.$broadcast('page-profile-picture-ready');
+    });
+
   	fanPageService.getPhotoPage().then(function(res) {
       $rootScope.$broadcast('page-photo-ready');
   	});

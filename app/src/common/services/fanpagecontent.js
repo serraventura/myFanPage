@@ -2,13 +2,18 @@
 
 angular.module('myFanPageApp').service('FanPageContent', function FanPageContent(FanPageConfig) {
 
-  var th = this;
+  var self = this;
 
   this.pageDetails = {
   	name: undefined,
   	about: undefined,
   	description: undefined,
-  	likes: undefined
+  	likes: undefined,
+    cover: undefined,
+    profilePicture: {
+      small: undefined,
+      big: undefined
+    }
   };
 
   this.pictures = [
