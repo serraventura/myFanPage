@@ -3,7 +3,7 @@
 angular.module('myFanPageApp')
 	.directive('pageDetails', function (FanPageContent) {
 		return {
-			template: '<span>{{valueProp}}</span>',
+			template: '<pre>{{valueProp}}</pre>',
 			restrict: 'E',
 			scope: true,
 			replace: true,
