@@ -3,7 +3,18 @@
 angular.module('myFanPageApp')
 	.directive('pageDetails', function (FanPageContent) {
 		return {
-			template: '<pre>{{valueProp}}</pre>',
+			//template: '<pre>{{valueProp}}</pre>',
+			template: function(element, attrs) {
+
+				var pageDetailsProp = (attrs.value||'').toLowerCase();
+
+				if (pageDetailsProp == 'cover' || (pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo') ) {
+					return '<img src="{{valueProp}}" />';
+				}else{
+					return '<pre>{{valueProp}}</pre>';
+				};
+
+			},
 			restrict: 'E',
 			scope: true,
 			replace: true,
@@ -17,13 +28,29 @@ angular.module('myFanPageApp')
 					}, function(newVal, oldVal) {
 
 						var pageDetailsProp = (attrs.value||'').toLowerCase();
+						var original = (attrs.original||'false');
+
+						if (pageDetailsProp == 'profilepicture' || (pageDetailsProp == 'picture' || pageDetailsProp == 'logo') ) {
+							pageDetailsProp = 'profilePicture';
+						};
 
 						if (FanPageContent.pageDetails.hasOwnProperty(pageDetailsProp)) {
-							scope.valueProp = FanPageContent.pageDetails[pageDetailsProp];
+
+							if (pageDetailsProp == 'profilePicture') {
+
+								if (original === 'true') {
+									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp].big;
+								}else{
+									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp].small;
+								};
+
+							}else{
+								scope.valueProp = FanPageContent.pageDetails[pageDetailsProp];
+							};
+
 						}else{
 							scope.valueProp = pageDetailsProp+' details not found.';
 						};
-
 
 					}, true);
 
