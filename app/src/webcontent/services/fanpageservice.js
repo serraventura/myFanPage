@@ -194,7 +194,7 @@ angular.module('myFanPageApp').factory('FanPageService', function ($q, $log, $ht
 					FanPageContent.pageDetails.description = res.data.description;
 					FanPageContent.pageDetails.likes = res.data.likes;
 
-					if (res.data.cover) {
+					if (res.data.cover && FanPageConfig.coverPicture) {
 						FanPageContent.pageDetails.cover = res.data.cover.source;
 					};
 
