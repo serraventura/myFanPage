@@ -7,9 +7,20 @@ angular.module('myFanPageApp')
 			template: function(element, attrs) {
 
 				var pageDetailsProp = (attrs.value||'').toLowerCase();
+				var responsive = (attrs.responsive||'false');
 
-				if (pageDetailsProp == 'cover' || (pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo') ) {
+				if (pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo') {
+
 					return '<img src="{{valueProp}}" />';
+
+				}else if (pageDetailsProp == 'cover') {
+
+					if (responsive === 'true') {
+						return '<img src="{{valueProp}}" style="width:100%;max-width:100%;display:block;height:auto;" />';
+					}else{
+						return '<img src="{{valueProp}}" />';
+					};
+
 				}else{
 					return '<pre>{{valueProp}}</pre>';
 				};
