@@ -22,7 +22,7 @@ angular.module('myFanPageApp')
 					};
 
 				}else{
-					return '<pre>{{valueProp}}</pre>';
+					return '<p style="white-space:pre-wrap;">{{valueProp}}</p>';
 				};
 
 			},
