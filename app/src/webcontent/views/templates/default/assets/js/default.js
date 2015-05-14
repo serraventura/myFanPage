@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
-	$.util.includeScript('test.js', function() {
-	    //alert('Load was performed.');
+	$.util.includeScript('lib.js', function() {
+	    helloWorld();
 	});
 	
+	// use your javascript/jquery stuff
 	
 });

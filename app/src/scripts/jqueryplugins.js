@@ -2,9 +2,9 @@
 
     $.util = {
 
-		includeScript: function(file) {
+		includeScript: function(file, callback) {
 	        var template = angular.element('[ng-view]').scope().templatePath;
-	        return $.getScript(template+'/assets/js/'+file);
+	        return $.getScript(template+'/assets/js/'+file, callback);
 	    }
     }
 
