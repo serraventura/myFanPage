@@ -16,7 +16,7 @@ myFanPageApp1.scriptloader = (function(){
 		loadCSS: function(file){
 
 			var css = document.createElement('LINK');
-			css.setAttribute('rel', 'import');
+			css.setAttribute('rel', 'stylesheet');
 			css.setAttribute('href', file);
 			document.body.appendChild(css);
 
