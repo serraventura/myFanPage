@@ -16,13 +16,13 @@ angular.module('myFanPageApp')
 				}else if (pageDetailsProp == 'cover') {
 
 					if (responsive === 'true') {
-						return '<img src="{{valueProp}}" style="width:100%;max-width:100%;display:block;height:auto;" />';
+						return '<img class="responsive-image" src="{{valueProp}}" />';
 					}else{
 						return '<img src="{{valueProp}}" />';
 					};
 
 				}else{
-					return '<p style="white-space:pre-wrap;">{{valueProp}}</p>';
+					return '<p>{{valueProp}}</p>';
 				};
 
 			},
