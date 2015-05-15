@@ -1,15 +1,10 @@
 <div>
 	Service html - default template
 	<hr />
-	{{pageContent.pageDetails.name}}
+	<page-details value="name"></page-details>
 	<hr />
-
-	<ul>
-		<li ng-repeat="(id, menu) in menuOptions track by $index">
-			<a href="#{{id}}">{{menu.name}}</a>
-		</li>
-	</ul>
+	<page-menu></page-menu>
 	<hr />
-
 	<h1>Service</h1>
+	<page-content></page-content>
 </div>

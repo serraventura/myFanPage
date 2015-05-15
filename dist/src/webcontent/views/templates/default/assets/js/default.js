@@ -1,8 +1,9 @@
 $(document).ready(function(){
 
-	$.getScript('src/webcontent/views/templates/default/assets/js/test.js', function() {
-	    alert('Load was performed.');
+	$.util.includeScript('lib.js', function() {
+	    helloWorld();
 	});
 	
+	// use your javascript/jquery stuff
 	
 });
