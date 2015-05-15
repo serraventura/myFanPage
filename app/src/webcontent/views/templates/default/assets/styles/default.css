@@ -1,0 +1,52 @@
+body{
+	margin: 0px;
+}
+
+#titlePage{
+
+	width: 100%;
+	background-color: black;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	color: white;
+}
+
+#coverMask{
+	border: 1px solid black;
+	height: 300px;
+}
+
+#coverPicture{
+	height: 100%;
+}
+
+#logoPage{
+	position: absolute;
+	top: 48px;
+	left: 10px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#menuPage{
+	border: 0px solid red;
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	list-style-type: none;
+	float: left;
+	width: 99%;
+	text-align: center;
+}
+
+#menuPage li{
+	display: inline;
+	padding-left: 15px;
+}
+
+.bodyContent{
+	float: left;
+	border: 5px solid red;
+}
