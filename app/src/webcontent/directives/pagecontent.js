@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myFanPageApp')
-	.directive('pageContent', function (FanPageContent, FanPageService, $routeParams) {
+	.directive('pageContent', function (FanPageContent, FeedService, $routeParams) {
 		return {
 			template: '<p ng-repeat="page in pageContent track by $index">{{page.text}}</p>',
 			restrict: 'E',
@@ -30,8 +30,9 @@ angular.module('myFanPageApp')
 
 							if (itemFound.length==0) {
 
-								var fanPageService = new FanPageService();
-								fanPageService.getContentByHashtag(hashtagProp).then(function (item) {
+								// var fanPageService = new FanPageService();
+								var feedService = new FeedService();
+								feedService.getContentByHashtag(hashtagProp).then(function (item) {
 
 									if (tweetProp === 'true') {
 										scope.pageContent = itemProp?[item[itemProp]]:item;

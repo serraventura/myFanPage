@@ -1,6 +1,6 @@
 var myFanPageApp1 = window.myFanPageApp1 || {};
-myFanPageApp1.scriptloader = myFanPageApp1.scriptloader || {};
-myFanPageApp1.scriptloader = (function(){
+myFanPageApp1.util = myFanPageApp1.util || {};
+myFanPageApp1.util = (function(){
 
 	return{
 

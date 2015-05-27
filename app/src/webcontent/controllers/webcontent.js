@@ -1,27 +1,40 @@
 'use strict';
 
 angular.module('myFanPageApp')
-  .controller('WebContentCtrl', function ($scope, $rootScope, FanPageService, WatchService, FanPageConfig) {
+  .controller('WebContentCtrl', function (
+    $scope, 
+    $rootScope, 
+    // FanPageService, 
+    WatchService, 
+    FanPageConfig,
+    PageDetailService,
+    PhotoService,
+    FeedService
+  ) {
 
     WatchService.watchRoutes($scope);
 
     $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
 
-  	var fanPageService = new FanPageService();
+  	// var fanPageService = new FanPageService();
 
-  	fanPageService.getPageInfos().then(function(res) {
+    var pageDetailService = new PageDetailService();
+    var photoService = new PhotoService();
+    var feedService = new FeedService();
+
+  	pageDetailService.getPageInfos().then(function(res) {
       $rootScope.$broadcast('page-infos-ready');
   	});
 
-    fanPageService.getProfilePicture().then(function(res) {
+    pageDetailService.getProfilePicture().then(function(res) {
       $rootScope.$broadcast('page-profile-picture-ready');
     });
 
-  	fanPageService.getPhotoPage().then(function(res) {
+  	photoService.getPhotoPage().then(function(res) {
       $rootScope.$broadcast('page-photo-ready');
   	});
 
-    fanPageService.getMenuContent().then(function(res) {
+    feedService.getMenuContent().then(function(res) {
       $rootScope.$broadcast('menu-content-ready');
     });
 
