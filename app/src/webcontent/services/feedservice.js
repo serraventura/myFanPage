@@ -7,7 +7,6 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 	var URLAPI = 'http://graph.facebook.com';
 	var sURLAPI = 'https://graph.facebook.com';
 
-
 	var getMenuContentByHashtag = function(res) {
 
 		var arrConfigProp = [];
@@ -70,7 +69,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 								id: res.data[i].id,
 								pictureId: res.data[i].object_id,
 								hashtag: hashtagFound[0].hashtag,
-								text: res.data[i].message,
+								text: MYFP.util.replaceURLWithHTMLLinks(res.data[i].message),
 								picture: undefined
 							});
 
@@ -166,7 +165,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 									id: res.data.data[i].id,
 									pictureId: res.data.data[i].object_id,
 									hashtag: hashtag,
-									text: res.data.data[i].message,
+									text: MYFP.util.replaceURLWithHTMLLinks(res.data.data[i].message),
 									picture: undefined
 								});
 

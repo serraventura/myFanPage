@@ -3,7 +3,7 @@
 angular.module('myFanPageApp')
 	.directive('pageContent', function (FanPageContent, FeedService, $routeParams) {
 		return {
-			template: '<p ng-repeat="page in pageContent track by $index">{{page.text}}</p>',
+			template: '<p ng-repeat="page in pageContent track by $index" ng-bind-html="page.text"></p>',
 			restrict: 'E',
 			scope: true,
 			replace: true,

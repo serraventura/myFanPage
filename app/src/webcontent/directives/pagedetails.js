@@ -22,7 +22,7 @@ angular.module('myFanPageApp')
 					};
 
 				}else{
-					return '<p>{{valueProp}}</p>';
+					return '<p ng-bind-html="valueProp"></p>';
 				};
 
 			},

@@ -35,8 +35,8 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				}else {
 
 					FanPageContent.pageDetails.name = res.data.name;
-					FanPageContent.pageDetails.about = res.data.about;
-					FanPageContent.pageDetails.description = res.data.description;
+					FanPageContent.pageDetails.about = MYFP.util.replaceURLWithHTMLLinks(res.data.about);
+					FanPageContent.pageDetails.description = MYFP.util.replaceURLWithHTMLLinks(res.data.description);
 					FanPageContent.pageDetails.likes = res.data.likes;
 
 					if (res.data.cover && FanPageConfig.coverPicture) {

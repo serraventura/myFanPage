@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('myFanPageApp', [
-  'ngRoute'
+  'ngRoute',
+  'ngSanitize'
 ])
 
 .config(function ($routeProvider, FanPageConfig) {
@@ -21,7 +22,7 @@ angular.module('myFanPageApp', [
 
 .run(function(FanPageConfig) {
 
-  myFanPageApp1.util.loadJS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
-  myFanPageApp1.util.loadCSS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
+  MYFP.util.loadJS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
+  MYFP.util.loadCSS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
 
 })

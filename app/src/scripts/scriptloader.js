@@ -1,6 +1,6 @@
-var myFanPageApp1 = window.myFanPageApp1 || {};
-myFanPageApp1.util = myFanPageApp1.util || {};
-myFanPageApp1.util = (function(){
+var MYFP = window.MYFP || {};
+MYFP.util = MYFP.util || {};
+MYFP.util = (function(){
 
 	return{
 
