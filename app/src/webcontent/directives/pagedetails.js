@@ -56,7 +56,13 @@ angular.module('myFanPageApp')
 								};
 
 							}else{
-								scope.valueProp = FanPageContent.pageDetails[pageDetailsProp];
+
+								if (pageDetailsProp === 'about' || pageDetailsProp === 'description') {
+									scope.valueProp = MYFP.util.replaceURLWithHTMLLinks(FanPageContent.pageDetails[pageDetailsProp]||'');
+								}else{
+									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp];
+								};
+
 							};
 
 						}else{

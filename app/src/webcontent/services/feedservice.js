@@ -7,33 +7,33 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 	var URLAPI = 'http://graph.facebook.com';
 	var sURLAPI = 'https://graph.facebook.com';
 
-	var setContentByType = function(data) {
+	var setContentByType = function(data, hashtag) {
 
 		var page = angular.copy(FanPageContent.pages);
 
-		switch(data.caption.toLowerCase()){
+		switch((data.caption||'').toLowerCase()){
             case 'soundcloud.com':
-				page.picture = undefined;
+				page[0].picture = undefined;
                 break;
 
             case 'youtube.com':
             	var template = 'http://img.youtube.com/vi/{ID}/0.jpg';
-				page.picture = template.replace('{ID}', MYFP.util.getYoutubeIdFromURL(data.link));
+				page[0].picture = template.replace('{ID}', MYFP.util.getYoutubeIdFromURL(data.link));
                 break;
 
             default:
-				page.picture = undefined;
+				page[0].picture = undefined;
                 break;
         };
 
-		page.id = data.id;
-		page.pictureId = data.object_id;
-		page.hashtag = hashtagFound[0].hashtag;
-		page.text = MYFP.util.replaceURLWithHTMLLinks(data.message);
-		page.type = data.caption;
-		page.externalLink = data.link;
+		page[0].id = data.id;
+		page[0].pictureId = data.object_id;
+		page[0].hashtag = hashtag;
+		page[0].text = data.message;
+		page[0].type = data.caption;
+		page[0].externalLink = data.link;
 
-		return page;
+		return page[0];
 
 	}
 
@@ -94,15 +94,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 						}).length;
 
 						if ( ((pageContentFound>0 && hashtagFound[0].tweet) || pageContentFound==0) ) {
-
-							arrFanPageContentPages.push({
-								id: res.data[i].id,
-								pictureId: res.data[i].object_id,
-								hashtag: hashtagFound[0].hashtag,
-								text: MYFP.util.replaceURLWithHTMLLinks(res.data[i].message),
-								picture: undefined
-							});
-
+							arrFanPageContentPages.push(setContentByType(res.data[i], hashtagFound[0].hashtag));
 						};
 
 					};
@@ -195,7 +187,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 									id: res.data.data[i].id,
 									pictureId: res.data.data[i].object_id,
 									hashtag: hashtag,
-									text: MYFP.util.replaceURLWithHTMLLinks(res.data.data[i].message),
+									text: res.data.data[i].message,
 									picture: undefined
 								});
 
