@@ -7,6 +7,36 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 	var URLAPI = 'http://graph.facebook.com';
 	var sURLAPI = 'https://graph.facebook.com';
 
+	var setContentByType = function(data) {
+
+		var page = angular.copy(FanPageContent.pages);
+
+		switch(data.caption.toLowerCase()){
+            case 'soundcloud.com':
+				page.picture = undefined;
+                break;
+
+            case 'youtube.com':
+            	var template = 'http://img.youtube.com/vi/{ID}/0.jpg';
+				page.picture = template.replace('{ID}', MYFP.util.getYoutubeIdFromURL(data.link));
+                break;
+
+            default:
+				page.picture = undefined;
+                break;
+        };
+
+		page.id = data.id;
+		page.pictureId = data.object_id;
+		page.hashtag = hashtagFound[0].hashtag;
+		page.text = MYFP.util.replaceURLWithHTMLLinks(data.message);
+		page.type = data.caption;
+		page.externalLink = data.link;
+
+		return page;
+
+	}
+
 	var getMenuContentByHashtag = function(res) {
 
 		var arrConfigProp = [];

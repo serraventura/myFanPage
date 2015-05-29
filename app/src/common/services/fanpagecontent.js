@@ -35,7 +35,9 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
       pictureId: '999399393',
       hashtag: '#anyhashtag',
       text: 'test test test...',
-      picture: 'http://...'
+      picture: 'http://img.youtube.com/vi/BLqxR1YXZj4/0.jpg',
+      type: 'youtube',
+      externalLink: 'https://www.youtube.com/watch?v=BLqxR1YXZj4'
     }
 
   ];
