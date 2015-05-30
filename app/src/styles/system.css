@@ -8,3 +8,12 @@ p{
 	display:block;
 	height:auto;
 }
+
+.myfp--wrap-text-image{
+	float:inherit;
+}
+
+.myfp--feeds-post{
+	float:left; 
+	width: 100%;
+}

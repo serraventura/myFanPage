@@ -17,7 +17,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
                 break;
 
             case 'youtube.com':
-            	var template = 'http://img.youtube.com/vi/{ID}/0.jpg';
+            	var template = 'http://img.youtube.com/vi/{ID}/mqdefault.jpg';
 				page[0].picture = template.replace('{ID}', MYFP.util.getYoutubeIdFromURL(data.link));
                 break;
 
