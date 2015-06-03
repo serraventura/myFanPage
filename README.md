@@ -43,12 +43,19 @@ Page Content:
 -------------------------
 ```html
 <page-content></page-content>
+Display page's content based on current active menu.
+The directive uses the config.js file to know what hashtag the current page is targeting.
 
-<page-content hashtag="#blog"></page-content>
+<page-content hashtag="#blog" tweet="false" item="0"></page-content>
+Display page's content based on hashtag specified on attribute.
+hashtag: #anyhashtag
+tweet: true|false - Returns just one post(latest) if false
+item: 0,1,2,3...n - Returns a specific post among all retrieved when tweet equals true
 ```
 
 Page Photo:
 -------------------------
 ```html
 <page-photos></page-photos>
+Display pictures from fanpage's album setup on config.js file on pinned menu photoFanPage.
 ```
