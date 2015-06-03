@@ -12,7 +12,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 		var d = $q.defer();
 		publicApi.isError = false;
 
-		$http.get(URLAPI+'/'+FanPageConfig.fanPageId+'/albums').then(function (res){
+		$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/albums/?access_token='+FanPageConfig.token).then(function (res){
 
 			if(!res.data.data){
 
@@ -58,7 +58,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 		var d = $q.defer();
 		publicApi.isError = false;
 
-		$http.get(URLAPI+'/'+idAlbum+'/photos').then(function (res){
+		$http.get(sURLAPI+'/'+idAlbum+'/photos/?access_token='+FanPageConfig.token).then(function (res){
 
 			if(!res.data.data){
 
