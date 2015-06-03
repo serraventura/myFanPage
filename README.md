@@ -1,4 +1,7 @@
-# myFanPage
+# myFanPageApp
+A 100% client APP to create flexible websites based in a Facebook fanpage. The APP aimming provide dynamic content using the basics client technologies such as HTML, CSS and Javascript.
+
+myFanPageApp is AngularJS based.
 
 # Built-in directives
 
