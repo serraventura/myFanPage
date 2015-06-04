@@ -3,6 +3,46 @@ A 100% client APP to create flexible websites based in a Facebook fanpage. The A
 
 myFanPageApp is AngularJS based.
 
+# Config file
+```javascript
+{
+
+	fanPageId: 'myfanpageapp',
+	template: 'default',
+	coverPicture: true,
+	profilePicture: true,
+	token: '809855312442090|MUv2SpoA7I3TCbsljWe1mDJy_Jg',
+
+	menu: {
+
+		aboutFanPage: {
+			active: true,
+			name: 'About us',
+			location: true
+		},
+		photoFanPage: {
+			active: true,
+			name: 'Photos',
+			album: 'Website'
+		},
+		blogFanPage: {
+			active: true,
+			tweet: true,
+			name: 'Blog',
+			hashtag: '#blog'
+		},
+		service: {
+			active: true,
+			name: 'Services',
+			hashtag: '#ourservices'
+		}
+
+	}
+
+}
+```
+
+
 # Built-in directives
 
 Page Details:
