@@ -11,7 +11,7 @@ myFanPageApp is AngularJS based.
 	template: 'default',
 	coverPicture: true,
 	profilePicture: true,
-	token: '809855312442090|MUv2SpoA7I3TCbsljWe1mDJy_Jg',
+	token: '',
 
 	menu: {
 
