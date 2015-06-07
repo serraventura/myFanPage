@@ -42,6 +42,33 @@ myFanPageApp is AngularJS based.
 }
 ```
 
+# Config.js file properties
+
+ - fanPageId: fanpage's name or ID - It allows the APP to know what fanpage it should retrieve the data.
+
+ - template: the template folder's name choosed to be used. If a custom template was created the name of its folder must be specified on this propertie.
+
+ - coverPicture: true|false - If true will retrieve the fanpage's cover picture otherwise it's gonna use the default cover picture provided in your template folder's asset images.
+
+ - profilePicture: true|false - If true will retrieve the fanpage's profile picture otherwise the default profile picture/logo provided in your template folder's asset images is gonna be used.
+
+ - token: APP Access token - The token is supposed to be used only on development envriroment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file xxxxxxxx on the root of the APP.
+
+ Token details:
+
+ For security propurses an APP Access token must not be used in a production envriroment. You can find out more details here#link#.
+
+ In a production envriroment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
+
+ The server-side files provided in Node.js and PHP must be hosted in your own server and to make the app recognize it a new node must be used on config.js as below.
+
+ ```javascript
+server: {
+	api: 'http://www.mydomain.com/api.php'
+}
+ ```
+
+
 
 # Built-in directives
 
