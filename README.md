@@ -54,6 +54,60 @@ myFanPageApp is AngularJS based.
 
  - token: APP Access token - The token is supposed to be used only on development envriroment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file xxxxxxxx on the root of the APP.
 
+ - menu: Following the example above each menu option is gonna be explained. 
+
+```javascript
+		aboutFanPage: {
+			active: true, // 
+			name: 'About us',
+			location: true
+		},
+```
+ - aboutFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the description about your fanpage/website.
+ - - active: true|false - the option menu is gonna be shown if true.
+ - - name: The menu option label to be displayed on menu.
+ - - location: The map location based on the address provided to the fanpage.
+
+
+```javascript
+		photoFanPage: {
+			active: true,
+			name: 'Photos',
+			album: 'Website'
+		},
+```
+ - photoFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the picture gallery of your fanpage/website.
+ - - active: true|false - the option menu is gonna be shown if true.
+ - - name: The menu option label to be displayed on menu.
+ - - album: The name of the album choosed to be shown on the website
+
+```javascript
+		blogFanPage: {
+			active: true,
+			tweet: true,
+			name: 'Blog',
+			hashtag: '#blog'
+		},
+```
+ - blogFanPage: Is NOT a hardcoded menu. You can use any name to enable a menu option.
+ - - active: true|false - the option menu is gonna be shown if true.
+ - - tweet: true|false - if true returns all the content based on the hashtag defined.
+ - - name: The menu option label to be displayed on menu.
+ - - hashtag: Creates a target to retrieve only content based on the hashtag defined.
+
+ ```javascript
+		service: {
+			active: true,
+			name: 'Services',
+			hashtag: '#ourservices'
+		}
+```
+ - service: Is NOT a hardcoded menu. You can use any name to enable a menu option.
+ - - active: true|false - the option menu is gonna be shown if true.
+ - - name: The menu option label to be displayed on menu.
+ - - hashtag: Creates a target to retrieve only content based on the hashtag defined. The example above will retrieve only one content, the latest post with the hashtag '#ourservices'.
+
+
  Token details:
 
  For security propurses an APP Access token must not be used in a production envriroment. You can find out more details here#link#.
