@@ -3,7 +3,7 @@ A 100% client APP to create flexible websites based in a Facebook fanpage. The A
 
 myFanPageApp is AngularJS based.
 
-# Config file
+## Config file
 ```javascript
 {
 
@@ -42,7 +42,7 @@ myFanPageApp is AngularJS based.
 }
 ```
 
-# Config.js file properties
+### Config.js file properties
 
  - fanPageId: fanpage's name or ID - It allows the APP to know what fanpage it should retrieve the data.
 
@@ -64,9 +64,9 @@ myFanPageApp is AngularJS based.
 		},
 ```
 * aboutFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the description about your fanpage/website.
-   * active: true|false - the option menu is gonna be shown if true.
-   * name: The menu option label to be displayed on menu.
-   * location: The map location based on the address provided to the fanpage.
+   * **active**: true|false - the option menu is gonna be shown if true.
+   * **name**: The menu option label to be displayed on menu.
+   * **location**: The map location based on the address provided to the fanpage.
 
 
 ```javascript
@@ -77,9 +77,9 @@ myFanPageApp is AngularJS based.
 		},
 ```
 * photoFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the picture gallery of your fanpage/website.
-    * active: true|false - the option menu is gonna be shown if true.
-    * name: The menu option label to be displayed on menu.
-    * album: The name of the album choosed to be shown on the website
+    * **active**: true|false - the option menu is gonna be shown if true.
+    * **name**: The menu option label to be displayed on menu.
+    * **album**: The name of the album choosed to be shown on the website
 
 ```javascript
 		blogFanPage: {
@@ -90,10 +90,10 @@ myFanPageApp is AngularJS based.
 		},
 ```
 * blogFanPage: Is NOT a hardcoded menu. You can use any name to enable a menu option.
-    * active: true|false - the option menu is gonna be shown if true.
-    * tweet: true|false - if true returns all the content based on the hashtag defined.
-    * name: The menu option label to be displayed on menu.
-    * hashtag: Creates a target to retrieve only content based on the hashtag defined.
+    * **active**: true|false - the option menu is gonna be shown if true.
+    * **tweet**: true|false - if true returns all the content based on the hashtag defined.
+    * **name**: The menu option label to be displayed on menu.
+    * **hashtag**: Creates a target to retrieve only content based on the hashtag defined.
 
  ```javascript
 		service: {
@@ -103,31 +103,28 @@ myFanPageApp is AngularJS based.
 		}
 ```
 * service: Is NOT a hardcoded menu. You can use any name to enable a menu option.
-    * active: true|false - the option menu is gonna be shown if true.
-    * name: The menu option label to be displayed on menu.
-    * hashtag: Creates a target to retrieve only content based on the hashtag defined. The example above will retrieve only one content, the latest post with the hashtag '#ourservices'.
+    * **active**: true|false - the option menu is gonna be shown if true.
+    * **name**: The menu option label to be displayed on menu.
+    * **hashtag**: Creates a target to retrieve only content based on the hashtag defined. The example above will retrieve only one content, the latest post with the hashtag '#ourservices'.
 
+###Token details:
 
- Token details:
+For security propurses an APP Access token must not be used in a production envriroment. You can find out more details here#link#.
 
- For security propurses an APP Access token must not be used in a production envriroment. You can find out more details here#link#.
+In a production envriroment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
 
- In a production envriroment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
+The server-side files provided in Node.js and PHP must be hosted in your own server and to make the app recognize it a new node must be used on config.js as below.
 
- The server-side files provided in Node.js and PHP must be hosted in your own server and to make the app recognize it a new node must be used on config.js as below.
-
- ```javascript
+```javascript
 server: {
 	api: 'http://www.mydomain.com/api.php'
 }
- ```
+```
 
+## Built-in directives
 
+###Page Details:
 
-# Built-in directives
-
-Page Details:
--------------------------
 ```html
 <page-details value="about"></page-details>
 The example above display the fanpage's short description
@@ -147,24 +144,24 @@ Display the fanpage's profile picture (value could be: logo, picture or profilep
 original: true|false - Retrieves the original picture size if true
 ```
 
-Page Menu:
--------------------------
+###Page Menu:
+
 ```html
 <page-menu></page-menu>
 Dipslay web site menu based on config.js file settings
 
 ```
 
-Page Include:
--------------------------
+###Page Include:
+
 ```html
 <page-include value="header.html"></page-include>
 Includes HTML parts based on template path
 Ex: If you are working in a template called "myGreenTemplate" all the HTML parts added as a value must be inside the template folder "myGreenTemplate".
 ```
 
-Page Content:
--------------------------
+###Page Content:
+
 ```html
 <page-content></page-content>
 Display page's content based on current active menu.
@@ -177,8 +174,8 @@ tweet: true|false - Returns just one post(latest) if false
 item: 0,1,2,3...n - Returns a specific post among all retrieved when tweet equals true
 ```
 
-Page Photo:
--------------------------
+###Page Photo:
+
 ```html
 <page-photos></page-photos>
 Display pictures from fanpage's album setup on config.js file on pinned menu photoFanPage.
