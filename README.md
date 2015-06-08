@@ -44,17 +44,17 @@ myFanPageApp is AngularJS based.
 
 ### Config.js file properties
 
- - fanPageId: fanpage's name or ID - It allows the APP to know what fanpage it should retrieve the data.
+ - **fanPageId**: fanpage's name or ID - It allows the APP to know what fanpage it should retrieve the data.
 
- - template: the template folder's name choosed to be used. If a custom template was created the name of its folder must be specified on this propertie.
+ - **template**: the template folder's name choosed to be used. If a custom template was created the name of its folder must be specified on this propertie.
 
- - coverPicture: true|false - If true will retrieve the fanpage's cover picture otherwise it's gonna use the default cover picture provided in your template folder's asset images.
+ - **coverPicture**: true|false - If true will retrieve the fanpage's cover picture otherwise it's gonna use the default cover picture provided in your template folder's asset images.
 
- - profilePicture: true|false - If true will retrieve the fanpage's profile picture otherwise the default profile picture/logo provided in your template folder's asset images is gonna be used.
+ - **profilePicture**: true|false - If true will retrieve the fanpage's profile picture otherwise the default profile picture/logo provided in your template folder's asset images is gonna be used.
 
- - token: APP Access token - The token is supposed to be used only on development envriroment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file xxxxxxxx on the root of the APP. See more details below.
+ - **token**: APP Access token - The token is supposed to be used only on development envriroment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file xxxxxxxx on the root of the APP. **See more details below**.
 
- - menu: Following the example above each menu option is gonna be explained. It's important to point that every menu name(ex: aboutFanPage) must reflect its respective HTML file. It means, if there's a menu option "aboutFanPage" one "aboutFanPage.html" must exist. The best way to understand is checking out the "default" template.
+ - **menu**: Following the example above each menu option is gonna be explained. It's important to point that every menu name(ex: aboutFanPage) must reflect its respective HTML file. It means, if there's a menu option "aboutFanPage" one "aboutFanPage.html" must exist. The best way to understand is checking out the "default" template.
 
 ```javascript
 		aboutFanPage: {
