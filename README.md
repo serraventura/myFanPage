@@ -63,10 +63,10 @@ myFanPageApp is AngularJS based.
 			location: true
 		},
 ```
- - aboutFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the description about your fanpage/website.
- -- active: true|false - the option menu is gonna be shown if true.
- -- name: The menu option label to be displayed on menu.
- -- location: The map location based on the address provided to the fanpage.
+- aboutFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the description about your fanpage/website.
+   active: true|false - the option menu is gonna be shown if true.
+   name: The menu option label to be displayed on menu.
+   location: The map location based on the address provided to the fanpage.
 
 
 ```javascript
@@ -76,10 +76,10 @@ myFanPageApp is AngularJS based.
 			album: 'Website'
 		},
 ```
- - photoFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the picture gallery of your fanpage/website.
- -- active: true|false - the option menu is gonna be shown if true.
- -- name: The menu option label to be displayed on menu.
- -- album: The name of the album choosed to be shown on the website
+- photoFanPage: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the picture gallery of your fanpage/website.
+    active: true|false - the option menu is gonna be shown if true.
+    name: The menu option label to be displayed on menu.
+    album: The name of the album choosed to be shown on the website
 
 ```javascript
 		blogFanPage: {
@@ -89,11 +89,11 @@ myFanPageApp is AngularJS based.
 			hashtag: '#blog'
 		},
 ```
- - blogFanPage: Is NOT a hardcoded menu. You can use any name to enable a menu option.
- -- active: true|false - the option menu is gonna be shown if true.
- -- tweet: true|false - if true returns all the content based on the hashtag defined.
- -- name: The menu option label to be displayed on menu.
- -- hashtag: Creates a target to retrieve only content based on the hashtag defined.
+- blogFanPage: Is NOT a hardcoded menu. You can use any name to enable a menu option.
+    active: true|false - the option menu is gonna be shown if true.
+    tweet: true|false - if true returns all the content based on the hashtag defined.
+    name: The menu option label to be displayed on menu.
+    hashtag: Creates a target to retrieve only content based on the hashtag defined.
 
  ```javascript
 		service: {
@@ -102,10 +102,10 @@ myFanPageApp is AngularJS based.
 			hashtag: '#ourservices'
 		}
 ```
- - service: Is NOT a hardcoded menu. You can use any name to enable a menu option.
- -- active: true|false - the option menu is gonna be shown if true.
- -- name: The menu option label to be displayed on menu.
- -- hashtag: Creates a target to retrieve only content based on the hashtag defined. The example above will retrieve only one content, the latest post with the hashtag '#ourservices'.
+- service: Is NOT a hardcoded menu. You can use any name to enable a menu option.
+    active: true|false - the option menu is gonna be shown if true.
+    name: The menu option label to be displayed on menu.
+    hashtag: Creates a target to retrieve only content based on the hashtag defined. The example above will retrieve only one content, the latest post with the hashtag '#ourservices'.
 
 
  Token details:
