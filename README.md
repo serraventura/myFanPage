@@ -52,7 +52,7 @@ myFanPageApp is AngularJS based.
 
  - **profilePicture**: true|false - If true will retrieve the fanpage's profile picture otherwise the default profile picture/logo provided in your template folder's asset images is gonna be used.
 
- - **token**: APP Access token - The token is supposed to be used only on development envriroment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file xxxxxxxx on the root of the APP. **See more details below**.
+ - **token**: APP Access token - The token is supposed to be used only on development environment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file xxxxxxxx on the root of the APP. **See more details below**.
 
  - **menu**: Following the example above each menu option is gonna be explained. It's important to point that every menu name(ex: aboutFanPage) must reflect its respective HTML file. It means, if there's a menu option "aboutFanPage" one "aboutFanPage.html" must exist. The best way to understand is checking out the "default" template.
 
@@ -109,9 +109,9 @@ myFanPageApp is AngularJS based.
 
 ###Token details:
 
-For security propurses an APP Access token must not be used in a production envriroment. You can find out more details here#link#.
+For security propurses an APP Access token must not be used in a production environment. You can find out more details here#link#.
 
-In a production envriroment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
+In a production environment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
 
 The server-side files provided in Node.js and PHP must be hosted in your own server and to make the app recognize it a new node must be used on config.js as below.
 
