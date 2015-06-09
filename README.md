@@ -109,7 +109,7 @@ myFanPageApp is AngularJS based.
 
 ###Token details:
 
-For security propurses an APP Access token must not be used in a production environment. You can find out more details here#link#.
+For security propurses an APP Access token must not be used on the front-end side in a production environment. You can find out more details here#link#.
 
 In a production environment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
 
@@ -197,3 +197,42 @@ server: {
 <page-photos></page-photos>
 ```
 > Display pictures from fanpage's album setup on config.js file on pinned menu photoFanPage.
+
+#How to build a template
+
+Templates can be found at **app/src/webcontent/views/templates/**. An easy way to find out how the templates works is checking out our "default" template.
+
+**Basic folder structure for a template:**
+
+```
+-- mytemplate               (Main folder)
+---- _blank.html            (System file)
+---- main.html              (Main HTML file)
+---- assets                 (Folder)
+------ js                   (Folder)
+-------- mytemplate.js      (Main javascript file. Must have same name as template)
+------ styles               (Folder)
+-------- mytemplate.css     (Main CSS file. Must have same name as template)
+```
+
+**Main basic rules to create a new template:**
+
+ - A template must be under **app/src/webcontent/views/templates/**.
+ - Chosen the template name the same must be used as the main javascript file and the main css file as exemple above.
+ - The basic folder strucuture shown above must be provided.
+ - The _blank.html cannot be removed.
+ - The first HTML file loaded is gonna be always main.html and the name cannot be changed.
+
+**Creating new pages:**
+
+On main.html you can use the page-menu directive ```html <page-menu></page-menu> ``` to show the menu options setup on **config.js**.
+
+Every page related to a menu option must have the same name, following the config.js file shown in the begin of the documentation we would have:
+
+aboutFanPage = aboutFanPage.html
+photoFanPage = photoFanPage.html
+blogFanPage = blogFanPage.html
+service = service.html
+
+Any extra HTML part can included by ```html <page-include></page-include>``` directive.
+
