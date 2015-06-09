@@ -217,15 +217,17 @@ Templates can be found at **app/src/webcontent/views/templates/**. An easy way t
 
 ###Main basic rules to create a new template:
 
- - A template must be under **app/src/webcontent/views/templates/**.
- - Chosen the template name the same must be used as the main javascript file name and the main css file name as exemple above.
- - The basic folder strucuture shown above must be provided.
- - The _blank.html cannot be removed.
- - The first HTML file loaded is gonna be always main.html and the name cannot be changed.
+ 1. A template must be under **app/src/webcontent/views/templates/**.
+ 2. Chosen the template name the same must be used as the main javascript file name and the main css file name as exemple above.
+ 3. The basic folder strucuture shown above must be provided.
+ 4. The _blank.html cannot be removed.
+ 5. The first HTML file loaded is gonna be always main.html and the name cannot be changed.
+ 6. HTML tags such as: ```<html></html>```, ```<head></head>```, ```<body></body>``` must not be used. Every HTML page reflect the content of a main ```<body></body>```tag.
+ 7. Only one root element must exist for every HTML page.
 
 ###Creating new pages:
 
-On main.html file the page-menu directive can be used ```<page-menu></page-menu>``` to show the menu options setup on **config.js**.
+On main.html file the page-menu directive can be used ```<page-menu></page-menu>`` to show the menu options setup on **config.js**.
 
 Every page related to a menu option must have the same name, following the config.js file shown in the begin of the documentation we would have:
 
@@ -235,4 +237,6 @@ Every page related to a menu option must have the same name, following the confi
  - service = service.html
 
 Any extra HTML part can be included by ```<page-include></page-include>``` directive.
+
+###Using third party resources in a template:
 
