@@ -222,12 +222,12 @@ Templates can be found at **app/src/webcontent/views/templates/**. An easy way t
  3. The basic folder strucuture shown above must be provided.
  4. The _blank.html cannot be removed.
  5. The first HTML file loaded is gonna be always main.html and the name cannot be changed.
- 6. HTML tags such as: ```<html></html>```, ```<head></head>```, ```<body></body>``` must not be used. Every HTML page reflect the content of a main ```<body></body>```tag.
+ 6. HTML tags such as: ```<html></html>```, ```<head></head>```, ```<body></body>``` must not be used. Every HTML page reflects the content of a main ```<body></body>``` tag.
  7. Only one root element must exist for every HTML page.
 
 ###Creating new pages:
 
-On main.html file the page-menu directive can be used ```<page-menu></page-menu>`` to show the menu options setup on **config.js**.
+On main.html file the page-menu directive can be used ```<page-menu></page-menu>``` to show the menu options setup on **config.js**.
 
 Every page related to a menu option must have the same name, following the config.js file shown in the begin of the documentation we would have:
 
@@ -239,4 +239,8 @@ Every page related to a menu option must have the same name, following the confi
 Any extra HTML part can be included by ```<page-include></page-include>``` directive.
 
 ###Using third party resources in a template:
+
+To use third party resources a couple of JQuery helpers methods are available over the namespace ```$.util```. Below follow the list of methods and its examples.
+
+ - ```$.util.includeScript()```
 
