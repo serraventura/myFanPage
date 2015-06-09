@@ -202,7 +202,7 @@ server: {
 
 Templates can be found at **app/src/webcontent/views/templates/**. An easy way to find out how the templates works is checking out our "default" template.
 
-**Basic folder structure for a template:**
+###Basic folder structure for a template:
 
 ```
 -- mytemplate               (Main folder)
@@ -215,24 +215,24 @@ Templates can be found at **app/src/webcontent/views/templates/**. An easy way t
 -------- mytemplate.css     (Main CSS file. Must have same name as template)
 ```
 
-**Main basic rules to create a new template:**
+###Main basic rules to create a new template:
 
  - A template must be under **app/src/webcontent/views/templates/**.
- - Chosen the template name the same must be used as the main javascript file and the main css file as exemple above.
+ - Chosen the template name the same must be used as the main javascript file name and the main css file name as exemple above.
  - The basic folder strucuture shown above must be provided.
  - The _blank.html cannot be removed.
  - The first HTML file loaded is gonna be always main.html and the name cannot be changed.
 
-**Creating new pages:**
+###Creating new pages:
 
-On main.html you can use the page-menu directive ```html <page-menu></page-menu> ``` to show the menu options setup on **config.js**.
+On main.html file the page-menu directive can be used *<page-menu></page-menu>* to show the menu options setup on **config.js**.
 
 Every page related to a menu option must have the same name, following the config.js file shown in the begin of the documentation we would have:
 
-aboutFanPage = aboutFanPage.html
-photoFanPage = photoFanPage.html
-blogFanPage = blogFanPage.html
-service = service.html
+ - aboutFanPage = aboutFanPage.html
+ - photoFanPage = photoFanPage.html
+ - blogFanPage = blogFanPage.html
+ - service = service.html
 
-Any extra HTML part can included by ```html <page-include></page-include>``` directive.
+Any extra HTML part can included by *<page-include></page-include>* directive.
 
