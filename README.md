@@ -225,7 +225,7 @@ Templates can be found at **app/src/webcontent/views/templates/**. An easy way t
 
 ###Creating new pages:
 
-On main.html file the page-menu directive can be used *<page-menu></page-menu>* to show the menu options setup on **config.js**.
+On main.html file the page-menu directive can be used ```<page-menu></page-menu>``` to show the menu options setup on **config.js**.
 
 Every page related to a menu option must have the same name, following the config.js file shown in the begin of the documentation we would have:
 
@@ -234,5 +234,5 @@ Every page related to a menu option must have the same name, following the confi
  - blogFanPage = blogFanPage.html
  - service = service.html
 
-Any extra HTML part can included by *<page-include></page-include>* directive.
+Any extra HTML part can be included by ```<page-include></page-include>``` directive.
 
