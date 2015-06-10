@@ -240,7 +240,28 @@ Any extra HTML part can be included by ```<page-include></page-include>``` direc
 
 ###Using third party resources in a template:
 
-To use third party resources a couple of JQuery helpers methods are available over the namespace ```$.util```. Below follow the list of methods and its examples.
+To use third party resources a JQuery helper method is available over the namespace ```$.util```.
 
- - ```$.util.includeScript()```
+ - ```$.util.includeFile()```
+
+ ```javascript
+
+// Including bootstrap CSS and JS remote files
+$.util.includeFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
+$.util.includeFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js');
+
+// Including remote file specifying the type
+$.util.includeFile('http://any-url...', 'css');
+
+// Including remote file specifying REL attribute
+$.util.includeFile('http://any-url...', undefined, 'import');
+
+// Including local files based on template path
+$.util.includeFile('test.css'); // css file at **styles** folder
+$.util.includeFile('test.js'); // js file at **js** folder
+
+```
+
+
+
 
