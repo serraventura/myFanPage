@@ -245,7 +245,6 @@ To use third party resources a JQuery helper method is available over the namesp
  - ```$.util.includeFile()```
 
  ```javascript
-
 // Including bootstrap CSS and JS remote files
 $.util.includeFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
 $.util.includeFile('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js');
@@ -259,9 +258,4 @@ $.util.includeFile('http://any-url...', undefined, 'import');
 // Including local files based on template path
 $.util.includeFile('test.css'); // css file at **styles** folder
 $.util.includeFile('test.js'); // js file at **js** folder
-
 ```
-
-
-
-
