@@ -11,9 +11,10 @@ MYFP.util = (function(){
 			document.body.appendChild(js)
 		},
 
-		loadCSS: function(file){
+		loadCSS: function(file, type){
+			type = (type||'stylesheet');
 			var css = document.createElement('LINK');
-			css.setAttribute('rel', 'stylesheet');
+			css.setAttribute('rel', type);
 			css.setAttribute('href', file);
 			document.body.appendChild(css);
 		},
