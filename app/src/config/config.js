@@ -6,7 +6,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	template: 'default',
 	coverPicture: true,
 	profilePicture: true,
-	token: '809855312442090|MUv2SpoA7I3TCbsljWe1mDJy_Jg',
+	token: '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
 
 	menu: {
 
