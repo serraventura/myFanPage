@@ -3,7 +3,7 @@
 angular.module('myFanPageApp')
 	.directive('pageContent', function (FanPageContent, FeedService, $routeParams) {
 		return {
-			template: '<div class="myfp--feeds-post"><div dir-paginate="page in pageContent|itemsPerPage:1 track by $index"><div class="myfp--wrap-text-image"><img ng-if="page.picture" src="{{page.picture}}" /></div><p ng-bind-html="page.text|enableLink"></p></div><dir-pagination-controls></dir-pagination-controls></div>',
+			template: '<div><div class="myfp--feeds-post" dir-paginate="page in pageContent|itemsPerPage:1 track by $index"><div class="myfp--wrap-text-image"><img ng-if="page.picture" src="{{page.picture}}" /></div><p ng-bind-html="page.text|enableLink"></p></div><dir-pagination-controls></dir-pagination-controls></div>',
 			restrict: 'E',
 			scope: true,
 			replace: true,
