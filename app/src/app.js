@@ -2,7 +2,8 @@
 
 angular.module('myFanPageApp', [
   'ngRoute',
-  'ngSanitize'
+  'ngSanitize',
+  'angularUtils.directives.dirPagination'
 ])
 
 .config(function ($routeProvider, FanPageConfig) {
