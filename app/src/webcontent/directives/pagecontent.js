@@ -10,7 +10,7 @@ angular.module('myFanPageApp')
 			link: {
 				post: function(scope, element, attrs) {
 
-					var _itemsPerPage = 2;
+					var _itemsPerPage = 20;
 					var _infiniteItemsPerPage = 999999;
 
 					scope.pageContent = [];
