@@ -25,7 +25,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				return d.promise;
 			};
 
-			$http.get(URLAPI+'/'+FanPageConfig.fanPageId).then(function (res){
+			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/?access_token='+FanPageConfig.token).then(function (res){
 
 				if(!res.data){
 
