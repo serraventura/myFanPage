@@ -9,12 +9,12 @@ angular.module('myFanPageApp')
 			replace: true,
 			controller: function ($scope) {
 
-				$scope.getInfinitePage = 20;
 				$scope.infinitePage = 0;
 				$scope.loadMore = function() {
 
+					// if($scope.infinitePage < ($scope.getItemsPerPage+1) ){
 					if($scope.infinitePage < $scope.pageContent.length){
-						$scope.infinitePage += $scope.getInfinitePage;
+						$scope.infinitePage += parseInt($scope.getItemsPerPage/2);
 						$scope.lazyPageContent = limitToFilter($scope.pageContent, $scope.infinitePage);
 					};
 
@@ -55,12 +55,12 @@ angular.module('myFanPageApp')
 										scope.active = true;
 										scope.getItemsPerPage = _itemsPerPage;
 										scope.pageContent = itemProp?[item[itemProp]]:item;
-										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
+										scope.lazyPageContent = limitToFilter(scope.pageContent, parseInt(scope.getItemsPerPage/2));
 									}else{
 										scope.active = false;
 										scope.getItemsPerPage = _infiniteItemsPerPage;
 										scope.pageContent = [item[itemProp||0]];
-										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
+										scope.lazyPageContent = limitToFilter(scope.pageContent, parseInt(scope.getItemsPerPage/2));
 									};
 
 								});
@@ -71,12 +71,12 @@ angular.module('myFanPageApp')
 									scope.active = true;
 									scope.getItemsPerPage = _itemsPerPage;
 									scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
-									scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
+									scope.lazyPageContent = limitToFilter(scope.pageContent, parseInt(scope.getItemsPerPage/2));
 								}else{
 									scope.active = false;
 									scope.getItemsPerPage = _infiniteItemsPerPage;
 									scope.pageContent = [itemFound[itemProp||0]];
-									scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
+									scope.lazyPageContent = limitToFilter(scope.pageContent, parseInt(scope.getItemsPerPage/2));
 								};
 
 							};
@@ -112,14 +112,14 @@ angular.module('myFanPageApp')
 										};
 
 										scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
-										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
+										scope.lazyPageContent = limitToFilter(scope.pageContent, parseInt(scope.getItemsPerPage/2));
 
 									}else{
 
 										scope.active = false;
 										scope.getItemsPerPage = _infiniteItemsPerPage;
 										scope.pageContent = [itemFound[itemProp||0]];
-										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
+										scope.lazyPageContent = limitToFilter(scope.pageContent, parseInt(scope.getItemsPerPage/2));
 
 									};
 
