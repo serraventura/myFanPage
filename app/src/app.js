@@ -3,7 +3,8 @@
 angular.module('myFanPageApp', [
   'ngRoute',
   'ngSanitize',
-  'angularUtils.directives.dirPagination'
+  'angularUtils.directives.dirPagination',
+  'infinite-scroll'
 ])
 
 .config(function ($routeProvider, FanPageConfig) {

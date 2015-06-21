@@ -1,16 +1,30 @@
 'use strict';
 
 angular.module('myFanPageApp')
-	.directive('pageContent', function (FanPageContent, FeedService, $routeParams) {
+	.directive('pageContent', function (FanPageContent, FeedService, $routeParams, limitToFilter) {
 		return {
-			template: '<div><div class="myfp--feeds-post" dir-paginate="page in pageContent|itemsPerPage:getItemsPerPage track by $index"><div class="myfp--wrap-text-image"><img ng-if="page.picture" src="{{page.picture}}" /></div><p ng-bind-html="page.text|enableLink"></p></div><dir-pagination-controls ng-if="active"></dir-pagination-controls></div>',
+			template: '<div><div infinite-scroll="loadMore()"><div class="myfp--feeds-post" dir-paginate="page in lazyPageContent|itemsPerPage:getItemsPerPage track by $index"><div class="myfp--wrap-text-image"><img ng-if="page.picture" src="{{page.picture}}" /></div><p ng-bind-html="page.text|enableLink"></p></div><dir-pagination-controls ng-if="active"></dir-pagination-controls></div></div>',
 			restrict: 'E',
 			scope: true,
 			replace: true,
+			controller: function ($scope) {
+
+				$scope.getInfinitePage = 20;
+				$scope.infinitePage = 0;
+				$scope.loadMore = function() {
+
+					if($scope.infinitePage < $scope.pageContent.length){
+						$scope.infinitePage += $scope.getInfinitePage;
+						$scope.lazyPageContent = limitToFilter($scope.pageContent, $scope.infinitePage);
+					};
+
+				};
+
+			},
 			link: {
 				post: function(scope, element, attrs) {
 
-					var _itemsPerPage = 20;
+					var _itemsPerPage = 100;
 					var _infiniteItemsPerPage = 999999;
 
 					scope.pageContent = [];
@@ -41,10 +55,12 @@ angular.module('myFanPageApp')
 										scope.active = true;
 										scope.getItemsPerPage = _itemsPerPage;
 										scope.pageContent = itemProp?[item[itemProp]]:item;
+										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
 									}else{
 										scope.active = false;
 										scope.getItemsPerPage = _infiniteItemsPerPage;
 										scope.pageContent = [item[itemProp||0]];
+										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
 									};
 
 								});
@@ -55,10 +71,12 @@ angular.module('myFanPageApp')
 									scope.active = true;
 									scope.getItemsPerPage = _itemsPerPage;
 									scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
+									scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
 								}else{
 									scope.active = false;
 									scope.getItemsPerPage = _infiniteItemsPerPage;
 									scope.pageContent = [itemFound[itemProp||0]];
+									scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
 								};
 
 							};
@@ -94,12 +112,14 @@ angular.module('myFanPageApp')
 										};
 
 										scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
+										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
 
 									}else{
 
 										scope.active = false;
 										scope.getItemsPerPage = _infiniteItemsPerPage;
 										scope.pageContent = [itemFound[itemProp||0]];
+										scope.lazyPageContent = limitToFilter(scope.pageContent, scope.getInfinitePage);
 
 									};
 
