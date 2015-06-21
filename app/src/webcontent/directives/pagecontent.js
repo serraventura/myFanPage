@@ -38,8 +38,12 @@ angular.module('myFanPageApp')
 								feedService.getContentByHashtag(hashtagProp).then(function (item) {
 
 									if (tweetProp === 'true') {
+										scope.active = true;
+										scope.getItemsPerPage = _itemsPerPage;
 										scope.pageContent = itemProp?[item[itemProp]]:item;
 									}else{
+										scope.active = false;
+										scope.getItemsPerPage = _infiniteItemsPerPage;
 										scope.pageContent = [item[itemProp||0]];
 									};
 
@@ -48,8 +52,12 @@ angular.module('myFanPageApp')
 							}else{
 
 								if (tweetProp === 'true') {
+									scope.active = true;
+									scope.getItemsPerPage = _itemsPerPage;
 									scope.pageContent = itemProp?[itemFound[itemProp]]:itemFound;
 								}else{
+									scope.active = false;
+									scope.getItemsPerPage = _infiniteItemsPerPage;
 									scope.pageContent = [itemFound[itemProp||0]];
 								};
 
