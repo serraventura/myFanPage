@@ -98,7 +98,7 @@ myFanPageApp is AngularJS based.
     * **tweet**: true|false - if true returns all the content based on the hashtag defined.
     * **name**: The menu option label to be displayed on menu.
     * **hashtag**: Creates a target to retrieve only content based on the hashtag defined.
-    * **pagination**: This is an option property if not defined the default pagination configuration will be used.
+    * **pagination**: This is an option property if not defined the default pagination configuration will be used. It can be used in any menu with hashtag and tweet(true) properties defined.
 
  ```javascript
 		service: {
