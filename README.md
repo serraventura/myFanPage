@@ -86,7 +86,11 @@ myFanPageApp is AngularJS based.
 			active: true,
 			tweet: true,
 			name: 'Blog',
-			hashtag: '#blog'
+			hashtag: '#blog',
+			pagination: {
+				active: true,
+				itemsPerPage: 100
+			}
 		},
 ```
 * **blogFanPage**: Is NOT a hardcoded menu. You can use any name to enable a menu option.
@@ -94,6 +98,7 @@ myFanPageApp is AngularJS based.
     * **tweet**: true|false - if true returns all the content based on the hashtag defined.
     * **name**: The menu option label to be displayed on menu.
     * **hashtag**: Creates a target to retrieve only content based on the hashtag defined.
+    * **pagination**: This is an option property if not defined the default pagination configuration will be used.
 
  ```javascript
 		service: {
