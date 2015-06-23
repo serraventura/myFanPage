@@ -50,15 +50,23 @@ angular.module('myFanPageApp')
 							if (pageDetailsProp == 'profilePicture') {
 
 								if (original === 'true') {
-									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp].big;
+									scope.valueProp = (FanPageContent.pageDetails[pageDetailsProp]|'').big;
 								}else{
-									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp].small;
+									scope.valueProp = (FanPageContent.pageDetails[pageDetailsProp]||'').small;
 								};
 
 							}else{
 
 								if (pageDetailsProp === 'about' || pageDetailsProp === 'description') {
 									scope.valueProp = MYFP.util.replaceURLWithHTMLLinks(FanPageContent.pageDetails[pageDetailsProp]||'');
+								}else if (pageDetailsProp === 'cover') {
+
+									if (original === 'true') {
+										scope.valueProp = (FanPageContent.pageDetails[pageDetailsProp]||'').original;
+									}else{
+										scope.valueProp = (FanPageContent.pageDetails[pageDetailsProp]||'').picture;
+									};
+
 								}else{
 									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp];
 								};

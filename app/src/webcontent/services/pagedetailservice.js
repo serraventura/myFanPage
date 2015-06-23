@@ -7,6 +7,45 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 	var URLAPI = 'http://graph.facebook.com';
 	var sURLAPI = 'https://graph.facebook.com';
 
+	var getOriginalCoverPicture = function (coverId) {
+
+		var d = $q.defer();
+		publicApi.isError = false;
+
+		if (!FanPageConfig.menu.aboutFanPage.active) {
+			publicApi.isError = true;
+			d.reject('Content not active.');
+			return d.promise;
+		};
+
+		$http.get(sURLAPI+'/'+coverId+'/?access_token='+FanPageConfig.token).then(function (res){
+
+			if(!res.data){
+
+				publicApi.isError = true;
+				return d.reject('No Data Found.');
+
+			}else {
+
+				if (FanPageConfig.coverPicture) {
+					FanPageContent.pageDetails.cover.original = res.data.images[0].source;
+				};
+
+				publicApi.isError = false;
+				return d.resolve(res);
+
+			};
+
+
+		}, function(res) {
+			publicApi.isError = true;
+			return d.reject(res);
+		});
+
+		return d.promise
+
+	};
+
 	// Public API
 	var PageDetailService = function() { // constructor
 
@@ -40,7 +79,9 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 					FanPageContent.pageDetails.likes = res.data.likes;
 
 					if (res.data.cover && FanPageConfig.coverPicture) {
-						FanPageContent.pageDetails.cover = res.data.cover.source;
+						FanPageContent.pageDetails.cover = {};
+						FanPageContent.pageDetails.cover.picture = res.data.cover.source;
+						getOriginalCoverPicture(res.data.cover.id);
 					};
 
 					publicApi.isError = false;

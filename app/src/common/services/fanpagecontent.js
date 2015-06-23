@@ -9,7 +9,10 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
   	about: undefined,
   	description: undefined,
   	likes: undefined,
-    cover: undefined,
+    cover: {
+      original: undefined,
+      picture: undefined
+    },
     profilePicture: {
       small: undefined,
       big: undefined
