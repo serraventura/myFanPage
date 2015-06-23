@@ -152,7 +152,7 @@ server: {
 
 > **original**: true|false - Retrieves the original picture size if true
 
-> **responsive**: true|false - Retrieves the original picture size if true
+> **responsive**: true|false - Makes cover picture "liquid" adjusting itself in 100% in a container.
 
 ```html
 <page-details value="logo" original="false"></page-details>
