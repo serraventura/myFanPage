@@ -146,9 +146,11 @@ server: {
 > Display the fanpage's name
 
 ```html
-<page-details value="cover" responsive="true"></page-details>
+<page-details value="cover" original="true" responsive="true"></page-details>
 ```
 > Display the fanpage's cover picture
+
+> **original**: true|false - Retrieves the original picture size if true
 
 > **responsive**: true|false - Retrieves the original picture size if true
 
