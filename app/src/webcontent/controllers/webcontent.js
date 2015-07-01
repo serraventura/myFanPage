@@ -9,7 +9,8 @@ angular.module('myFanPageApp')
     FanPageConfig,
     PageDetailService,
     PhotoService,
-    FeedService
+    FeedService,
+    ModuleLoader
   ) {
 
     WatchService.watchRoutes($scope);
@@ -24,6 +25,7 @@ angular.module('myFanPageApp')
 
   	pageDetailService.getPageInfos().then(function(res) {
       $rootScope.$broadcast('page-infos-ready');
+      ModuleLoader.loadAll($scope);
   	});
 
     pageDetailService.getProfilePicture().then(function(res) {

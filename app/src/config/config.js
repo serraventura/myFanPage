@@ -36,6 +36,10 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			hashtag: '#ourservices'
 		}
 
+	},
+
+	plugin: {
+		testPlugin: true
 	}
 
 });
