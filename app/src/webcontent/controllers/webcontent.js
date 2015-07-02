@@ -25,7 +25,7 @@ angular.module('myFanPageApp')
 
   	pageDetailService.getPageInfos().then(function(res) {
       $rootScope.$broadcast('page-infos-ready');
-      ModuleLoader.loadAll($scope);
+      ModuleLoader.loadAll();
   	});
 
     pageDetailService.getProfilePicture().then(function(res) {
