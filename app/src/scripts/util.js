@@ -11,6 +11,16 @@ MYFP.util = (function(){
 			document.body.appendChild(js)
 		},
 
+		camelCaseToDash: function (str) {
+			return str.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2');
+		},
+
+		dashToCamelCase: function(str) {
+			return str.replace(/\W+(.)/g, function (x, chr) {
+				return chr.toUpperCase();
+			});
+		},
+
 		loadCSS: function(file, type){
 			type = (type||'stylesheet');
 			var css = document.createElement('LINK');
