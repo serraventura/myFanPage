@@ -3,6 +3,26 @@
 angular.module('myFanPageApp')
   .factory('ModuleLoader', function ($ocLazyLoad, $compile, $rootScope, $http, FanPageConfig) {
 
+    function getAllAttributes(nodeString, id) {
+
+      var div = document.createElement('div');
+      div.innerHTML = nodeString;
+
+      var el = document.getElementById(id);
+
+      var attrObj = {};
+      for (var att, i = 0, atts = el.attributes, n = atts.length; i < n; i++){
+        att = atts[i];
+        //attrObj[att.nodeName] = att.nodeValue;
+        attrObj[att.nodeName] = att.value;
+      }
+
+      // remember to remove element (div)
+
+      return attrObj;
+
+    };
+
     // Public API here
     return {
 
@@ -60,7 +80,7 @@ angular.module('myFanPageApp')
                               $('body').find(
                                 arrDirectiveElements[i].split('<')[1].replace('>', '')
                               ).each(function(){
-                                  
+
                                   $(this).parent().append(elToAppend); //TODO: get attributes
 
                                   //TODO: get and apply properties before compiling
