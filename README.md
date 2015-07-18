@@ -35,7 +35,11 @@ myFanPageApp is AngularJS based.
 			active: true,
 			name: 'Services',
 			hashtag: '#ourservices'
-		}
+		},
+		
+    plugin: {
+      myCustomPluginName: true
+    }
 
 	}
 
@@ -266,3 +270,23 @@ $.util.includeFile('http://any-url...', undefined, 'import');
 $.util.includeFile('test.css'); // css file at **styles** folder
 $.util.includeFile('test.js'); // js file at **js** folder
 ```
+
+#How to build a plugin
+
+Plugins can be built to extend the APP. Basically a supported plugin is an external AngularJS module which can attached to the main APP by the config.js file on the section **plugin**.
+
+###Restrictions
+
+For the current version of the plugin support there are still some restriction as following:
+
+ - The external AngularJS module must be in a single file.
+ - The internal plugin's directives must be type element (restrict: 'E').
+ 
+###Main basic rules
+
+ - The plugin must be inside the folder **webcomponent** (app/src/webcomponent).
+ - Must be in a single file.
+ - Directives must be type element.
+ - Must be inside a folder with the same name. Ex: app/src/webcomponent/mycustompluginname/mycustompluginname.js.
+ - Must be defined on config.js file section **plugin**. You can see the above example **"mycustompluginname"** on the top of the documentation on config.js section.
+ 
