@@ -3,23 +3,24 @@
 angular.module('myFanPageApp')
   .factory('ModuleLoader', function ($ocLazyLoad, $compile, $rootScope, $http, FanPageConfig) {
 
-    function getAllAttributes(nodeString, id) {
-
-      var div = document.createElement('div');
-      div.innerHTML = nodeString;
-
-      var el = document.getElementById(id);
+    function getAllAttributes(domElement, returnString) {
 
       var attrObj = {};
-      for (var att, i = 0, atts = el.attributes, n = atts.length; i < n; i++){
+      var attrString = '';
+
+      for (var att, i = 0, atts = domElement.attributes, n = atts.length; i < n; i++){
         att = atts[i];
         //attrObj[att.nodeName] = att.nodeValue;
         attrObj[att.nodeName] = att.value;
+        attrString = attrString + att.nodeName + '="' + att.value + '" ';
+
       }
 
-      // remember to remove element (div)
-
-      return attrObj;
+      if(returnString){
+        return attrString;
+      }else{
+        return attrObj;
+      }
 
     };
 
@@ -32,19 +33,21 @@ angular.module('myFanPageApp')
 
                 var p;
                 var arrDirectiveElements;
-                var arrPlugins = [];
                 var scope = $rootScope.$new();
 
                 for(p in FanPageConfig.plugin){
 
                     if (FanPageConfig.plugin.hasOwnProperty(p) && FanPageConfig.plugin[p]) {
 
-                      //TODO: files should be loaded by LazyLoad module not by "hand"
+                      var pathPlugin = 'src/webcomponent/'+p.toLowerCase()+'/'+p.toLowerCase()+'.js';
 
-                        MYFP.util.loadJS('src/webcomponent/'+p.toLowerCase()+'/'+p.toLowerCase()+'.js');
-                        arrPlugins.push('src/webcomponent/'+p.toLowerCase()+'/'+p.toLowerCase()+'.js');
+                      $ocLazyLoad.load({
+                        name: p.toLowerCase(),
+                        files: [pathPlugin],
+                        serie: true
+                      }).then(function () {
 
-                        $http.get('src/webcomponent/'+p.toLowerCase()+'/'+p.toLowerCase()+'.js').then(function (fileContent) {
+                        $http.get(pathPlugin).then(function (fileContent) {
 
                           var regExp = /\.directive\(['"]([^'"\n]+)['"]/g;
                           var match = fileContent.data.match(regExp);
@@ -59,58 +62,40 @@ angular.module('myFanPageApp')
                           for (var i = 0; i < arrDirectives.length; i++) {
 
                             arrDirectiveElements.push(
-                              ('<' + MYFP.util.camelCaseToDash(arrDirectives[i]) + '></' + MYFP.util.camelCaseToDash(arrDirectives[i]) + '>').toLowerCase()
+                              ( MYFP.util.camelCaseToDash(arrDirectives[i]) ).toLowerCase()
                             );
 
                           }
 
-                          //TODO: the whole logic to check plugins directives should happen after lazyload
-                          $ocLazyLoad.load({
-                            name: p.toLowerCase(),
-                            files: ['src/webcomponent/'+p.toLowerCase()+'/'+p.toLowerCase()+'.js'],
-                            serie: true
-                          }).then(function () {
+                          var el, elToAppend, directivePart1;
 
-                            var el, elToAppend;
+                          for (var i = 0; i < arrDirectiveElements.length; i++) {
 
-                            for (var i = 0; i < arrDirectiveElements.length; i++) {
+                            //TODO: remove dom manipulation from service
 
-                              //TODO: get attributes from directives found in the DOM
-                              //TODO: remove duplicated directives
-                              $('body').find(
-                                arrDirectiveElements[i].split('<')[1].replace('>', '')
-                              ).each(function(){
+                            directivePart1 = arrDirectiveElements[i]
 
-                                  $(this).parent().append(elToAppend); //TODO: get attributes
+                            $('body').find(arrDirectiveElements[i]).each(function(){
 
-                                  //TODO: get and apply properties before compiling
-                                  elToAppend = $compile( angular.element( arrDirectiveElements[i] ) )(scope);
+                                el = $(this);
+
+                                elToAppend = $compile( angular.element( '<' + arrDirectiveElements[i] + ' ' + getAllAttributes(el.get(0), true) + '></' + arrDirectiveElements[i] + '>' ) )(scope);
+                                el.after(elToAppend);
+                                el.remove();
 
                               });
 
-                              //el = angular.element('body').find('my-test-plugin').parent();
-                              //angular.element('body').find('my-test-plugin').remove();
-                              //el.append(elToAppend);
-
-                            }
-
-                          }, function (e) {
-                            console.log(e);
-                          });
-
+                          }
 
                         });
 
-
+                      }, function (e) {
+                        console.log(e);
+                      });
 
                     };
 
                 };
-
-                // return $ocLazyLoad.load({
-                //     name: '',
-                //     files: arrPlugins
-                // });
 
             }else{
                 return undefined;
