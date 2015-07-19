@@ -290,3 +290,31 @@ For the current version of the plugin support there are still some restriction a
  - Must be inside a folder with the same name. Ex: **app/src/webcomponent/mycustompluginname/mycustompluginname.js**.
  - Must be defined on **config.js** file, section **plugin**. You can see the above example **"mycustompluginname"** on the top of the documentation on **config.js** section.
  
+ ###Simple plugin example
+ 
+ ```javascript
+ 'use strict';
+ 
+ angular.module('myCustomPluginName', [])
+ .config(function () {})
+ .run(function() {})
+ .controller('TestPlugin', function ($scope) {
+     $scope.smile = ' :) ';
+ })
+ .directive('myCustomDirectivePlugin', function () {
+   return {
+     scope: true,
+     replace: true,
+     restrict: 'E',
+     template: '<span>My Name is {{name}} Im {{age}} years old {{smile}}</span>',
+     link: {
+       post: function (scope, element, attrs) {
+         scope.age = attrs.age;
+         scope.name = attrs.name;
+       }
+     }
+ 
+ 
+   };
+ })
+ ```

@@ -2,10 +2,10 @@
 
 angular.module('myFanPageApp')
   .controller('WebContentCtrl', function (
-    $scope, 
-    $rootScope, 
-    // FanPageService, 
-    WatchService, 
+    $scope,
+    $rootScope,
+    // FanPageService,
+    WatchService,
     FanPageConfig,
     PageDetailService,
     PhotoService,
@@ -39,5 +39,14 @@ angular.module('myFanPageApp')
     feedService.getMenuContent().then(function(res) {
       $rootScope.$broadcast('menu-content-ready');
     });
+
+
+    $scope.list = [
+      {name: 'test 111', age: 33},
+      {name: 'test 222', age: 44},
+      {name: 'test 333', age: 55}
+    ]
+
+
 
   });
