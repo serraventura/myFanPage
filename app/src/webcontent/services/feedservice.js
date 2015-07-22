@@ -11,33 +11,36 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
 		var page = angular.copy(FanPageContent.pages);
 
-		switch((data.caption||'').toLowerCase()){
-            case 'soundcloud.com':
-				page[0].picture = undefined;
-                break;
+    switch((data.caption||'').toLowerCase()){
+      case 'soundcloud.com':
+        page[0].picture = undefined;
+        break;
 
-            case 'youtube.com':
-            	var template = 'http://img.youtube.com/vi/{ID}/mqdefault.jpg';
-				page[0].picture = template.replace('{ID}', MYFP.util.getYoutubeIdFromURL(data.link));
-                break;
+      case 'youtube.com':
+        var template = 'http://img.youtube.com/vi/{ID}/mqdefault.jpg';
+        page[0].picture = template.replace('{ID}', MYFP.util.getYoutubeIdFromURL(data.link));
+        break;
 
-            default:
-				page[0].picture = undefined;
-                break;
-        };
+      default:
+        page[0].picture = undefined;
+        break;
+
+    };
 
 		page[0].id = data.id;
 		page[0].pictureId = data.object_id;
 		page[0].hashtag = hashtag;
 		page[0].text = data.message;
-		page[0].type = data.caption;
+		page[0].type = data.caption||data.type;
 		page[0].externalLink = data.link;
 
 		return page[0];
 
-	}
+	};
 
-	var getMenuContentByHashtag = function(res) {
+	var setMenuContentByHashtag = function(res) {
+
+    var d = $q.defer();
 
 		var arrConfigProp = [];
 		var prop;
@@ -71,7 +74,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 			};
 
 		};
-	
+
 		if (res.data) {
 
 			var hashtagFound;
@@ -104,12 +107,48 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 			};
 
 			FanPageContent.pages = arrFanPageContentPages;
+      console.log('FanPageContent: ', FanPageContent);
 
-			console.log('FanPageContent: ', FanPageContent);
+      return d.resolve(FanPageContent);
 
-		};
+		}else{
+      return d.reject('Data not found');
+    }
+
+    return d.promise;
 
 	};
+
+  var requestMenuContent = function() {
+
+    var d = $q.defer();
+    publicApi.isError = false;
+
+    $http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
+
+      if(!res.data.data){
+
+        publicApi.isError = true;
+        return d.reject('No Data Found.');
+
+      }else{
+
+        publicApi.isError = false;
+        return d.resolve(res);
+
+      };
+
+
+    }, function(res) {
+
+      publicApi.isError = true;
+      return d.reject(res);
+
+    });
+
+    return d.promise
+
+  };
 
 	// Public API
 	var FeedService = function() { // constructor
@@ -120,35 +159,31 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 		// methods ###
 		this.getMenuContent = function() {
 
-			var d = $q.defer();
-			publicApi.isError = false;
+      return requestMenuContent()
+        .then(function(res) {
+          return setMenuContentByHashtag(res.data);
+        })
+        .then(function(res) {
 
-			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
+          // check all contents type "photo" and retrieve them
+          for (var i = 0; i < FanPageContent.pages.length; i++) {
 
-				if(!res.data.data){
+            if(FanPageContent.pages[i].type.toLowerCase() == 'photo'){
 
-					publicApi.isError = true;
-					return d.reject('No Data Found.');
+              //TODO: get photos from a new call by post ID
+              //getPicturesByFeedId(FanPageContent.pages[i].id);
 
-				}else {
-
-					publicApi.isError = false;
-					getMenuContentByHashtag(res.data);
-
-					return d.resolve(res);
-				};
+              //call example
+              // https://graph.facebook.com/798758500213688_851494078273463/?access_token=390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4&fields=attachments
 
 
-			}, function(res) {
+            }
 
-				publicApi.isError = true;
-				return d.reject(res);
+          }
 
-			});
+        });
 
-			return d.promise
-
-		}
+		};
 
 		this.getContentByHashtag = function(hashtag) {
 
@@ -215,8 +250,8 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
 			return d.promise
 
-		}
-		//###		
+		};
+		//###
 
 
 	};
