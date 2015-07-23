@@ -2,6 +2,7 @@
 
 angular.module('myFanPageApp')
 	.directive('pageContent', function (FanPageContent, FeedService, $routeParams, limitToFilter) {
+    //TODO: enable contents with multiple pictures. The property "page.picture" could be a single link or an array of links
 		return {
 			template: '<div><div infinite-scroll="loadMore()"><div class="myfp--feeds-post" dir-paginate="page in lazyPageContent|itemsPerPage:getItemsPerPage track by $index"><div class="myfp--wrap-text-image"><img ng-if="page.picture" src="{{page.picture}}" /></div><p ng-bind-html="page.text|enableLink"></p></div><dir-pagination-controls ng-if="active"></dir-pagination-controls></div></div>',
 			restrict: 'E',

@@ -119,6 +119,37 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
 	};
 
+  var getPicturesByFeedId = function(id) {
+
+    var d = $q.defer();
+    publicApi.isError = false;
+
+    $http.get(sURLAPI+'/'+id+'/?access_token='+FanPageConfig.token+'&fields=attachments').then(function (res){
+
+      if(!res.data){
+
+        publicApi.isError = true;
+        return d.reject('No Data Found.');
+
+      }else{
+
+        publicApi.isError = false;
+        return d.resolve(res);
+
+      };
+
+
+    }, function(res) {
+
+      publicApi.isError = true;
+      return d.reject(res);
+
+    });
+
+    return d.promise
+
+  };
+
   var requestMenuContent = function() {
 
     var d = $q.defer();
@@ -165,21 +196,50 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
         })
         .then(function(res) {
 
+          var promises = [];
+
           // check all contents type "photo" and retrieve them
           for (var i = 0; i < FanPageContent.pages.length; i++) {
 
             if(FanPageContent.pages[i].type.toLowerCase() == 'photo'){
-
-              //TODO: get photos from a new call by post ID
-              //getPicturesByFeedId(FanPageContent.pages[i].id);
-
-              //call example
-              // https://graph.facebook.com/798758500213688_851494078273463/?access_token=390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4&fields=attachments
-
-
+              promises.push(getPicturesByFeedId(FanPageContent.pages[i].id));
             }
 
           }
+
+          $q.all(promises).then(function (data) {
+
+            var subattachments, idx;
+
+            for (var i = 0; i < data.length; i++) {
+
+              if( data[i].data.attachments.data[0].hasOwnProperty('subattachments') ){
+
+                subattachments = [];
+
+                for (var j = 0; j < data[i].data.attachments.data[0].subattachments.data.length; j++) {
+                  subattachments.push(data[i].data.attachments.data[0].subattachments.data[j].media.image.src);
+                };
+
+                idx = _.findIndex(FanPageContent.pages, function(item) {
+                  return item.id == data[i].data.id;
+                });
+
+                FanPageContent.pages[idx].picture = subattachments;
+
+              }else{
+
+                idx = _.findIndex(FanPageContent.pages, function(item) {
+                  return item.id == data[i].data.id;
+                });
+
+                FanPageContent.pages[idx].picture = data[i].data.attachments.data[0].media.image.src;
+
+              }
+
+            }
+
+          })
 
         });
 
