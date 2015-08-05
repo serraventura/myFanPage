@@ -1,3 +1,5 @@
+//TODO: double validation on files path after one level more was added (Folder  "core")
+
 // Generated on 2015-03-28 using generator-angular-feature 0.6.0
 'use strict';
 
@@ -392,21 +394,21 @@ module.exports = function (grunt) {
     'clean:dist',
     'bower-install',
 
-    //useminPrepare task updates the grunt configuration to apply a configured transformation 
-    //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat 
+    //useminPrepare task updates the grunt configuration to apply a configured transformation
+    //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
     //and uglify for JS files, but it can be configured.
     'useminPrepare',
     //------------------
 
 
-    //Running slow tasks like Coffee and Sass concurrently can potentially improve your 
-    //build time significantly. This task is also useful if you need to run multiple blocking 
+    //Running slow tasks like Coffee and Sass concurrently can potentially improve your
+    //build time significantly. This task is also useful if you need to run multiple blocking
     //tasks like nodemon and watch at once.
     'concurrent:dist',
     //------------------
 
-    //Parse CSS and add vendor-prefixed CSS properties using the 'Can I Use' database. 
-    //Based on Autoprefixer. 
+    //Parse CSS and add vendor-prefixed CSS properties using the 'Can I Use' database.
+    //Based on Autoprefixer.
     'autoprefixer',
     //------------------
 
@@ -421,14 +423,14 @@ module.exports = function (grunt) {
 
     //Grunt plugin for finding and modifying static resource URLs
     //The task looks through your specified files for URLs to rewrite
-    'cdnify', 
+    'cdnify',
     //------------------
 
     'cssmin', //Compress CSS files
     'uglify', //Minify files with UglifyJS
     'rev', //Static file asset revisioning through content hashing
 
-    //Replaces references to non-optimized scripts or stylesheets into a set of HTML files 
+    //Replaces references to non-optimized scripts or stylesheets into a set of HTML files
     //(or any templates/views)
     'usemin',
     //------------------

@@ -3,8 +3,8 @@
 angular.module('myFanPageApp')
 	.directive('pageMenu', function (FanPageContent) {
 		return {
-			template: '<ul><li ng-repeat="(id, menu) in menuOptions track by $index"><a href="#{{id}}">{{menu.name}}</a></li></ul>',
-			restrict: 'E',
+			templateUrl: 'src/core/views/page-menu.html',
+      restrict: 'E',
 			scope: true,
 			replace: true,
 			link: {

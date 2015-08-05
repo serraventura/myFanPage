@@ -3,8 +3,8 @@
 angular.module('myFanPageApp')
 	.directive('pagePhotos', function (FanPageContent) {
 		return {
-			template: '<ul><li ng-repeat="picture in pictures track by $index"><a href="{{picture.big}}" target="_blank"><img src="{{picture.small}}" /></a><span>{{picture.description}}</span></li></ul>',
-			restrict: 'E',
+			templateUrl: 'src/core/views/page-photos.html',
+      restrict: 'E',
 			scope: true,
 			replace: true,
 			link: {

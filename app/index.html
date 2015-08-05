@@ -15,7 +15,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="src/styles/system.css"> 
+    <link rel="stylesheet" href="src/core/styles/system.css">
     <!-- endbuild -->
   </head>
   <body ng-app="myFanPageApp">
@@ -60,34 +60,34 @@
 
 
         <!-- build:js({.tmp,app}) src/scripts.js -->
-        <script src="src/app.js"></script>
-        <script src="src/scripts/util.js"></script>
-        <script src="src/scripts/jqueryutil.js"></script>
+        <script src="src/core/app.js"></script>
+        <script src="src/core/scripts/util.js"></script>
+        <script src="src/core/scripts/jqueryutil.js"></script>
 
-        <script src="src/webcontent/controllers/webcontent.js"></script>
+        <script src="src/core/controllers/webcontent.js"></script>
 
         <!--script src="src/webcontent/services/fanpageservice.js"></script-->
 
-        <script src="src/webcontent/services/feedservice.js"></script>
-        <script src="src/webcontent/services/pagedetailservice.js"></script>
-        <script src="src/webcontent/services/photoservice.js"></script>
+        <script src="src/core/services/feedservice.js"></script>
+        <script src="src/core/services/pagedetailservice.js"></script>
+        <script src="src/core/services/photoservice.js"></script>
 
-        <script src="src/webcontent/services/watchservice.js"></script>
+        <script src="src/core/services/watchservice.js"></script>
 
-        <script src="src/webcontent/filters/sanitize.js"></script>
-        <script src="src/webcontent/filters/enablelink.js"></script>
+        <script src="src/core/filters/sanitize.js"></script>
+        <script src="src/core/filters/enablelink.js"></script>
 
-        <script src="src/webcontent/directives/pagedetails.js"></script>
-        <script src="src/webcontent/directives/pagemenu.js"></script>
-        <script src="src/webcontent/directives/pagephotos.js"></script>
-        <script src="src/webcontent/directives/pagecontent.js"></script>
-        <script src="src/webcontent/directives/pageinclude.js"></script>
+        <script src="src/core/directives/pagedetails.js"></script>
+        <script src="src/core/directives/pagemenu.js"></script>
+        <script src="src/core/directives/pagephotos.js"></script>
+        <script src="src/core/directives/pagecontent.js"></script>
+        <script src="src/core/directives/pageinclude.js"></script>
 
-        <script src="src/common/services/fanpagecontent.js"></script>
-        <script src="src/common/services/moduleloader.js"></script>
+        <script src="src/core/datamodel/fanpagecontent.js"></script>
+        <script src="src/core/scripts/moduleloader.js"></script>
         <!-- endbuild -->
 
         <script src="src/config/config.js"></script>
-        
+
 </body>
 </html>
