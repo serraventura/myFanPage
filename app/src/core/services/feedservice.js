@@ -218,7 +218,12 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
                 subattachments = [];
 
                 for (var j = 0; j < data[i].data.attachments.data[0].subattachments.data.length; j++) {
-                  subattachments.push(data[i].data.attachments.data[0].subattachments.data[j].media.image.src);
+
+                  subattachments.push({
+                    big: data[i].data.attachments.data[0].subattachments.data[j].media.image.src,
+                    small: data[i].data.attachments.data[0].subattachments.data[j].target.id
+                  });
+
                 };
 
                 idx = _.findIndex(FanPageContent.pages, function(item) {
@@ -233,7 +238,10 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
                   return item.id == data[i].data.id;
                 });
 
-                FanPageContent.pages[idx].picture = data[i].data.attachments.data[0].media.image.src;
+                FanPageContent.pages[idx].picture = {
+                  big: data[i].data.attachments.data[0].media.image.src,
+                  small: data[i].data.attachments.data[0].target.id
+                };
 
               }
 
