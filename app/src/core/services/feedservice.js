@@ -119,12 +119,12 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
 	};
 
-  var getPicturesByFeedId = function(id) {
+  var getPicturesByFeedId = function(id, field) {
 
     var d = $q.defer();
     publicApi.isError = false;
 
-    $http.get(sURLAPI+'/'+id+'/?access_token='+FanPageConfig.token+'&fields=attachments').then(function (res){
+    $http.get(sURLAPI+'/'+id+'/?access_token='+FanPageConfig.token+'&fields='+field).then(function (res){
 
       if(!res.data){
 
@@ -196,18 +196,20 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
         })
         .then(function(res) {
 
-          var promises = [];
+          // getting big picture ###
+
+          var promisesAttachments = [];
 
           // check all contents type "photo" and retrieve them
           for (var i = 0; i < FanPageContent.pages.length; i++) {
 
             if(FanPageContent.pages[i].type.toLowerCase() == 'photo'){
-              promises.push(getPicturesByFeedId(FanPageContent.pages[i].id));
+              promisesAttachments.push(getPicturesByFeedId(FanPageContent.pages[i].id, 'attachments'));
             }
 
           }
 
-          $q.all(promises).then(function (data) {
+          $q.all(promisesAttachments).then(function (data) {
 
             var subattachments, idx;
 
@@ -247,7 +249,66 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
             }
 
-          })
+            // ############
+            // TODO: find a way to improve performance for this code (maybe lodash)
+
+            var promisesPicture = [];
+
+            var arrPics = _.flatten(_.map(FanPageContent.pages, function(item){
+              if(item.type == 'photo') {
+                return item.picture
+              }
+            }));
+
+            // check all contents type "photo" and retrieve them
+            for (var i = 0; i < arrPics.length; i++) {
+
+              if(arrPics[i]){
+                promisesPicture.push(getPicturesByFeedId(arrPics[i].small, 'picture'));
+              }
+
+            }
+
+            $q.all(promisesPicture).then(function (data) {
+
+              for (var c = 0; c < data.length; c++) {
+
+                for (var i = 0; i < FanPageContent.pages.length; i++) {
+
+                  if(FanPageContent.pages[i].type.toLowerCase() == 'photo'){
+
+                    if(FanPageContent.pages[i].picture && (_.isObject(FanPageContent.pages[i].picture) || _.isArray(FanPageContent.pages[i].picture)) ){
+
+
+                      if( _.isArray(FanPageContent.pages[i].picture) ){
+
+                        for (var j = 0; j < FanPageContent.pages[i].picture.length; j++) {
+
+                          if(FanPageContent.pages[i].picture[j].small == data[c].data.id){
+                            FanPageContent.pages[i].picture[j].small = data[c].data.picture;
+                          }
+
+                        }
+
+                      }else{
+
+                        if(FanPageContent.pages[i].picture.small == data[c].data.id){
+                          FanPageContent.pages[i].picture.small = data[c].data.picture;
+                        }
+
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              }
+
+            });
+
+          });
 
         });
 
