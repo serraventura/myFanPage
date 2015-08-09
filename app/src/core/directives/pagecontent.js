@@ -28,6 +28,10 @@ angular.module('myFanPageApp')
 					var _itemsPerPage = 100;
 					var _infiniteItemsPerPage = 999999;
 
+          scope.isPictureArray = function(o){
+            return _.isArray(o.picture) && o.picture;
+          }
+
 					scope.pageContent = [];
 
 					scope.$watch(function() {

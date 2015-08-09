@@ -11,9 +11,11 @@ p{
 
 .myfp--wrap-text-image{
 	float:inherit;
+  border: 1px solid red;
 }
 
 .myfp--feeds-post{
-	float:left; 
+	float:left;
 	width: 100%;
+  border: 1px solid blue;
 }

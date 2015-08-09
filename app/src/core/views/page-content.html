@@ -1,8 +1,18 @@
 <div>
   <div infinite-scroll="loadMore()">
     <div class="myfp--feeds-post" dir-paginate="page in lazyPageContent|itemsPerPage:getItemsPerPage track by $index">
-      <div class="myfp--wrap-text-image"><img ng-if="page.picture" src="{{page.picture}}"/></div>
-      <p ng-bind-html="page.text|enableLink"></p></div>
+
+      <div class="myfp--wrap-text-image" ng-if="page.type=='photo'">
+        <img ng-if="isPictureArray(page)" ng-repeat="pic in page.picture track by $index" src="{{pic.small}}" />
+        <img ng-if="!isPictureArray(page)" src="{{page.picture.small}}" />
+      </div>
+
+      <div class="myfp--wrap-text-image" ng-if="page.type!='photo'">
+        <img ng-if="page.picture" src="{{page.picture}}" />
+      </div>
+
+      <p ng-bind-html="page.text|enableLink"></p>
+    </div>
     <dir-pagination-controls ng-if="active"></dir-pagination-controls>
   </div>
 </div>
