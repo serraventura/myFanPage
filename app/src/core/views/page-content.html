@@ -3,8 +3,21 @@
     <div class="myfp--feeds-post" dir-paginate="page in lazyPageContent|itemsPerPage:getItemsPerPage track by $index">
 
       <div class="myfp--wrap-text-image" ng-if="page.type=='photo'">
-        <img ng-if="isPictureArray(page)" ng-repeat="pic in page.picture track by $index" src="{{pic.small}}" />
-        <img ng-if="!isPictureArray(page)" src="{{page.picture.small}}" />
+
+        <ul ng-if="isPictureArray(page)">
+          <li ng-repeat="pic in page.picture track by $index">
+            <a href="{{pic.big}}" target="_blank">
+              <img src="{{pic.small}}" />
+            </a>
+          </li>
+        </ul>
+
+        <div ng-if="!isPictureArray(page)">
+          <a href="{{page.picture.big}}" target="_blank">
+            <img src="{{page.picture.small}}" />
+          </a>
+        </div>
+
       </div>
 
       <div class="myfp--wrap-text-image" ng-if="page.type!='photo'">

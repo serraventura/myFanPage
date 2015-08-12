@@ -23,7 +23,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
       default:
 
-        if (data.link && !data.caption) {
+        if (data.type == 'link') {
           page[0].picture = data.picture;
         }else{
           page[0].picture = undefined;
