@@ -5,7 +5,6 @@ angular.module('myFanPageApp')
     $scope,
     $rootScope,
     $q,
-    // FanPageService,
     WatchService,
     FanPageConfig,
     PageDetailService,
@@ -14,17 +13,18 @@ angular.module('myFanPageApp')
     ModuleLoader
   ) {
 
-    WatchService.watchRoutes($scope);
-    $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
+
 
     var arrPromises = [];
     var promise;
-
-  	// var fanPageService = new FanPageService();
-
     var pageDetailService = new PageDetailService();
     var photoService = new PhotoService();
     var feedService = new FeedService();
+
+    // TODO: decide whow to organize the watches blocks
+    WatchService.watchRoutes($scope);
+
+    $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
 
   	promise = pageDetailService.getPageInfos().then(function(res) {
       $rootScope.$broadcast('page-infos-ready');

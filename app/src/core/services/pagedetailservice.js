@@ -9,13 +9,13 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 
 	var getOriginalCoverPicture = function (coverId) {
 
-		var d = $q.defer();
+		var defer = $q.defer();
 		publicApi.isError = false;
 
 		if (!FanPageConfig.menu.aboutFanPage.active) {
 			publicApi.isError = true;
-			d.reject('Content not active.');
-			return d.promise;
+			defer.reject('Content not active.');
+			return defer.promise;
 		};
 
 		$http.get(sURLAPI+'/'+coverId+'/?access_token='+FanPageConfig.token).then(function (res){
@@ -23,7 +23,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 			if(!res.data){
 
 				publicApi.isError = true;
-				d.reject('No Data Found.');
+				defer.reject('No Data Found.');
 
 			}else {
 
@@ -32,17 +32,17 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				};
 
 				publicApi.isError = false;
-				d.resolve(res);
+				defer.resolve(res);
 
 			};
 
 
 		}, function(res) {
 			publicApi.isError = true;
-			d.reject(res);
+			defer.reject(res);
 		});
 
-		return d.promise
+		return defer.promise
 
 	};
 
@@ -55,13 +55,13 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 		// methods ###
 		this.getPageInfos = function() {
 
-			var d = $q.defer();
+			var defer = $q.defer();
 			publicApi.isError = false;
 
 			if (!FanPageConfig.menu.aboutFanPage.active) {
 				publicApi.isError = true;
-				d.reject('Content not active.');
-				return d.promise;
+				defer.reject('Content not active.');
+				return defer.promise;
 			};
 
 			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/?access_token='+FanPageConfig.token).then(function (res){
@@ -69,7 +69,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				if(!res.data){
 
 					publicApi.isError = true;
-					d.reject('No Data Found.');
+					defer.reject('No Data Found.');
 
 				}else {
 
@@ -85,29 +85,29 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 					};
 
 					publicApi.isError = false;
-					d.resolve(res);
+					defer.resolve(res);
 
 				};
 
 
 			}, function(res) {
 				publicApi.isError = true;
-				d.reject(res);
+				defer.reject(res);
 			});
 
-			return d.promise
+			return defer.promise
 
 		}
 
 		this.getProfilePicture = function() {
 
-			var d = $q.defer();
+			var defer = $q.defer();
 			publicApi.isError = false;
 
 			if (!FanPageConfig.profilePicture) {
 				publicApi.isError = true;
-				d.reject('Content not active.');
-				return d.promise;
+				defer.reject('Content not active.');
+				return defer.promise;
 			};
 
 			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/photos/?access_token='+FanPageConfig.token).then(function (res){
@@ -115,7 +115,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				if(!res.data.data){
 
 					publicApi.isError = true;
-					d.reject('No Data Found.');
+					defer.reject('No Data Found.');
 
 				}else {
 
@@ -123,16 +123,16 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 					FanPageContent.pageDetails.profilePicture.big = res.data.data[0].source;
 
 					publicApi.isError = false;
-					d.resolve(res);
+					defer.resolve(res);
 
 				};
 
 			}, function(res) {
 				publicApi.isError = true;
-				d.reject(res);
+				defer.reject(res);
 			});
 
-			return d.promise
+			return defer.promise
 
 		}
 		//###		

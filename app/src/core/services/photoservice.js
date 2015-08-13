@@ -9,7 +9,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 
 	var getAlbum = function() {
 
-		var d = $q.defer();
+		var defer = $q.defer();
 		publicApi.isError = false;
 
 		$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/albums/?access_token='+FanPageConfig.token).then(function (res){
@@ -17,19 +17,19 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			if(!res.data.data){
 
 				publicApi.isError = true;
-				d.reject('No Data Found.');
+				defer.reject('No Data Found.');
 
 			}else {
-				d.resolve(res);
+				defer.resolve(res);
 			};
 
 
 		}, function (res) {
 			publicApi.isError = true;
-			d.reject(res);
+			defer.reject(res);
 		});
 
-		return d.promise
+		return defer.promise
 
 	};
 
@@ -55,7 +55,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 
 	var getPictures = function(idAlbum) {
 
-		var d = $q.defer();
+		var defer = $q.defer();
 		publicApi.isError = false;
 
 		$http.get(sURLAPI+'/'+idAlbum+'/photos/?access_token='+FanPageConfig.token).then(function (res){
@@ -63,20 +63,20 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			if(!res.data.data){
 
 				publicApi.isError = true;
-				d.reject('No Data Found.');
+				defer.reject('No Data Found.');
 
 			}else {
 				publicApi.isError = false;
-				d.resolve(res);
+				defer.resolve(res);
 			};
 
 
 		}, function (res) {
 			publicApi.isError = true;
-			d.reject(res);
+			defer.reject(res);
 		});
 
-		return d.promise
+		return defer.promise
 
 	}
 
@@ -89,14 +89,14 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 		// methods ###
 		this.getPhotoPage = function() {
 
-			var d = $q.defer();
+			var defer = $q.defer();
 			var that = this;
 			publicApi.isError = false;
 
 			if (!FanPageConfig.menu.photoFanPage.active) {
 				publicApi.isError = true;
-				d.reject('Content not active.');
-				return d.promise;
+				defer.reject('Content not active.');
+				return defer.promise;
 			};
 
 			return getAlbum()
@@ -104,7 +104,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 				var idAlbum = getWebsiteAlbumId(d.data.data);
 				return getPictures(idAlbum);
 			}, function(err){
-				d.reject(err);
+				defer.reject(err);
 			})
 			.then(function(d) {
 
@@ -124,17 +124,17 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 					};
 
 					FanPageContent.pictures = pictures;
-					d.resolve(d);
+					defer.resolve(d);
 
 				}else{
-					d.reject('Content Not Found.');
+					defer.reject('Content Not Found.');
 				}
 
 			}, function(err) {
-				d.reject(err);
+				defer.reject(err);
 			});
 
-			return d.promise
+			return defer.promise
 
 		};
 		//###		

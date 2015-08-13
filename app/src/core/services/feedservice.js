@@ -46,7 +46,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
 	var setMenuContentByHashtag = function(res) {
 
-    var d = $q.defer();
+    var defer = $q.defer();
 
 		var arrConfigProp = [];
 		var prop;
@@ -115,19 +115,19 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 			FanPageContent.pages = arrFanPageContentPages;
       console.log('FanPageContent: ', FanPageContent);
 
-      d.resolve(FanPageContent);
+      defer.resolve(FanPageContent);
 
 		}else{
-      d.reject('Data not found');
+      defer.reject('Data not found');
     }
 
-    return d.promise;
+    return defer.promise;
 
 	};
 
   var getPicturesByFeedId = function(id, field) {
 
-    var d = $q.defer();
+    var defer = $q.defer();
     publicApi.isError = false;
 
     $http.get(sURLAPI+'/'+id+'/?access_token='+FanPageConfig.token+'&fields='+field).then(function (res){
@@ -135,12 +135,12 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
       if(!res.data){
 
         publicApi.isError = true;
-        d.reject('No Data Found.');
+        defer.reject('No Data Found.');
 
       }else{
 
         publicApi.isError = false;
-        d.resolve(res);
+        defer.resolve(res);
 
       };
 
@@ -148,17 +148,17 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     }, function(res) {
 
       publicApi.isError = true;
-      d.reject(res);
+      defer.reject(res);
 
     });
 
-    return d.promise
+    return defer.promise
 
   };
 
   var requestMenuContent = function() {
 
-    var d = $q.defer();
+    var defer = $q.defer();
     publicApi.isError = false;
 
     $http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
@@ -166,12 +166,12 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
       if(!res.data.data){
 
         publicApi.isError = true;
-        d.reject('No Data Found.');
+        defer.reject('No Data Found.');
 
       }else{
 
         publicApi.isError = false;
-        d.resolve(res);
+        defer.resolve(res);
 
       };
 
@@ -179,11 +179,11 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     }, function(res) {
 
       publicApi.isError = true;
-      d.reject(res);
+      defer.reject(res);
 
     });
 
-    return d.promise
+    return defer.promise
 
   };
 
@@ -196,13 +196,13 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 		// methods ###
 		this.getMenuContent = function() {
 
-      var d = $q.defer();
+      var defer = $q.defer();
 
       return requestMenuContent()
         .then(function(res) {
           return setMenuContentByHashtag(res.data);
         }, function(err){
-          d.reject(err);
+          defer.reject(err);
         })
         .then(function(res) {
 
@@ -221,7 +221,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
           $q.all(promisesAttachments).then(function (data) {
 
             if (!data) {
-              d.reject('No Data Found.');
+              defer.reject('No Data Found.');
               return false;
             };
 
@@ -321,27 +321,27 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
               }
 
             }, function(err){
-              d.reject(err);
+              defer.reject(err);
             });
 
-            d.resolve(data);
+            defer.resolve(data);
 
           }, function(err){
-            d.reject(err);
+            defer.reject(err);
           });
 
         }, function(err){
-          d.reject(err);
+          defer.reject(err);
         });
 
-        return d.promise;
+        return defer.promise;
 
 		};
 
 		this.getContentByHashtag = function(hashtag) {
 
 			var pageContentFound = undefined;
-			var d = $q.defer();
+			var defer = $q.defer();
 			publicApi.isError = false;
 
 			// check if content is already saved
@@ -350,8 +350,8 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 			});
 
 			if (pageContentFound.length>0) {
-				d.resolve(pageContentFound);
-				return d.promise;
+				defer.resolve(pageContentFound);
+				return defer.promise;
 			};
 
 			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
@@ -359,7 +359,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 				if(!res.data.data){
 
 					publicApi.isError = true;
-					d.reject('No Data Found.');
+					defer.reject('No Data Found.');
 
 				}else {
 
@@ -390,18 +390,18 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 						return item.hashtag==hashtag
 					});
 
-					d.resolve(pageContentFound);
+					defer.resolve(pageContentFound);
 				};
 
 
 			}, function(res) {
 
 				publicApi.isError = true;
-				return d.reject(res);
+				return defer.reject(res);
 
 			});
 
-			return d.promise
+			return defer.promise
 
 		};
 		//###
