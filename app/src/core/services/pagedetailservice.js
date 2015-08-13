@@ -1,11 +1,9 @@
 'use strict';
 
-angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, $http, FanPageConfig, FanPageContent) {
+angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, $http, FanPageConfig, FanPageContent, API) {
 
 	// Private API
 	var publicApi = undefined;
-	var URLAPI = 'http://graph.facebook.com';
-	var sURLAPI = 'https://graph.facebook.com';
 
 	var getOriginalCoverPicture = function (coverId) {
 
@@ -18,7 +16,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 			return defer.promise;
 		};
 
-		$http.get(sURLAPI+'/'+coverId+'/?access_token='+FanPageConfig.token).then(function (res){
+		$http.get( API.get('identifier', coverId) ).then(function (res){
 
 			if(!res.data){
 
@@ -69,7 +67,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				return defer.promise;
 			};
 
-			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/?access_token='+FanPageConfig.token).then(function (res){
+			$http.get( API.get('identifier', FanPageConfig.fanPageId) ).then(function (res){
 
 				if(!res.data){
 
@@ -120,7 +118,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				return defer.promise;
 			};
 
-			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/photos/?access_token='+FanPageConfig.token).then(function (res){
+			$http.get( API.get('photos', FanPageConfig.fanPageId) ).then(function (res){
 
 				if(!res.data.data){
 
@@ -145,8 +143,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 			return defer.promise
 
 		}
-		//###		
-
+		//###
 
 	};
 

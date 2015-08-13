@@ -8,6 +8,10 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	profilePicture: true,
 	token: '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
 
+  //server: {
+  //  api: 'http://www.mydomain.com/api.php'
+  //},
+
 	menu: {
 
 		aboutFanPage: {

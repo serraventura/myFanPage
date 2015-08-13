@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http, FanPageConfig, FanPageContent) {
+angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http, FanPageConfig, FanPageContent, API) {
 
 	// Private API
 	var publicApi = undefined;
-	var URLAPI = 'http://graph.facebook.com';
 	var sURLAPI = 'https://graph.facebook.com';
 
 	var setContentByType = function(data, hashtag) {
@@ -130,6 +129,8 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     var defer = $q.defer();
     publicApi.isError = false;
 
+    //API.get('identifier', id)
+
     $http.get(sURLAPI+'/'+id+'/?access_token='+FanPageConfig.token+'&fields='+field).then(function (res){
 
       if(!res.data){
@@ -161,7 +162,9 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     var defer = $q.defer();
     publicApi.isError = false;
 
-    $http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
+
+
+    $http.get( API.get('feed', FanPageConfig.fanPageId) ).then(function (res){
 
       if(!res.data.data){
 
@@ -370,7 +373,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 				return defer.promise;
 			};
 
-			$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/feed/?access_token='+FanPageConfig.token+'&limit=250').then(function (res){
+			$http.get( API.get('feed', FanPageConfig.fanPageId) ).then(function (res){
 
 				if(!res.data.data){
 

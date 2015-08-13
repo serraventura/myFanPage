@@ -1,18 +1,16 @@
 'use strict';
 
-angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http, FanPageConfig, FanPageContent) {
+angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http, FanPageConfig, FanPageContent, API) {
 
 	// Private API
 	var publicApi = undefined;
-	var URLAPI = 'http://graph.facebook.com';
-	var sURLAPI = 'https://graph.facebook.com';
 
 	var getAlbum = function() {
 
 		var defer = $q.defer();
 		publicApi.isError = false;
 
-		$http.get(sURLAPI+'/'+FanPageConfig.fanPageId+'/albums/?access_token='+FanPageConfig.token).then(function (res){
+		$http.get( API.get('albums', FanPageConfig.fanPageId) ).then(function (res){
 
 			if(!res.data.data){
 
@@ -58,7 +56,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 		var defer = $q.defer();
 		publicApi.isError = false;
 
-		$http.get(sURLAPI+'/'+idAlbum+'/photos/?access_token='+FanPageConfig.token).then(function (res){
+		$http.get( API.get('photos', idAlbum) ).then(function (res){
 
 			if(!res.data.data){
 
@@ -119,7 +117,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 					var pictures = [];
 
 					for (var i = 0; i < len; i++) {
-						
+
 						pictures.push({
 							small: d.data.data[i].picture,
 							big: d.data.data[i].source,
@@ -142,7 +140,7 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			return defer.promise
 
 		};
-		//###		
+		//###
 
 
 	};
