@@ -4,7 +4,11 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
 
   var self = this;
 
-  this.pageDetails = {
+  var FanPageContent = {};
+
+  FanPageContent.isCached = false;
+
+  FanPageContent.pageDetails = {
   	name: undefined,
   	about: undefined,
   	description: undefined,
@@ -19,7 +23,7 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
     }
   };
 
-  this.pictures = [
+  FanPageContent.pictures = [
 
     {
       small: undefined,
@@ -29,9 +33,9 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
 
   ];
 
-  this.menuOptions = FanPageConfig.menu;
+  FanPageContent.menuOptions = FanPageConfig.menu;
 
-  this.pages = [
+  FanPageContent.pages = [
 
     {
       id: '0300303030',
@@ -45,5 +49,37 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
 
   ];
 
+  (function(){
+
+      //TODO: maybe the cache checking should be isolated
+      if(typeof Storage !== 'undefined'){
+
+        if(localStorage.getItem('fanPageContentCache') != null){
+
+          try{
+
+            var cache = JSON.parse(localStorage.getItem('fanPageContentCache'));
+
+            if (moment().diff(moment(cache.dateCriation), 'days') < 1) {
+
+              FanPageContent.isCached = true;
+              FanPageContent.pageDetails = cache.data.pageDetails;
+              FanPageContent.pictures = cache.data.pictures;
+              FanPageContent.menuOptions = cache.data.menuOptions;
+              FanPageContent.pages = cache.data.pages;
+
+            };
+
+          }catch(err){
+            console.log('Error in cache: ', err);
+          }
+
+        }
+
+      }
+
+  })()
+
+  return FanPageContent;
 
 });

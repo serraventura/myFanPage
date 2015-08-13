@@ -65,6 +65,7 @@ angular.module('myFanPageApp')
 
     $q.all(arrPromises).then(function (data) {
 
+      //TODO: maybe the cache checking should be isolated
       // handling cache
       if(typeof Storage !== 'undefined'){
 

@@ -58,6 +58,11 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 			var defer = $q.defer();
 			publicApi.isError = false;
 
+			if (FanPageContent.isCached) {
+				defer.resolve();
+				return defer.promise;
+			};
+
 			if (!FanPageConfig.menu.aboutFanPage.active) {
 				publicApi.isError = true;
 				defer.reject('Content not active.');
@@ -103,6 +108,11 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 
 			var defer = $q.defer();
 			publicApi.isError = false;
+
+			if (FanPageContent.isCached) {
+				defer.resolve();
+				return defer.promise;
+			};
 
 			if (!FanPageConfig.profilePicture) {
 				publicApi.isError = true;

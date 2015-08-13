@@ -197,11 +197,18 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 		this.getMenuContent = function() {
 
       var defer = $q.defer();
+      publicApi.isError = false;
 
-      return requestMenuContent()
+      if (FanPageContent.isCached) {
+        defer.resolve();
+        return defer.promise;
+      };
+
+      requestMenuContent()
         .then(function(res) {
           return setMenuContentByHashtag(res.data);
         }, function(err){
+          publicApi.isError = true;
           defer.reject(err);
         })
         .then(function(res) {
@@ -222,6 +229,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
             if (!data) {
               defer.reject('No Data Found.');
+              publicApi.isError = true;
               return false;
             };
 
@@ -320,17 +328,20 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
               }
 
+              defer.resolve(data);
+
             }, function(err){
+              publicApi.isError = true;
               defer.reject(err);
             });
 
-            defer.resolve(data);
-
           }, function(err){
+            publicApi.isError = true;
             defer.reject(err);
           });
 
         }, function(err){
+          publicApi.isError = true;
           defer.reject(err);
         });
 
@@ -343,6 +354,11 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 			var pageContentFound = undefined;
 			var defer = $q.defer();
 			publicApi.isError = false;
+
+      if (FanPageContent.isCached) {
+        defer.resolve();
+        return defer.promise;
+      };
 
 			// check if content is already saved
 			pageContentFound = FanPageContent.pages.filter(function(item){

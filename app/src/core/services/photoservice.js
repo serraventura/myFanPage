@@ -93,6 +93,11 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			var that = this;
 			publicApi.isError = false;
 
+			if (FanPageContent.isCached) {
+				defer.resolve();
+				return defer.promise;
+			};
+
 			if (!FanPageConfig.menu.photoFanPage.active) {
 				publicApi.isError = true;
 				defer.reject('Content not active.');
