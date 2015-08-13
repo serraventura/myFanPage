@@ -115,10 +115,10 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 			FanPageContent.pages = arrFanPageContentPages;
       console.log('FanPageContent: ', FanPageContent);
 
-      return d.resolve(FanPageContent);
+      d.resolve(FanPageContent);
 
 		}else{
-      return d.reject('Data not found');
+      d.reject('Data not found');
     }
 
     return d.promise;
@@ -135,12 +135,12 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
       if(!res.data){
 
         publicApi.isError = true;
-        return d.reject('No Data Found.');
+        d.reject('No Data Found.');
 
       }else{
 
         publicApi.isError = false;
-        return d.resolve(res);
+        d.resolve(res);
 
       };
 
@@ -148,7 +148,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     }, function(res) {
 
       publicApi.isError = true;
-      return d.reject(res);
+      d.reject(res);
 
     });
 
@@ -166,12 +166,12 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
       if(!res.data.data){
 
         publicApi.isError = true;
-        return d.reject('No Data Found.');
+        d.reject('No Data Found.');
 
       }else{
 
         publicApi.isError = false;
-        return d.resolve(res);
+        d.resolve(res);
 
       };
 
@@ -179,7 +179,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     }, function(res) {
 
       publicApi.isError = true;
-      return d.reject(res);
+      d.reject(res);
 
     });
 
@@ -196,14 +196,17 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 		// methods ###
 		this.getMenuContent = function() {
 
+      var d = $q.defer();
+
       return requestMenuContent()
         .then(function(res) {
           return setMenuContentByHashtag(res.data);
+        }, function(err){
+          d.reject(err);
         })
         .then(function(res) {
 
           // getting big picture ###
-
           var promisesAttachments = [];
 
           // check all contents type "photo" and retrieve them
@@ -216,6 +219,11 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
           }
 
           $q.all(promisesAttachments).then(function (data) {
+
+            if (!data) {
+              d.reject('No Data Found.');
+              return false;
+            };
 
             var subattachments, idx;
 
@@ -312,11 +320,21 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
               }
 
+            }, function(err){
+              d.reject(err);
             });
 
+            d.resolve(data);
+
+          }, function(err){
+            d.reject(err);
           });
 
+        }, function(err){
+          d.reject(err);
         });
+
+        return d.promise;
 
 		};
 
@@ -341,7 +359,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 				if(!res.data.data){
 
 					publicApi.isError = true;
-					return d.reject('No Data Found.');
+					d.reject('No Data Found.');
 
 				}else {
 
@@ -372,7 +390,7 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 						return item.hashtag==hashtag
 					});
 
-					return d.resolve(pageContentFound);
+					d.resolve(pageContentFound);
 				};
 
 

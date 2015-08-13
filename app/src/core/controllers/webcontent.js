@@ -4,6 +4,7 @@ angular.module('myFanPageApp')
   .controller('WebContentCtrl', function (
     $scope,
     $rootScope,
+    $q,
     // FanPageService,
     WatchService,
     FanPageConfig,
@@ -14,8 +15,10 @@ angular.module('myFanPageApp')
   ) {
 
     WatchService.watchRoutes($scope);
-
     $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
+
+    var arrPromises = [];
+    var promise;
 
   	// var fanPageService = new FanPageService();
 
@@ -23,29 +26,39 @@ angular.module('myFanPageApp')
     var photoService = new PhotoService();
     var feedService = new FeedService();
 
-  	pageDetailService.getPageInfos().then(function(res) {
+  	promise = pageDetailService.getPageInfos().then(function(res) {
       $rootScope.$broadcast('page-infos-ready');
       ModuleLoader.loadAll();
   	});
+    arrPromises.push(promise);
 
-    pageDetailService.getProfilePicture().then(function(res) {
+    promise = pageDetailService.getProfilePicture().then(function(res) {
       $rootScope.$broadcast('page-profile-picture-ready');
     });
+    arrPromises.push(promise);
 
-  	photoService.getPhotoPage().then(function(res) {
+  	promise = photoService.getPhotoPage().then(function(res) {
       $rootScope.$broadcast('page-photo-ready');
   	});
+    arrPromises.push(promise);
 
-    feedService.getMenuContent().then(function(res) {
+    promise = feedService.getMenuContent().then(function(res) {
       $rootScope.$broadcast('menu-content-ready');
     });
+    arrPromises.push(promise);
 
+    $q.all(arrPromises).then(function (data) {
 
-    $scope.list = [
-      {name: 'test 111', age: 33},
-      {name: 'test 222', age: 44},
-      {name: 'test 333', age: 55}
-    ]
+    }, function(err){
+
+    });
+
+    // plugin test
+    // $scope.list = [
+    //   {name: 'test 111', age: 33},
+    //   {name: 'test 222', age: 44},
+    //   {name: 'test 333', age: 55}
+    // ]
 
 
 

@@ -17,16 +17,16 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			if(!res.data.data){
 
 				publicApi.isError = true;
-				return d.reject('No Data Found.');
+				d.reject('No Data Found.');
 
 			}else {
-				return d.resolve(res);
+				d.resolve(res);
 			};
 
 
 		}, function (res) {
 			publicApi.isError = true;
-			return d.reject(res);
+			d.reject(res);
 		});
 
 		return d.promise
@@ -63,17 +63,17 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			if(!res.data.data){
 
 				publicApi.isError = true;
-				return d.reject('No Data Found.');
+				d.reject('No Data Found.');
 
 			}else {
 				publicApi.isError = false;
-				return d.resolve(res);
+				d.resolve(res);
 			};
 
 
 		}, function (res) {
 			publicApi.isError = true;
-			return d.reject(res);
+			d.reject(res);
 		});
 
 		return d.promise
@@ -89,11 +89,11 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 		// methods ###
 		this.getPhotoPage = function() {
 
+			var d = $q.defer();
 			var that = this;
 			publicApi.isError = false;
 
 			if (!FanPageConfig.menu.photoFanPage.active) {
-				var d = $q.defer();
 				publicApi.isError = true;
 				d.reject('Content not active.');
 				return d.promise;
@@ -103,25 +103,38 @@ angular.module('myFanPageApp').factory('PhotoService', function ($q, $log, $http
 			.then(function(d) {
 				var idAlbum = getWebsiteAlbumId(d.data.data);
 				return getPictures(idAlbum);
+			}, function(err){
+				d.reject(err);
 			})
 			.then(function(d) {
 
-				var len = d.data.data.length;
-				var pictures = [];
+				if (d.data.data) {
 
-				for (var i = 0; i < len; i++) {
-					
-					pictures.push({
-						small: d.data.data[i].picture,
-						big: d.data.data[i].source,
-						description: d.data.data[i].name
-					});
+					var len = d.data.data.length;
+					var pictures = [];
 
-				};
+					for (var i = 0; i < len; i++) {
+						
+						pictures.push({
+							small: d.data.data[i].picture,
+							big: d.data.data[i].source,
+							description: d.data.data[i].name
+						});
 
-				FanPageContent.pictures = pictures;
+					};
 
+					FanPageContent.pictures = pictures;
+					d.resolve(d);
+
+				}else{
+					d.reject('Content Not Found.');
+				}
+
+			}, function(err) {
+				d.reject(err);
 			});
+
+			return d.promise
 
 		};
 		//###		

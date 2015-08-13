@@ -23,7 +23,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 			if(!res.data){
 
 				publicApi.isError = true;
-				return d.reject('No Data Found.');
+				d.reject('No Data Found.');
 
 			}else {
 
@@ -32,14 +32,14 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				};
 
 				publicApi.isError = false;
-				return d.resolve(res);
+				d.resolve(res);
 
 			};
 
 
 		}, function(res) {
 			publicApi.isError = true;
-			return d.reject(res);
+			d.reject(res);
 		});
 
 		return d.promise
@@ -69,7 +69,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				if(!res.data){
 
 					publicApi.isError = true;
-					return d.reject('No Data Found.');
+					d.reject('No Data Found.');
 
 				}else {
 
@@ -85,14 +85,14 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 					};
 
 					publicApi.isError = false;
-					return d.resolve(res);
+					d.resolve(res);
 
 				};
 
 
 			}, function(res) {
 				publicApi.isError = true;
-				return d.reject(res);
+				d.reject(res);
 			});
 
 			return d.promise
@@ -115,7 +115,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 				if(!res.data.data){
 
 					publicApi.isError = true;
-					return d.reject('No Data Found.');
+					d.reject('No Data Found.');
 
 				}else {
 
@@ -123,13 +123,13 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 					FanPageContent.pageDetails.profilePicture.big = res.data.data[0].source;
 
 					publicApi.isError = false;
-					return d.resolve(res);
+					d.resolve(res);
 
 				};
 
 			}, function(res) {
 				publicApi.isError = true;
-				return d.reject(res);
+				d.reject(res);
 			});
 
 			return d.promise
