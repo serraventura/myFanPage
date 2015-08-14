@@ -4,7 +4,6 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
 	// Private API
 	var publicApi = undefined;
-	var sURLAPI = 'https://graph.facebook.com';
 
 	var setContentByType = function(data, hashtag) {
 
@@ -129,9 +128,11 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
     var defer = $q.defer();
     publicApi.isError = false;
 
-    //API.get('identifier', id)
+    var URL = API.get('identifier', id, {
+      fields: field
+    });
 
-    $http.get(sURLAPI+'/'+id+'/?access_token='+FanPageConfig.token+'&fields='+field).then(function (res){
+    $http.get( URL ).then(function (res){
 
       if(!res.data){
 
@@ -161,8 +162,6 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
     var defer = $q.defer();
     publicApi.isError = false;
-
-
 
     $http.get( API.get('feed', FanPageConfig.fanPageId) ).then(function (res){
 
