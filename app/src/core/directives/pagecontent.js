@@ -86,7 +86,7 @@ angular.module('myFanPageApp')
 
 							};
 
-						}else{ //if property hashtag is NOT provided, first do the search by route to find the right hashtag
+						}else{ //if property hashtag is NOT provided, first do the search by nodejs to find the right hashtag
 
 							if (FanPageContent.menuOptions.hasOwnProperty($routeParams.name||'')) {
 
