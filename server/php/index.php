@@ -1,19 +1,27 @@
+<?php
+
+require 'Slim/Slim.php';
+\Slim\Slim::registerAutoloader();
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
 $app = new \Slim\Slim();
 
-$config = array(
-	'token' => '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
-	'api' => 'https://graph.facebook.com'
-);
+$app->get('/identifier/', function() use ($app) {
 
-$app->get('/api/identifier/', function() use ($app) {
+	$TOKEN = '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4';
+	$API = 'https://graph.facebook.com';
 
-	$id = $_GET['identifier'];
-	$endPoint = $_GET['endPoint'];
+	$req = $app->request();
+	
+	$id = $req->params('identifier');
+	$endPoint = $req->params('endPoint');
+
 	$sufix = '';
 	$params = '';
-	$config = (object)$config;
 
-	if(isset($id)){
+	if(isset( $id )){
 		$sufix += '/'+$id;
 	}
 
@@ -21,18 +29,31 @@ $app->get('/api/identifier/', function() use ($app) {
 		$sufix += '/'+$endPoint;
 	}
 
-	unset($_GET['identifier']);
-	unset($_GET['endPoint']);
+	// unset($req->params('identifier'));
+	// unset($req->params('endPoint'));
 
-	$params += '?access_token=' + $config.token + '&';
+	$params += '?access_token=' + $TOKEN + '&';
 
-	foreach ($o in $_GET){
-		$params += $o + '=' + $_GET[$o] + '&';
+
+
+var_dump($URL);
+// var_dump($req->params('endPoint'));
+ // echo $req->get('endPoint');
+
+
+
+	foreach ($req->params() as $key => $value) {
+		$params += $value + '=' + $key[$value] + '&';
 	};
 
 	$params = substr($params, 0, strlen($params)-1);
 
-	$URL = $config.api + $sufix + $params;
+	$URL = $API + $sufix + $params;
+
+
+return;
+
+
 
 	$opts = array(
 		'http' => array(
@@ -51,3 +72,5 @@ $app->get('/api/identifier/', function() use ($app) {
 });
 
 $app->run();
+
+?>
