@@ -1,14 +1,14 @@
 var express = require('express');
 var request = require('request');
 
-var api = require('./includes/config.js');
+var c = require('../includes/config.js');
 
 var router = express.Router();
 
-router.post('/identifier', function(req, res){
+router.get('/identifier', function(req, res){
 
-  var id = req.body.identifier;
-  var endPoint = req.body.endPoint;
+  var id = req.query.identifier;
+  var endPoint = req.query.endPoint;
   var sufix = '';
   var params = '';
 
@@ -20,29 +20,52 @@ router.post('/identifier', function(req, res){
     sufix += '/'+endPoint;
   }
 
-  delete req.body.identifier;
-  delete req.body.endPoint;
+  // console.log('query: ', req.query);
 
-  params += '?access_token=' + config.token + '&';
+  delete req.query.identifier;
+  delete req.query.endPoint;
 
-  for (var o in req.body){
-    params += o + '=' + req.body[o] + '&';
+  params += '?access_token=' + c.config.token + '&';
+
+  for (var o in req.query){
+    params += o + '=' + req.query[o] + '&';
   };
 
   params = params.substring(0,params.length-1);
 
-  var URL = config.api + sufix + params;
+  var URL = c.config.api + sufix + params;
+
+  // console.log('URL: ', URL);
+  // return 
 
   request({
     url: URL,
   }, function(err, cbRes, body){
 
+    var data;
+
+    try{
+        data = JSON.parse(body);
+    }catch(err){
+        data = err;
+    };
+
     if(!err){
-      res.status(200);
-      res.json(body);
+
+      console.log('success');
+
+      if (cbRes.statusCode == 200) {
+        res.status(200);
+        res.json(data);
+      }else{
+        res.status(cbRes.statusCode);
+        res.json(data);
+      }
+
     }else{
+      console.log('Err: ', err);
       res.status(500);
-      res.json(err);
+      res.json(data);
     }
 
   });
