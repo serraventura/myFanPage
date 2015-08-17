@@ -17,7 +17,7 @@ $app->get('/api/identifier/', function() use ($app) {
 		$sufix += '/'+$id;
 	}
 
-	if(isset($endPoint)){
+	if(isset($endPoint) && $endPoint != 'identifier'){
 		$sufix += '/'+$endPoint;
 	}
 

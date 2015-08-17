@@ -23,8 +23,12 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div ng-controller="WebContentCtrl" class="container" ng-view=""></div>
+    <div class="myfp--main-container">
+      <div class="myfp--header-container"></div>
+      <!-- Add your site or application content here -->
+      <div ng-controller="WebContentCtrl" class="myfp--container" ng-view=""></div>
+      <div class="myfp--footer-container"></div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
