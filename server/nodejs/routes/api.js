@@ -16,7 +16,7 @@ router.get('/identifier', function(req, res){
     sufix += '/'+id;
   }
 
-  if(endPoint != undefined){
+  if(endPoint != undefined && endPoint != 'identifier'){
     sufix += '/'+endPoint;
   }
 
@@ -36,7 +36,7 @@ router.get('/identifier', function(req, res){
   var URL = c.config.api + sufix + params;
 
   // console.log('URL: ', URL);
-  // return 
+  // return
 
   request({
     url: URL,
