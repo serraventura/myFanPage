@@ -15,10 +15,13 @@ $app = new \Slim\Slim();
 $app->get('/identifier/', function() use ($app) {
 
 	$req = $app->request();
+
+	//use hardcode token or request one is up to your implementation
 	$TOKEN = '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4';
+
 	$API = 'https://graph.facebook.com';
 	$GETPARAMS = $req->params();
-	
+
 	$id = $req->params('identifier');
 	$endPoint = $req->params('endPoint');
 
