@@ -118,15 +118,23 @@ myFanPageApp is AngularJS based.
 
 ###Token details:
 
-For security propurses an APP Access token must not be used on the front-end side in a production environment. You can find out more details here#link#.
+For security propurses an APP Access token must not be used on the front-end side in a production environment. You can find out more details and participate [here](http://stackoverflow.com/questions/30654961/facebook-app-token-from-a-placebo-app).
 
 In a production environment you must do authenticated requests from the server side to avoid expose your token. To do so, a server side files are provided on the folder "server" on the root of the APP.
 
 The server-side files provided in Node.js and PHP must be hosted in your own server and to make the app recognize it a new node must be used on config.js as below.
 
 ```javascript
+// NodeJS/Express
 server: {
-	api: 'http://www.mydomain.com/api.php'
+	api: 'http://www.mydomain.com/api'
+}
+```
+
+```javascript
+// PHP/Slim
+server: {
+	api: 'http://www.mydomain.com/yourfolder'
 }
 ```
 
@@ -252,8 +260,6 @@ Any extra HTML part can be included by ```<page-include></page-include>``` direc
 ###Using third party resources in a template:
 
 To use third party resources a JQuery helper method is available over the namespace ```$.util```.
-
- - ```$.util.includeFile()```
 
  ```javascript
 // Including bootstrap CSS and JS remote files
