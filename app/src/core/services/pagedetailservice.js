@@ -25,7 +25,7 @@ angular.module('myFanPageApp').factory('PageDetailService', function ($q, $log, 
 
 			}else {
 
-				if (FanPageConfig.coverPicture) {
+				if ( FanPageConfig.coverPicture && _.has(res.data, 'images') ) {
 					FanPageContent.pageDetails.cover.original = res.data.images[0].source;
 				};
 
