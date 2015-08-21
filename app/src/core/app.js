@@ -10,16 +10,21 @@ angular.module('myFanPageApp', [
 
 .config(function ($routeProvider, FanPageConfig) {
 
+  var flAnchorContent = false;
+  if(flAnchorContent) return false;
+
   $routeProvider
-    .when('/', { 
+    .when('/', {
       templateUrl: 'src/webcontent/views/templates/'+FanPageConfig.template+'/main.html',
     })
-    .when('/:name', { 
+    .when('/:name', {
       templateUrl: 'src/webcontent/views/templates/'+FanPageConfig.template+'/_blank.html',
     })
     .otherwise({
       redirectTo: '/'
     });
+
+    flAnchorContent = FanPageConfig.anchorContent;
 
 })
 
