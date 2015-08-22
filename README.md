@@ -12,13 +12,15 @@ myFanPageApp is AngularJS based.
 	coverPicture: true,
 	profilePicture: true,
 	token: '',
+	anchorContent: false,
 
 	menu: {
 
 		aboutFanPage: {
 			active: true,
 			name: 'About us',
-			location: true
+			location: true,
+			initialPage: false
 		},
 		photoFanPage: {
 			active: true,
@@ -57,6 +59,8 @@ myFanPageApp is AngularJS based.
  - **profilePicture**: true|false - If true will retrieve the fanpage's profile picture otherwise the default profile picture/logo provided in your template folder's asset images is gonna be used.
 
  - **token**: APP Access token - The token is supposed to be used only on development environment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file **token.dev** on the root of the APP. **See more details below**.
+ 
+ - **anchorContent**: Enable/Disable content based on classic HTML anchors. To make it works the whole content must be in a single HTML file (**main.html**) in your template. The anchor id must match the menu options. Ex: #aboutFanPage, #photoFanPage, etc...   
 
  - **menu**: Following the example above each menu option is gonna be explained. It's important to point that every menu name(ex: aboutFanPage) must reflect its respective HTML file. It means, if there's a menu option "aboutFanPage" one "aboutFanPage.html" must exist. The best way to understand is checking out the "default" template.
 
@@ -64,13 +68,15 @@ myFanPageApp is AngularJS based.
 		aboutFanPage: {
 			active: true, // 
 			name: 'About us',
-			location: true
+			location: true,
+			initialPage: false
 		},
 ```
 * **aboutFanPage**: Is a hardcoded menu. You must use the same property name to be able to enable a menu option which is gonna show the description about your fanpage/website.
    * **active**: true|false - the option menu is gonna be shown if true.
    * **name**: The menu option label to be displayed on menu.
    * **location**: The map location based on the address provided to the fanpage.
+   * **initialPage**: Make the option menu the initial page.
 
 
 ```javascript
@@ -165,6 +171,16 @@ server: {
 > **original**: true|false - Retrieves the original picture size if true
 
 > **responsive**: true|false - Makes cover picture "liquid" adjusting itself in 100% in a container.
+
+```html
+<div fix-header></div>
+```
+> Fix container outside of dynamic container. It avoids blink/refresh effects in fixed contents.
+
+```html
+<div fix-footer></div>
+```
+> Fix container outside of dynamic container. It avoids blink/refresh effects in fixed contents.
 
 ```html
 <page-details value="logo" original="false"></page-details>
