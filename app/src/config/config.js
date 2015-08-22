@@ -8,6 +8,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	profilePicture: true,
 	token: '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
   anchorContent: false,
+
 	 //server: {
 	 //	api: 'http://localhost:3001/api'
 	 //},
@@ -17,7 +18,8 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 		aboutFanPage: {
 			active: true,
 			name: 'About us',
-			location: true
+			location: true,
+      initialPage: false
 		},
 		photoFanPage: {
 			active: true,

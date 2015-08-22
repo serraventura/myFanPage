@@ -17,6 +17,7 @@ angular.module('myFanPageApp')
               var anchor = $(angular.element(this).attr('href'));
 
               if( FanPageConfig.anchorContent && anchor.length > 0 ){
+
                 anchor[0].scrollIntoView();
               }
 
