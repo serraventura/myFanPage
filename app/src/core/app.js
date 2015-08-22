@@ -30,7 +30,7 @@ angular.module('myFanPageApp', [
 
 })
 
-.run(function(FanPageConfig, $rootScope, $location) {
+.run(function(FanPageConfig, $location) {
 
   MYFP.util.loadJS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
   MYFP.util.loadCSS('src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
