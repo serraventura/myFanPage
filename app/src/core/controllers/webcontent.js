@@ -23,6 +23,7 @@ angular.module('myFanPageApp')
     // TODO: decide whow to organize the watches blocks
     WatchService.watchRoutes($scope);
 
+    $scope.FanPageContent = FanPageContent;
     $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
 
   	promise = pageDetailService.getPageInfos().then(function(res) {
@@ -47,7 +48,7 @@ angular.module('myFanPageApp')
     arrPromises.push(promise);
 
     function makeCache() {
-      
+
         var fanPageContentCache = {
           dateCriation: moment().format(),
           data: FanPageContent
