@@ -18,7 +18,12 @@ angular.module('myFanPageApp')
 
               if( FanPageConfig.anchorContent && anchor.length > 0 ){
 
-                anchor[0].scrollIntoView();
+                $('html, body').animate({
+                  scrollTop: $( anchor ).offset().top
+                }, 500);
+
+                //anchor[0].scrollIntoView();
+
               }
 
             });
