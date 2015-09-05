@@ -4,20 +4,23 @@
 // STARTERS --------------------------------------------------------------------------
 // me/normalise_widget.less 							CSS reset, with Open Type support
 // me/global.less 												Global mixins
-// system.less 														Original starter, WILL BE REMOVED
 //
 // SETTINGS --------------------------------------------------------------------------
 // _brand.less 														Colours and typography
+// _grid.less 														Layout
 //
 // BASE ------------------------------------------------------------------------------
 // this file
 //
 // COMPONENTS ------------------------------------------------------------------------
 // 1. Common (atoms)
-// 	_table.less 													Tables
+// 	_system.less 													html, body, etc.
+// 	_page__title.less 										page title in the top bar
+// 	_page__hero.less 											hero image
+// 	_page__logo.less 											logo image
 //
 // 2. Specific
-//
+//	_about.less 													BOUT
 //
 // MODULES ---------------------------------------------------------------------------
 // _module__XXX.less 											XXX
@@ -44,11 +47,15 @@
 
 //------------------------------------------------------------------------------------
 // SETTINGS
-// @import "_brand";
+@import "_brand";
+@import "_grid";
 
 //------------------------------------------------------------------------------------
 // COMMON COMPONENTS
-@import "_topnav";
+@import "_page__title";
+@import "_page__hero";
+@import "_page__logo";
+@import "_page__topnav";
 
 //------------------------------------------------------------------------------------
 // PAGE-SPECIFIC COMPONENTS
@@ -63,5 +70,5 @@
 // @import "_function__lang-switch";
 // @import "_function__has-edit";
 // @import "_function__has-dropdown";
-// @import "_function__has-tooltip";
+@import "_function__has-tooltip";
 // @import "_function__help";

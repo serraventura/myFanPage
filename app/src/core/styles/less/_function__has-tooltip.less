@@ -1,0 +1,67 @@
+// TOOLTIP-SPECIFIC MIXINS
+// put your mixins here
+
+
+// TOOLTIP
+.has-tooltip {}
+
+.has-tooltip__toggle {
+	.relative;
+	.inline-block;
+	cursor: help;
+}
+
+.is-tooltip {
+	.absolute;
+	left: 	50%;
+	bottom: 0;
+	.translateX(-50%);
+	background-color: @c-bg-table;
+	color: @c-text;
+	font-size: round(@basefont * .7);
+	font-style: normal;
+	padding: round(@gutter / 3) round(@gutter / 2);
+	border: 1px solid @c-border;
+	.depth--shadow(1);
+	.opacity(0);
+	.hidden;
+	.has-tooltip__toggle:hover & {
+		.opacity(1);
+		.visible;
+	}
+}
+
+
+// ----------------------------------
+// position
+.is-tooltip--top {
+	bottom: @basefont;
+}
+.is-tooltip--bottom {
+	top: @basefont;
+	bottom: inherit;
+}
+.is-tooltip--left {
+	right: 100%;
+	left: inherit;
+	.translateX(0);
+	.translateY(42.5%);
+}
+.is-tooltip--right {
+	left: 100%;
+	.translateX(0);
+	.translateY(42.5%);
+}
+
+
+// ----------------------------------
+// size
+.is-tooltip--short {
+	width: 180px;
+}
+.is-tooltip--medium {
+	width: 360px;
+}
+.is-tooltip--large {
+	width: 540px;
+}

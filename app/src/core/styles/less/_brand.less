@@ -1,0 +1,112 @@
+// JUPITER BRAND
+//---------------------------------------------------------------------------------
+// TABLE OF CONTENTS
+//
+// 1. Colours
+// 2. Typography
+// 3. Fun
+//
+//--------------------------------------------------------------------------------
+
+//---------------------------------------------
+// COLOURS
+//
+// Reference (do not use these straight away in the CSS, check point 3 for the variables to use):
+// 1. Jupiter brand colours, from Jupiter Guidelines PDF
+// can use in shades, 80% 60% 40% 20%
+@c-petrol-blue: 		#4F6B87;
+@c-yellow: 					#F9B953;
+@c-dark-blue: 			#123B61;
+@c-teal-green: 			#8BB7B8;
+@c-dark-grey: 			#2C4250;
+@c-orange: 					#F5821F;
+@c-jupiter-blue: 		#127FC1;
+@c-red: 						#BE4126;
+// 2. More colours, from Typography.jpg
+@c-section-title: 	#F26F00;
+@c-headings: 				#002C3F;
+@c-body: 						#4E4E4E;
+@c-divider:					#C2C2C2;
+@c-white:						#FFF;
+// ---
+// 3. In use
+@c-primary-dark: 		@c-dark-blue;
+@c-primary: 				@c-jupiter-blue;
+@c-primary-light: 	@c-teal-green;
+@c-accent: 					@c-section-title;
+@c-text: 						@c-body;
+@c-text-title: 			@c-headings;
+@c-text-light: 			lighten(@c-body, 20%);						// footnotes and disclaimers
+@c-link:						@c-accent;
+@c-border:					@c-divider; 											// borders and separators
+@c-bg-table:				lighten(@c-text, 60%);						// panels background, zebra table
+@c-bg-table-alt:		lighten(@c-text, 50%); 						// zebra table alternative
+@c-bg: 							@c-white;
+
+
+// RGBA Mixin
+.rgbaColorIn(@color, @opacity: 1) {
+	@result: rgba(red(@color), green(@color), blue(@color), @opacity);
+}
+// alternate method: use the fade function
+// example:
+// background-color: fade(@c-grey_dark, 50%);
+
+// SVG Colouring
+.svgcolor(@fill-color, @stroke-color) {
+	[fill]:not([fill="none"]) {
+		fill: @fill-color;
+	}
+	[stroke]:not([stroke="none"]) {
+		stroke: @stroke-color;
+	}
+}
+
+
+
+
+//---------------------------------------------
+// TYPOGRAPHY
+// .eot					IE9 Compact Modes
+// .eot?#iefix	IE6-IE8
+// .woff2				Super Modern Browsers (if available)
+// .woff				Modern Browsers
+// .ttf					Safari, Android, iOS
+// .svg					Legacy iOS, Print service
+
+// Montserrat (Normal 400), from Google Fonts
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+// Source Sans Pro (Light 300, Normal 400, Bold 700), from Google Fonts
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+// Font Awesome, for the icons
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css);
+
+@f-arial: 			~"Arial, Helvetica, sans-serif";
+@f-mo: 					~"Montserrat, sans-serif";
+@f-ss: 					~"'Source Sans Pro', sans-serif";
+@f-fa: 					~"'FontAwesome'" @i;
+@f-default: 		@f-ss;
+@basefont: 			18px;
+.font(@f-family: @f-default, @f-weight: 400, @f-lineheight: 1.35, @f-style: ~"normal") {
+	font-family: 	@f-family;
+	font-weight: 	@f-weight;
+	font-style: 	@f-style;
+	line-height: 	@f-lineheight;
+}
+
+a,
+*:focus {
+	outline: none;
+	// must specify an alternative style
+}
+
+
+
+//---------------------------------------------
+// HELPERS
+@tea:  			#7EA;
+@coffee:  	#C0FFEE;
+// ^ interestingly, they're both 'watery' colours
+
+// SELF-AWARENESS
+@whoami: 		#BADA55;

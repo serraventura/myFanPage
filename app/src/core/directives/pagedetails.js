@@ -16,7 +16,7 @@ angular.module('myFanPageApp')
 				}else if (pageDetailsProp == 'cover') {
 
 					if (responsive === 'true') {
-						return '<img class="myfp--responsive-image" src="{{valueProp}}" />';
+						return '<img class="myfp__image--responsive" src="{{valueProp}}" />';
 					}else{
 						return '<img src="{{valueProp}}" />';
 					};

@@ -1,0 +1,31 @@
+// TOPNAV-SPECIFIC MIXINS
+@navmargin: ~"calc(@{logowidth} + (@{logoborder} * 2))";
+
+
+
+// TOP NAVIGATION
+.myfp__nav--list {
+	list-style-type: none;
+	// .translateX(-50%);
+	padding: 0;
+	margin: 0 0 0 @navmargin;
+	.inline-block;
+	.clearfix;
+}
+
+.myfp__nav--list-item {
+	float: left;
+	a {
+		color: @c-text;
+		font-size: round(@basefont * .65);
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: .7em 1em .3em 1em;
+		.inline-block;
+		&:after {
+			content: '';
+			background-color: @c-text;
+			.inline-block;
+		}
+	}
+}
