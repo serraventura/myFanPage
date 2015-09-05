@@ -7,7 +7,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	coverPicture: true,
 	profilePicture: true,
 	token: '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
-  anchorContent: true,
+  anchorContent: false,
 
 	 //server: {
 	 //	api: 'http://localhost:3001/api'
