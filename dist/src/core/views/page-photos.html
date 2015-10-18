@@ -1,0 +1,10 @@
+<ul>
+  <li ng-repeat="picture in pictures track by $index">
+
+    <a href="{{picture.big}}" target="_blank">
+      <img src="{{picture.small}}"/>
+    </a>
+    <span>{{picture.description}}</span>
+
+  </li>
+</ul>

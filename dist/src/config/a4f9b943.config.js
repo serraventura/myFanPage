@@ -6,14 +6,20 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	template: 'default',
 	coverPicture: true,
 	profilePicture: true,
-	token: '809855312442090|MUv2SpoA7I3TCbsljWe1mDJy_Jg',
+	token: '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
+  anchorContent: false,
+
+	 //server: {
+	 //	api: 'http://localhost:3001/api'
+	 //},
 
 	menu: {
 
 		aboutFanPage: {
 			active: true,
 			name: 'About us',
-			location: true
+			location: true,
+      initialPage: false
 		},
 		photoFanPage: {
 			active: true,
@@ -24,7 +30,11 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			active: true,
 			tweet: true,
 			name: 'Blog',
-			hashtag: '#blog'
+			hashtag: '#blog',
+			pagination: {
+				active: true,
+				itemsPerPage: 100
+			}
 		},
 		service: {
 			active: true,
@@ -32,6 +42,10 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			hashtag: '#ourservices'
 		}
 
+	},
+
+	plugin: {
+		testPlugin: true
 	}
 
 });
