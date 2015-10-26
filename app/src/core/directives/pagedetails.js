@@ -11,14 +11,14 @@ angular.module('myFanPageApp')
 
 				if (pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo') {
 
-					return '<img src="{{valueProp}}" />';
+					return '<img ng-src="{{valueProp}}" />';
 
 				}else if (pageDetailsProp == 'cover') {
 
 					if (responsive === 'true') {
-						return '<img class="myfp__image--responsive" src="{{valueProp}}" />';
+						return '<img class="myfp__image--responsive" ng-src="{{valueProp}}" />';
 					}else{
-						return '<img src="{{valueProp}}" />';
+						return '<img ng-src="{{valueProp}}" />';
 					};
 
 				}else{
