@@ -170,7 +170,12 @@ module.exports = function (grunt) {
         files: {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/src/{,*/}*.js',
+            //'<%= yeoman.dist %>/src/{,*/}*.js',
+            '<%= yeoman.dist %>/src/core/{,*/}*.js',
+            '<%= yeoman.dist %>/src/webcontent/{,*/}*.js',
+            //'<%= yeoman.dist %>/src/webcomponent/{,*/}*.js',
+            '<%= yeoman.dist %>/src/scripts.js',
+            //'<%= yeoman.dist %>/src/config/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
@@ -289,6 +294,7 @@ module.exports = function (grunt) {
             'src/**/views/templates/**/{,*/}*.html',
             'src/**/views/templates/**/**',
             'src/config/{,*/}*.js',
+            'src/webcomponent/{,*/}*.js',
             'vendor/bower_components/**/*',
             'src/**/assets/images/{,*/}*.{webp,png,jpg,jpeg,gif,svg}',
             'src/**/assets/fonts/*'
@@ -318,6 +324,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
+        //'copy:webcomponents',
         'imagemin',
         'svgmin'
       ]
