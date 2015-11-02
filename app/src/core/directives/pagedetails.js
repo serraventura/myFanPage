@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('myFanPageApp')
-	.directive('pageDetails', function (FanPageContent) {
+	.directive('pageDetails', function (FanPageContent, FanPageConfig) {
 		return {
-			//template: '<pre>{{valueProp}}</pre>',
 			template: function(element, attrs) {
 
 				var pageDetailsProp = (attrs.value||'').toLowerCase();
@@ -61,11 +60,19 @@ angular.module('myFanPageApp')
 									scope.valueProp = MYFP.util.replaceURLWithHTMLLinks(FanPageContent.pageDetails[pageDetailsProp]||'');
 								}else if (pageDetailsProp === 'cover') {
 
-									if (original === 'true') {
-										scope.valueProp = (FanPageContent.pageDetails[pageDetailsProp]||'').original;
-									}else{
-										scope.valueProp = (FanPageContent.pageDetails[pageDetailsProp]||'').picture;
-									};
+                  var defaultCoverPicture = scope.templatePath + '/cover.jpg';
+
+                  if(FanPageConfig.coverPicture){
+
+                    if (original === 'true') {
+                      scope.valueProp = _.get(FanPageContent, ['pageDetails', pageDetailsProp, 'original'], defaultCoverPicture);
+                    }else{
+                      scope.valueProp = _.get(FanPageContent, ['pageDetails', pageDetailsProp, 'picture'], defaultCoverPicture);
+                    };
+
+                  }else{
+                    scope.valueProp = defaultCoverPicture;
+                  }
 
 								}else{
 									scope.valueProp = FanPageContent.pageDetails[pageDetailsProp];
