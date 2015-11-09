@@ -19,12 +19,13 @@ angular.module('myFanPageApp')
     var pageDetailService = new PageDetailService();
     var photoService = new PhotoService();
     var feedService = new FeedService();
+    var prefixAbsoluteTemplateUrl = _.get(FanPageConfig, ['prefixAbsoluteTemplateUrl'], '');
 
     // TODO: decide whow to organize the watches blocks
     WatchService.watchRoutes($scope);
 
     $scope.FanPageContent = FanPageContent;
-    $scope.templatePath = 'src/webcontent/views/templates/'+FanPageConfig.template;
+    $scope.templatePath = prefixAbsoluteTemplateUrl + 'src/webcontent/views/templates/'+FanPageConfig.template;
 
   	promise = pageDetailService.getPageInfos().then(function(res) {
       $rootScope.$broadcast('page-infos-ready');
