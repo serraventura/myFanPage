@@ -435,6 +435,55 @@ module.exports = function (grunt) {
 
     'cssmin', //Compress CSS files
     'uglify', //Minify files with UglifyJS
+    //'rev', //Static file asset revisioning through content hashing
+
+    //Replaces references to non-optimized scripts or stylesheets into a set of HTML files
+    //(or any templates/views)
+    'usemin',
+    //------------------
+
+    'htmlmin', // Minify HTML
+    'clean:unnecessary'
+  ]);
+
+  grunt.registerTask('build-prefix', [
+    'clean:dist',
+    'bower-install',
+
+    //useminPrepare task updates the grunt configuration to apply a configured transformation
+    //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
+    //and uglify for JS files, but it can be configured.
+    'useminPrepare',
+    //------------------
+
+
+    //Running slow tasks like Coffee and Sass concurrently can potentially improve your
+    //build time significantly. This task is also useful if you need to run multiple blocking
+    //tasks like nodemon and watch at once.
+    'concurrent:dist',
+    //------------------
+
+    //Parse CSS and add vendor-prefixed CSS properties using the 'Can I Use' database.
+    //Based on Autoprefixer.
+    'autoprefixer',
+    //------------------
+
+    //'ngmin',
+
+    //Add, remove and rebuild angularjs dependency injection annotations
+    'ngAnnotate',
+    //------------------
+
+    'concat', //Concatenate files.
+    'copy:dist', //Copy files and folders.
+
+    //Grunt plugin for finding and modifying static resource URLs
+    //The task looks through your specified files for URLs to rewrite
+    'cdnify',
+    //------------------
+
+    'cssmin', //Compress CSS files
+    'uglify', //Minify files with UglifyJS
     'rev', //Static file asset revisioning through content hashing
 
     //Replaces references to non-optimized scripts or stylesheets into a set of HTML files
