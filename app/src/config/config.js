@@ -9,8 +9,6 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 	token: '390919341102414|M7umyjZFedSGfPhQ4QXnOvhMXX4',
   anchorContent: false,
 
-  //prefixAbsoluteTemplateUrl: 'http://localhost:3319/templates/xxx/',
-
 	 //server: {
 	 //	api: 'http://localhost:3001/api'
 	 //},
