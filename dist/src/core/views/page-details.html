@@ -1,0 +1,22 @@
+<div class="myfp__pagedetails">
+
+  <img ng-if="pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo'" class="logo" ng-src="{{valueProp}}" />
+
+
+  <div ng-if="pageDetailsProp == 'cover'">
+
+    <div ng-if="responsive === 'true'" class="cover-wrapper">
+      <img class="cover" ng-src="{{valueProp}}" />
+    </div>
+
+    <img ng-if="responsive !== 'true'" class="" ng-src="{{valueProp}}" />
+
+  </div>
+
+  <p
+    ng-if="pageDetailsProp != 'profilepicture' && pageDetailsProp != 'picture' && pageDetailsProp != 'logo' && pageDetailsProp != 'cover'"
+    class="title" ng-bind-html="valueProp">
+
+  </p>
+
+</div>

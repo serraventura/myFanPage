@@ -1,10 +1,12 @@
-<ul>
-  <li ng-repeat="picture in pictures track by $index">
+<div class="myfp__pagephotos">
+  <ul>
+    <li ng-repeat="picture in pictures track by $index">
 
-    <a ng-href="{{picture.big}}" target="_blank">
-      <img ng-src="{{picture.small}}"/>
-    </a>
-    <span>{{picture.description}}</span>
+      <a ng-href="{{picture.big}}" target="_blank">
+        <img ng-src="{{picture.small}}"/>
+      </a>
+      <span>{{picture.description}}</span>
 
-  </li>
-</ul>
+    </li>
+  </ul>
+</div>

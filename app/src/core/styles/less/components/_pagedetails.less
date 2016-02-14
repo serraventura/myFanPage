@@ -1,0 +1,55 @@
+// LOGO-SPECIFIC MIXINS
+@logowidth: 	@logoheight;
+@logoheight: 	130px;
+@logoborder: 	10px;
+
+// COVER-SPECIFIC MIXINS
+@heroheight: 320px;
+
+.myfp__pagedetails {
+
+  // PAGE LOGO
+  .logo {
+    .absolute;
+    bottom: 0;
+    left: 1em;
+    height: @logoheight;
+    border: @logoborder solid @c-white;
+  }
+
+  .cover-wrapper {
+    .relative;
+    height: @heroheight;
+    overflow: hidden;
+
+    .cover {
+      .absolute;
+      top: 50%;
+      .translateY(-50%);
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+  }
+
+  .title, .short-description, .long-description {
+    //.absolute;
+    width: 100%;
+    //background-color: @c-text;
+    //color: @c-white;
+    //.font(@f-mo);
+    //font-size: round(@basefont * .8);
+    padding: .5em 1em;
+    margin: 0;
+    //border-bottom: 1px solid darken(@c-text, 20%);
+    z-index: 5;
+  }
+
+  .title {
+    background-color: @c-text;
+    color: @c-white;
+  }
+
+}

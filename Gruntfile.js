@@ -17,6 +17,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-contrib-less');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -42,8 +44,15 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['src/**/assets/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: [
+          'app/src/core/styles/{,*/}*.css',
+          'app/src/core/styles/less/{,*/}*.less'
+        ],
+        tasks: [
+          'newer:copy:styles',
+          'autoprefixer',
+          'less:development'
+        ]
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -90,6 +99,19 @@ module.exports = function (grunt) {
       dist: {
         options: {
           base: '<%= yeoman.dist %>'
+        }
+      }
+    },
+
+    // Config Less
+    less: {
+      development: {
+        options: {
+          paths: ['app/src/core/styles/less'],
+          sourceMap : true
+        },
+        files: {
+          'app/src/core/styles/myfp.css': 'app/src/core/styles/less/myfp.less'
         }
       }
     },
@@ -377,6 +399,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'bower-install',
+      'less:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -400,6 +423,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
+    'less:development',
 
     //useminPrepare task updates the grunt configuration to apply a configured transformation
     //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
@@ -449,6 +473,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build-prefix', [
     'clean:dist',
     'bower-install',
+    'less:development',
 
     //useminPrepare task updates the grunt configuration to apply a configured transformation
     //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat

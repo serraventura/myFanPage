@@ -3,28 +3,29 @@
 angular.module('myFanPageApp')
 	.directive('pageDetails', function (FanPageContent, FanPageConfig) {
 		return {
-			template: function(element, attrs) {
-
-				var pageDetailsProp = (attrs.value||'').toLowerCase();
-				var responsive = (attrs.responsive||'false');
-
-				if (pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo') {
-
-					return '<img ng-src="{{valueProp}}" />';
-
-				}else if (pageDetailsProp == 'cover') {
-
-					if (responsive === 'true') {
-						return '<img class="myfp__image--responsive" ng-src="{{valueProp}}" />';
-					}else{
-						return '<img ng-src="{{valueProp}}" />';
-					};
-
-				}else{
-					return '<p ng-bind-html="valueProp"></p>';
-				};
-
-			},
+			//template: function(element, attrs) {
+            //
+			//	var pageDetailsProp = (attrs.value||'').toLowerCase();
+			//	var responsive = (attrs.responsive||'false');
+            //
+			//	if (pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo') {
+            //
+			//		return '<img class=" logo" ng-src="{{valueProp}}" />';
+            //
+			//	}else if (pageDetailsProp == 'cover') {
+            //
+			//		if (responsive === 'true') {
+			//			return '<div class="myfp__pagedetails cover-wrapper"><img class="cover" ng-src="{{valueProp}}" /></div>';
+			//		}else{
+			//			return '<img class="myfp__pagedetails" ng-src="{{valueProp}}" />';
+			//		};
+            //
+			//	}else{
+			//		return '<p class="myfp__pagedetails title" ng-bind-html="valueProp"></p>';
+			//	};
+            //
+			//},
+      templateUrl: 'src/core/views/page-details.html',
 			restrict: 'E',
 			scope: true,
 			replace: true,
@@ -39,6 +40,11 @@ angular.module('myFanPageApp')
 
 						var pageDetailsProp = (attrs.value||'').toLowerCase();
 						var original = (attrs.original||'false');
+            var responsive = (attrs.responsive||'false');
+
+            scope.pageDetailsProp = pageDetailsProp;
+            scope.original = original;
+            scope.responsive = responsive;
 
 						if (pageDetailsProp == 'profilepicture' || (pageDetailsProp == 'picture' || pageDetailsProp == 'logo') ) {
 							pageDetailsProp = 'profilePicture';
