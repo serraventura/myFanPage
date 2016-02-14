@@ -30,7 +30,7 @@ angular.module('myFanPageApp').constant('FanPageConfig', {
 			active: true,
 			tweet: true,
 			name: 'Blog',
-			hashtag: '#blog',
+			hashtag: '#blog2',
 			pagination: {
 				active: true,
 				itemsPerPage: 100
