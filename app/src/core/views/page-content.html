@@ -1,32 +1,49 @@
 <div class="myfp__pagecontent">
   <div infinite-scroll="loadMore()">
-    <div class="feeds-post" dir-paginate="page in lazyPageContent|itemsPerPage:getItemsPerPage track by $index">
 
-      <div class="wrap-text-image" ng-show="page.type=='photo'">
+    <div
+      ng-class="{'single-feed': lazyPageContent.length == 1}"
+      class="feeds-post"
+      dir-paginate="page in lazyPageContent | itemsPerPage:getItemsPerPage track by $index"
+    >
 
-        <ul ng-show="isPictureArray(page)">
-          <li ng-repeat="pic in page.picture track by $index">
-            <a ng-href="{{pic.big}}" target="_blank">
-              <img ng-src="{{pic.small}}" />
+      <div class="type-photo" ng-if="page.type=='photo'">
+
+        <p ng-if="isPictureArray(page)" ng-bind-html="page.text|enableLink"></p>
+
+        <div class="wrap-text-image">
+
+          <ul ng-if="isPictureArray(page)">
+            <li ng-repeat="pic in page.picture track by $index">
+              <a ng-href="{{pic.big}}" target="_blank">
+                <img ng-if="page.picture.length > 1" class="photo-array" ng-src="{{pic.small}}" />
+                <img ng-if="page.picture.length == 1" class="photo" ng-src="{{pic.small}}" />
+              </a>
+            </li>
+          </ul>
+
+          <div ng-if="!isPictureArray(page)">
+            <a ng-href="{{page.picture.big}}" target="_blank">
+              <img ng-src="{{page.picture.small}}" />
             </a>
-          </li>
-        </ul>
+          </div>
 
-        <div ng-show="!isPictureArray(page)">
-          <a ng-href="{{page.picture.big}}" target="_blank">
-            <img ng-src="{{page.picture.small}}" />
-          </a>
         </div>
 
+        <p ng-if="!isPictureArray(page)" ng-bind-html="page.text|enableLink"></p>
+
       </div>
 
-      <div class="wrap-text-image" ng-if="page.type!='photo'">
-        <img ng-show="page.picture" ng-src="{{page.picture}}" />
+      <div class="type-other" ng-if="page.type!='photo'">
+        <div class="wrap-text-image">
+          <img ng-show="page.picture" ng-src="{{page.picture}}" />
+        </div>
+        <p ng-bind-html="page.text|enableLink"></p>
       </div>
-
-      <p ng-bind-html="page.text|enableLink"></p>
 
     </div>
+
     <dir-pagination-controls ng-show="active"></dir-pagination-controls>
+
   </div>
 </div>
