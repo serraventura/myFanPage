@@ -381,6 +381,18 @@ module.exports = function (grunt) {
       dist: {}
     },
 
+    // Append a timestamp to config.js (to avoid cache) which are both located in 'index.html'
+    cachebreaker: {
+      dev: {
+        options: {
+          match: ['src/config/config.js'],
+        },
+        files: {
+          src: ['<%= yeoman.app %>/index.html']
+        }
+      }
+    },
+
     // Test settings
     karma: {
       unit: {
@@ -403,6 +415,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
+      'cachebreaker:dev',
       'watch'
     ]);
   });
