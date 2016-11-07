@@ -1,7 +1,10 @@
 <div class="myfp__pagedetails">
 
-  <img ng-if="pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo'" class="logo" ng-src="{{valueProp}}" />
-
+  <img
+    ng-if="pageDetailsProp == 'profilepicture' || pageDetailsProp == 'picture' || pageDetailsProp == 'logo'"
+    ng-src="{{valueProp}}"
+    class="logo"
+  />
 
   <div ng-if="pageDetailsProp == 'cover'">
 
@@ -14,9 +17,21 @@
   </div>
 
   <p
-    ng-if="pageDetailsProp != 'profilepicture' && pageDetailsProp != 'picture' && pageDetailsProp != 'logo' && pageDetailsProp != 'cover'"
-    class="title" ng-bind-html="valueProp">
+    ng-if="pageDetailsProp == 'name'"
+    class="title"
+    ng-bind-html="valueProp">
+  </p>
 
+  <p
+    ng-if="pageDetailsProp == 'about'"
+    class="short-description"
+    ng-bind-html="valueProp">
+  </p>
+
+  <p
+    ng-if="pageDetailsProp == 'description'"
+    class="long-description"
+    ng-bind-html="valueProp">
   </p>
 
 </div>
