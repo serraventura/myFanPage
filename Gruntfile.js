@@ -390,6 +390,14 @@ module.exports = function (grunt) {
         files: {
           src: ['<%= yeoman.app %>/index.html']
         }
+      },
+      dist: {
+        options: {
+          match: ['src/config/config.js'],
+        },
+        files: {
+          src: ['<%= yeoman.dist %>/index.html']
+        }
       }
     },
 
@@ -415,7 +423,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'cachebreaker:dev',
+      'cachebreaker:dev', //creates random number to avoid cache on config.js
       'watch'
     ]);
   });
@@ -437,7 +445,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'bower-install',
     'less:development',
-
+    
     //useminPrepare task updates the grunt configuration to apply a configured transformation
     //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
     //and uglify for JS files, but it can be configured.
@@ -464,7 +472,7 @@ module.exports = function (grunt) {
 
     'concat', //Concatenate files.
     'copy:dist', //Copy files and folders.
-
+    'cachebreaker:dist', //creates random number to avoid cache on config.js
     //Grunt plugin for finding and modifying static resource URLs
     //The task looks through your specified files for URLs to rewrite
     'cdnify',
@@ -514,7 +522,7 @@ module.exports = function (grunt) {
 
     'concat', //Concatenate files.
     'copy:dist', //Copy files and folders.
-
+    'cachebreaker:dist', //creates random number to avoid cache on config.js
     //Grunt plugin for finding and modifying static resource URLs
     //The task looks through your specified files for URLs to rewrite
     'cdnify',
