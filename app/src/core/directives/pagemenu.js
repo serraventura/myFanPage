@@ -3,10 +3,10 @@
 angular.module('myFanPageApp')
 	.directive('pageMenu', function (FanPageContent, FanPageConfig, $timeout) {
 		return {
-			// templateUrl: 'src/core/views/page-menu.html',
-      templateUrl: function(elem, attr) {
-        return 'src/core/views/page-menu.html?_='+Math.random();
-      },
+			templateUrl: 'src/core/views/page-menu.html',
+      // templateUrl: function(elem, attr) {
+      //   return 'src/core/views/page-menu.html?_='+Math.random();
+      // },
       restrict: 'E',
 			scope: true,
 			replace: true,
