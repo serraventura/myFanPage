@@ -13,6 +13,7 @@ myFanPageApp is AngularJS based.
 	profilePicture: true,
 	token: '',
 	anchorContent: false,
+	enableCache: true,
 
 	menu: {
 
@@ -60,7 +61,9 @@ myFanPageApp is AngularJS based.
 
  - **token**: APP Access token - The token is supposed to be used only on development environment. This is a convenient way to develop your website faster without need any server dependency. There are tokens available on the file **token.dev** on the root of the APP. **See more details below**.
  
- - **anchorContent**: Enable/Disable content based on classic HTML anchors. To make it works the whole content must be in a single HTML file (**main.html**) in your template. The anchor id must match the menu options. Ex: #aboutFanPage, #photoFanPage, etc...   
+ - **anchorContent**: Enable/Disable content based on classic HTML anchors. To make it works the whole content must be in a single HTML file (**main.html**) in your template. The anchor id must match the menu options. Ex: #aboutFanPage, #photoFanPage, etc...
+
+ - **enableCache**: true|false - local cache for data coming from facebook page.    
 
  - **menu**: Following the example above each menu option is gonna be explained. It's important to point that every menu name(ex: aboutFanPage) must reflect its respective HTML file. It means, if there's a menu option "aboutFanPage" one "aboutFanPage.html" must exist. The best way to understand is checking out the "default" template.
 

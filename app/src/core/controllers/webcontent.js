@@ -20,6 +20,7 @@ angular.module('myFanPageApp')
     var photoService = new PhotoService();
     var feedService = new FeedService();
     var prefixAbsoluteTemplateUrl = _.get(FanPageConfig, ['prefixAbsoluteTemplateUrl'], '');
+    var enableCache = _.get(FanPageConfig, ['enableCache'], true);
 
     // TODO: decide whow to organize the watches blocks
     WatchService.watchRoutes($scope);
@@ -71,23 +72,29 @@ angular.module('myFanPageApp')
       // handling cache
       if(typeof Storage !== 'undefined'){
 
-        if(localStorage.getItem('fanPageContentCache') != null){
+        if (enableCache) {
 
-          try{
+          if(localStorage.getItem('fanPageContentCache') != null){
 
-            var cache = JSON.parse(localStorage.getItem('fanPageContentCache'));
+            try{
 
-            if (moment().diff(moment(cache.dateCriation), 'days') >= 1) {
-              localStorage.removeItem('fanPageContentCache');
-              makeCache();
-            };
+              var cache = JSON.parse(localStorage.getItem('fanPageContentCache'));
 
-          }catch(err){
-            console.log('Error in cache: ', err);
+              if (moment().diff(moment(cache.dateCriation), 'days') >= 1) {
+                localStorage.removeItem('fanPageContentCache');
+                makeCache();
+              };
+
+            }catch(err){
+              console.log('Error in cache: ', err);
+            }
+
+          }else{
+            makeCache();
           }
 
-        }else{
-          makeCache();
+        } else {
+          localStorage.removeItem('fanPageContentCache');
         }
 
       }
