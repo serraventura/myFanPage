@@ -182,9 +182,31 @@ module.exports = function (grunt) {
       }
     },
 
-
-
-
+		ngtemplates:  {
+			app:        {
+				src:      ['<%= yeoman.app %>/src/core/views/**.html', '<%= yeoman.app %>/src/webcontent/views/templates/**/**.html'],
+				dest:     'app/src/core/templatesCache.js',
+				options: {
+					prefix: '',
+					//usemin: 'scripts/scripts.js',
+					module: 'myFanPageApp',
+					url: function(url) {
+            // console.log(url);
+						return url.replace('app/', ''); // fix for absolute path urls
+					},
+					htmlmin: {
+						collapseBooleanAttributes:      true,
+						collapseWhitespace:             true,
+						removeAttributeQuotes:          false,
+						removeComments:                 true,
+						removeEmptyAttributes:          false,
+						removeRedundantAttributes:      false,
+						removeScriptTypeAttributes:     true,
+						removeStyleLinkTypeAttributes:  true
+					}
+				}
+			}
+		},
 
     // Renames files for browser caching purposes
     rev: {
@@ -464,6 +486,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     //------------------
 
+    'ngtemplates', // cache HTML templates
     //'ngmin',
 
     //Add, remove and rebuild angularjs dependency injection annotations
@@ -514,6 +537,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     //------------------
 
+    'ngtemplates', // cache HTML templates
     //'ngmin',
 
     //Add, remove and rebuild angularjs dependency injection annotations
