@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myFanPageApp').service('WatchService', function WatchService(FanPageConfig, $route, $routeParams, $http, $compile) {
+angular.module('myFanPageApp').service('WatchService', function WatchService(FanPageConfig, $route, $routeParams, $http, $compile, $templateCache) {
 
   var th = this;
 
@@ -12,11 +12,19 @@ angular.module('myFanPageApp').service('WatchService', function WatchService(Fan
 
       if (newVal !== oldVal && !FanPageConfig.anchorContent) {
 
-        $route.current.templateUrl = 'src/webcontent/views/templates/'+FanPageConfig.template+'/'+$routeParams.name+'.html';
+        var templateUrl = 'src/webcontent/views/templates/'+FanPageConfig.template+'/'+$routeParams.name+'.html';
+        var template = $templateCache.get(templateUrl);
 
-        $http.get($route.current.templateUrl).then(function (msg) {
-          angular.element('[ng-view]').eq(0).html($compile(msg.data)($scope));
-        });
+        if (!template) {
+
+          $route.current.templateUrl = templateUrl;
+          $http.get($route.current.templateUrl).then(function (msg) {
+            angular.element('[ng-view]').eq(0).html($compile(msg.data)($scope));
+          });
+
+        } else {
+          angular.element('[ng-view]').eq(0).html($compile(template)($scope));
+        }
 
       };
 
