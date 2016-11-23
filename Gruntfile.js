@@ -463,6 +463,10 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
+  grunt.registerTask('cache-template', [
+    'ngtemplates'
+  ]);
+
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
