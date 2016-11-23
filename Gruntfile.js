@@ -565,6 +565,7 @@ module.exports = function (grunt) {
     //------------------
 
     'ngtemplates', // cache HTML templates
+    'ngconstant:development',
     //'ngmin',
 
     //Add, remove and rebuild angularjs dependency injection annotations
