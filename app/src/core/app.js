@@ -8,9 +8,12 @@ angular.module('myFanPageApp', [
   'oc.lazyLoad'
 ])
 
-.config(function ($routeProvider, FanPageConfig) {
+.config(function ($routeProvider, FanPageConfig, ENV) {
 
   var prefixAbsoluteTemplateUrl = _.get(FanPageConfig, ['prefixAbsoluteTemplateUrl'], '');
+
+  // if there is template cache available no need to load absolute path
+  if (ENV.templateCache) prefixAbsoluteTemplateUrl = '';
 
   var mainTemplateUrl = prefixAbsoluteTemplateUrl+'src/webcontent/views/templates/'+FanPageConfig.template+'/main.html';
   var pageTemplateUrl = prefixAbsoluteTemplateUrl+'src/webcontent/views/templates/'+FanPageConfig.template+'/_blank.html';

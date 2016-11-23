@@ -8,7 +8,7 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-
+var fs = require('fs');
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -207,6 +207,28 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+
+    ngconstant: {
+      // Options for all targets
+      options: {
+        serializerOptions: {indent: '', no_trailing_comma: true},
+        wrap: "'use strict';\n\n{%= __ngModule %}",
+        name: 'myFanPageApp',
+        deps: false
+      },
+      // Environment targets
+      development: {
+        options: {
+          dest: 'app/src/core/scripts/env.js'
+        },
+        constants: {
+          ENV: {
+            development: true,
+            templateCache: fs.existsSync('app/src/core/templatesCache.js')
+          }
+        }
+      }
+    },
 
     // Renames files for browser caching purposes
     rev: {
@@ -491,6 +513,7 @@ module.exports = function (grunt) {
     //------------------
 
     'ngtemplates', // cache HTML templates
+    'ngconstant:development',
     //'ngmin',
 
     //Add, remove and rebuild angularjs dependency injection annotations
