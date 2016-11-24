@@ -11,7 +11,8 @@ angular.module('myFanPageApp')
     PhotoService,
     FeedService,
     ModuleLoader,
-    FanPageContent
+    FanPageContent,
+    ENV
   ) {
 
     var arrPromises = [];
@@ -21,6 +22,9 @@ angular.module('myFanPageApp')
     var feedService = new FeedService();
     var prefixAbsoluteTemplateUrl = _.get(FanPageConfig, ['prefixAbsoluteTemplateUrl'], '');
     var enableCache = _.get(FanPageConfig, ['enableCache'], true);
+
+    // if there is template cache available no need to load absolute path
+    if (ENV.templateCache) prefixAbsoluteTemplateUrl = '';
 
     // TODO: decide whow to organize the watches blocks
     WatchService.watchRoutes($scope);
