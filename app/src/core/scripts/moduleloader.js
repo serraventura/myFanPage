@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myFanPageApp')
-  .factory('ModuleLoader', function ($ocLazyLoad, $compile, $rootScope, $http, FanPageConfig) {
+  .factory('ModuleLoader', function ($ocLazyLoad, $compile, $rootScope, $http, FanPageConfig, ENV) {
 
     function getAllAttributes(domElement, returnString) {
 
@@ -32,7 +32,7 @@ angular.module('myFanPageApp')
             if (FanPageConfig.hasOwnProperty('plugin')) {
 
                 var p;
-                var arrDirectiveElements;
+                var arrDirectiveElements, promise;
                 var scope = $rootScope.$new();
 
                 for(p in FanPageConfig.plugin){
@@ -41,11 +41,13 @@ angular.module('myFanPageApp')
 
                       var pathPlugin = 'src/webcomponent/'+p.toLowerCase()+'/'+p.toLowerCase()+'.js';
 
-                      $ocLazyLoad.load({
-                        name: p.toLowerCase(),
-                        files: [pathPlugin],
-                        serie: true
-                      }).then(function () {
+                      if (ENV.development) {
+                        promise = $ocLazyLoad.load({name: p.toLowerCase(), files: [pathPlugin], serie: true});
+                      } else {
+                        promise = $ocLazyLoad.inject(p.toLowerCase());
+                      }
+
+                      promise.then(function () {
 
                         $http.get(pathPlugin).then(function (fileContent) {
 

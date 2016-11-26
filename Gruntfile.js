@@ -227,6 +227,52 @@ module.exports = function (grunt) {
             templateCache: fs.existsSync('app/src/core/templatesCache.js')
           }
         }
+      },
+      production: {
+        options: {
+          dest: 'app/src/core/scripts/env.js'
+        },
+        constants: {
+          ENV: {
+            development: false,
+            templateCache: fs.existsSync('app/src/core/templatesCache.js')
+          }
+        }
+      }
+    },
+
+		devcode: {
+      options: {
+        html: true, // html files parsing?
+        js: true, // javascript files parsing?
+        css: true, // css files parsing?
+        clean: true, // removes devcode comments even if code was not removed
+        block: {
+          open: 'devcode', // with this string we open a block of code
+          close: 'endcode' // with this string we close a block of code
+        },
+        dest: 'dist' // default destination which overwrittes environment variable
+      },
+      server: { // settings for task used with 'devcode:server'
+        options: {
+          source: '<%= yeoman.app %>/',
+          dest: '.tmp/',
+          env: 'development'
+        }
+      },
+      dist: { // settings for task used with 'devcode:dist'
+        options: {
+          source: 'dist/',
+          dest: 'dist/',
+          env: 'production'
+        }
+      },
+      dev: { // settings for task used with 'devcode:dist'
+        options: {
+          source: '.tmp',
+          dest: '.tmp',
+          env: 'development'
+        }
       }
     },
 
@@ -464,6 +510,7 @@ module.exports = function (grunt) {
       'clean:server',
       'bower-install',
       'less:development',
+      'devcode:server', // devcode before coffee or whatever You like, but using 'server' section.
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -513,7 +560,7 @@ module.exports = function (grunt) {
     //------------------
 
     'ngtemplates', // cache HTML templates
-    'ngconstant:development',
+    'ngconstant:production',
     //'ngmin',
 
     //Add, remove and rebuild angularjs dependency injection annotations
@@ -522,6 +569,7 @@ module.exports = function (grunt) {
 
     'concat', //Concatenate files.
     'copy:dist', //Copy files and folders.
+    'devcode:dist', // devcode after 'copy', or whatever You like if You know what are You doing.
     'cachebreaker:dist', //creates random number to avoid cache on config.js
     //Grunt plugin for finding and modifying static resource URLs
     //The task looks through your specified files for URLs to rewrite
@@ -541,11 +589,11 @@ module.exports = function (grunt) {
     'clean:unnecessary'
   ]);
 
-  grunt.registerTask('build-prefix', [
+  grunt.registerTask('build-dev', [
     'clean:dist',
     'bower-install',
     'less:development',
-
+    
     //useminPrepare task updates the grunt configuration to apply a configured transformation
     //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
     //and uglify for JS files, but it can be configured.
@@ -574,6 +622,7 @@ module.exports = function (grunt) {
 
     'concat', //Concatenate files.
     'copy:dist', //Copy files and folders.
+    'devcode:dev', // devcode after 'copy', or whatever You like if You know what are You doing.
     'cachebreaker:dist', //creates random number to avoid cache on config.js
     //Grunt plugin for finding and modifying static resource URLs
     //The task looks through your specified files for URLs to rewrite
@@ -582,7 +631,7 @@ module.exports = function (grunt) {
 
     'cssmin', //Compress CSS files
     'uglify', //Minify files with UglifyJS
-    'rev', //Static file asset revisioning through content hashing
+    //'rev', //Static file asset revisioning through content hashing
 
     //Replaces references to non-optimized scripts or stylesheets into a set of HTML files
     //(or any templates/views)
