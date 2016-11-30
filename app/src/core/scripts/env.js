@@ -2,6 +2,6 @@
 
 angular.module('myFanPageApp')
 
-.constant('ENV', {development:true,templateCache:true})
+.constant('ENV', {development:false,templateCache:true})
 
 ;
