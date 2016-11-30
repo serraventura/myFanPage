@@ -252,17 +252,17 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
                 };
 
-                idx = _.findIndex(FanPageContent.pages, function(item) {
+                idx = (FanPageContent.pages || []).findIndex(function(item) {
                   return item.id == data[i].data.id;
-                });
+                })
 
                 FanPageContent.pages[idx].picture = subattachments;
 
               }else{
 
-                idx = _.findIndex(FanPageContent.pages, function(item) {
+                idx = (FanPageContent.pages || []).findIndex(function(item) {
                   return item.id == data[i].data.id;
-                });
+                })
 
                 FanPageContent.pages[idx].picture = {
                   big: data[i].data.attachments.data[0].media.image.src,
@@ -277,12 +277,10 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
             // TODO: find a way to improve performance for this code (maybe lodash)
 
             var promisesPicture = [];
-
-            var arrPics = _.flatten(_.map(FanPageContent.pages, function(item){
-              if(item.type == 'photo') {
-                return item.picture
-              }
-            }));
+            var arrPics = FanPageContent.pages
+              .filter(function(item){return item.type === 'photo'})
+              .map(function(item){return item.picture})
+              .reduce( function(item1, item2) {return item1.concat(item2)} );
 
             // check all contents type "photo" and retrieve them
             for (var i = 0; i < arrPics.length; i++) {
@@ -301,10 +299,11 @@ angular.module('myFanPageApp').factory('FeedService', function ($q, $log, $http,
 
                   if(FanPageContent.pages[i].type.toLowerCase() == 'photo'){
 
-                    if(FanPageContent.pages[i].picture && (_.isObject(FanPageContent.pages[i].picture) || _.isArray(FanPageContent.pages[i].picture)) ){
+                    var picture = FanPageContent.pages[i].picture;
+                    var isPictureObject = (picture !== null && typeof picture === 'object');
+                    if(FanPageContent.pages[i].picture && (isPictureObject || Array.isArray(FanPageContent.pages[i].picture)) ){
 
-
-                      if( _.isArray(FanPageContent.pages[i].picture) ){
+                      if( Array.isArray(FanPageContent.pages[i].picture) ){
 
                         for (var j = 0; j < FanPageContent.pages[i].picture.length; j++) {
 
