@@ -513,6 +513,7 @@ module.exports = function (grunt) {
       'devcode:server', // devcode before coffee or whatever You like, but using 'server' section.
       'concurrent:server',
       'autoprefixer',
+      'ngconstant:development',
       'connect:livereload',
       'cachebreaker:dev', //creates random number to avoid cache on config.js
       'watch'
@@ -540,7 +541,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'bower-install',
     'less:development',
-    
+
     //useminPrepare task updates the grunt configuration to apply a configured transformation
     //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
     //and uglify for JS files, but it can be configured.
@@ -593,7 +594,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'bower-install',
     'less:development',
-    
+
     //useminPrepare task updates the grunt configuration to apply a configured transformation
     //flow to tagged files (i.e. blocks). By default the transformation flow is composed of concat
     //and uglify for JS files, but it can be configured.
