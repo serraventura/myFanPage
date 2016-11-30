@@ -59,8 +59,10 @@ angular.module('myFanPageApp').service('FanPageContent', function FanPageContent
           try{
 
             var cache = JSON.parse(localStorage.getItem('fanPageContentCache'));
+            var now = new Date().getDate();
+            var dateCriation = new Date(cache.dateCriation || now).getDate();
 
-            if (moment().diff(moment(cache.dateCriation), 'days') < 1) {
+            if ( (now-dateCriation) < 1) {
 
               FanPageContent.isCached = true;
               FanPageContent.pageDetails = cache.data.pageDetails;

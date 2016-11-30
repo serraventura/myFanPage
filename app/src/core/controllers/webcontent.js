@@ -56,7 +56,7 @@ angular.module('myFanPageApp')
     function makeCache() {
 
         var fanPageContentCache = {
-          dateCriation: moment().format(),
+          dateCriation: new Date(),
           data: FanPageContent
         };
 
@@ -83,8 +83,10 @@ angular.module('myFanPageApp')
             try{
 
               var cache = JSON.parse(localStorage.getItem('fanPageContentCache'));
+              var now = new Date().getDate();
+              var dateCriation = new Date(cache.dateCriation || now).getDate();
 
-              if (moment().diff(moment(cache.dateCriation), 'days') >= 1) {
+              if ( (now-dateCriation) < 1) {
                 localStorage.removeItem('fanPageContentCache');
                 makeCache();
               };

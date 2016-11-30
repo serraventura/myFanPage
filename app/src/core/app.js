@@ -10,7 +10,7 @@ angular.module('myFanPageApp', [
 
 .config(function ($routeProvider, FanPageConfig, ENV) {
 
-  var prefixAbsoluteTemplateUrl = _.get(FanPageConfig, ['prefixAbsoluteTemplateUrl'], '');
+  var prefixAbsoluteTemplateUrl = FanPageConfig.prefixAbsoluteTemplateUrl || '';
 
   // if there is template cache available no need to load absolute path
   if (ENV.templateCache) prefixAbsoluteTemplateUrl = '';
@@ -37,7 +37,7 @@ angular.module('myFanPageApp', [
 
 .run(function(FanPageConfig, $location) {
 
-  var prefixAbsoluteTemplateUrl = _.get(FanPageConfig, ['prefixAbsoluteTemplateUrl'], '');
+  var prefixAbsoluteTemplateUrl = FanPageConfig.prefixAbsoluteTemplateUrl || '';
 
   MYFP.util.loadJS(prefixAbsoluteTemplateUrl+'src/webcontent/views/templates/'+FanPageConfig.template+'/assets/js/'+FanPageConfig.template+'.js');
   MYFP.util.loadCSS(prefixAbsoluteTemplateUrl+'src/webcontent/views/templates/'+FanPageConfig.template+'/assets/styles/'+FanPageConfig.template+'.css');
