@@ -42,11 +42,10 @@ angular.module('myFanPageApp', [
     MYFP.util.loadJS(prefixAbsoluteTemplateUrl + 'src/webcontent/views/templates/' + FanPageConfig.template + '/assets/js/' + FanPageConfig.template + '.js');
     MYFP.util.loadCSS(prefixAbsoluteTemplateUrl + 'src/webcontent/views/templates/' + FanPageConfig.template + '/assets/styles/' + FanPageConfig.template + '.css');
 
-    if ($location.path() == '') {
-
-        var menuOption = Object.keys(FanPageConfig.menu || {}).map(function (item) { return FanPageConfig.menu[item] }).find(function (item) { return item.initialPage });
-        if (menuOption) $location.path('/' + menuOption);
-
+    if ($location.path() === '') {
+        var menuOptions = Object.keys(FanPageConfig.menu || {});
+        var idx = menuOptions.map(function (item) { return FanPageConfig.menu[item] }).findIndex(function (item) { return item.initialPage });
+        if (idx !== -1) $location.path('/' + menuOptions[idx]);
     }
 
 })
