@@ -18,7 +18,6 @@ grunt serve
 ## Config file
 ```javascript
 {
-
 	fanPageId: 'myfanpageapp',
 	template: 'default',
 	coverPicture: true,
@@ -26,9 +25,7 @@ grunt serve
 	token: '',
 	anchorContent: false,
 	enableCache: true,
-
 	menu: {
-
 		aboutFanPage: {
 			active: true,
 			name: 'About us',
@@ -51,13 +48,10 @@ grunt serve
 			name: 'Services',
 			hashtag: '#ourservices'
 		}
-
 	},
-	
 	plugin: {
 		myCustomPluginName: true
 	}
-
 }
 ```
 
@@ -204,7 +198,7 @@ server: {
 
 > **original**: true|false - Retrieves the original picture size if true
 
-###Page Menu:
+### Page Menu:
 
 ```html
 <page-menu></page-menu>
@@ -252,7 +246,7 @@ server: {
 
 Templates can be found at **app/src/webcontent/views/templates/**. An easy way to find out how the templates works is checking out our "default" template.
 
-###Basic folder structure for a template:
+### Basic folder structure for a template:
 
 ```
 -- mytemplate               (Main folder)
