@@ -1,7 +1,19 @@
 # myFanPageApp
-A 100% client APP to create flexible websites based in a Facebook fanpage. The APP aims provide dynamic content using the basics client technologies such as HTML, CSS and Javascript.
+A 100% client APP to create flexible websites based in a Facebook fanpage. The APP aim to provide dynamic content using the basics client technologies such as HTML, CSS and Javascript.
 
 myFanPageApp is AngularJS based.
+
+## Running locally
+
+> Requires NPM, GIT
+```bash
+git clone https://github.com/serraventura/myFanPage
+npm install
+npm install -g bower
+bower install
+grunt serve
+# open in a browse http://127.0.0.1:9000/
+```
 
 ## Config file
 ```javascript
@@ -125,7 +137,7 @@ myFanPageApp is AngularJS based.
     * **name**: The menu option label to be displayed on menu.
     * **hashtag**: Creates a target to retrieve only content based on the hashtag defined. The example above will retrieve only one content, the latest post with the hashtag '#ourservices'.
 
-###Token details:
+### Token details:
 
 For security propurses an APP Access token must not be used on the front-end side in a production environment. You can find out more details and participate [here](http://stackoverflow.com/questions/30654961/facebook-app-token-from-a-placebo-app).
 
@@ -149,7 +161,7 @@ server: {
 
 ## Built-in directives
 
-###Page Details:
+### Page Details:
 
 ```html
 <page-details value="about"></page-details>
@@ -200,7 +212,7 @@ server: {
 > Dipslay web site menu based on config.js file settings
 
 
-###Page Include:
+### Page Include:
 
 ```html
 <page-include value="header.html"></page-include>
@@ -209,7 +221,7 @@ server: {
 
 > Ex: If you are working in a template called "myGreenTemplate" all the HTML parts added as a value must be inside the template folder "myGreenTemplate".
 
-###Page Content:
+### Page Content:
 
 ```html
 <page-content></page-content>
@@ -229,14 +241,14 @@ server: {
  
 > **item**: 0,1,2,3...n - Returns a specific post among all retrieved when tweet equals true
 
-###Page Photo:
+### Page Photo:
 
 ```html
 <page-photos></page-photos>
 ```
 > Display pictures from fanpage's album setup on config.js file on pinned menu photoFanPage.
 
-#How to build a template
+# How to build a template
 
 Templates can be found at **app/src/webcontent/views/templates/**. An easy way to find out how the templates works is checking out our "default" template.
 
@@ -253,7 +265,7 @@ Templates can be found at **app/src/webcontent/views/templates/**. An easy way t
 -------- mytemplate.css     (Main CSS file. Must have same name as template)
 ```
 
-###Main basic rules to create a new template:
+### Main basic rules to create a new template:
 
  1. A template must be under **app/src/webcontent/views/templates/**.
  2. Chosen the template name the same must be used as the main javascript file name and the main css file name as exemple above.
@@ -263,7 +275,7 @@ Templates can be found at **app/src/webcontent/views/templates/**. An easy way t
  6. HTML tags such as: ```<html></html>```, ```<head></head>```, ```<body></body>``` must not be used. Every HTML page reflects the content of a main ```<body></body>``` tag.
  7. Only one root element must exist for every HTML page.
 
-###Creating new pages:
+### Creating new pages:
 
 On main.html file the page-menu directive can be used ```<page-menu></page-menu>``` to show the menu options setup on **config.js**.
 
@@ -276,7 +288,7 @@ Every page related to a menu option must have the same name, following the confi
 
 Any extra HTML part can be included by ```<page-include></page-include>``` directive.
 
-###Using third party resources in a template:
+### Using third party resources in a template:
 
 To use third party resources a JQuery helper method is available over the namespace ```$.util```.
 
@@ -296,18 +308,18 @@ $.util.includeFile('test.css'); // css file at **styles** folder
 $.util.includeFile('test.js'); // js file at **js** folder
 ```
 
-#How to build a plugin
+# How to build a plugin
 
 Plugins can be built to extend the APP. Basically a supported plugin is an external AngularJS module which can be attached to the main APP by the **config.js** file on the section **plugin**.
 
-###Restrictions
+### Restrictions
 
 For the current version of the plugin support there are still some restriction as following:
 
  - The external AngularJS module must be in a single file.
  - The internal plugin's directives must be type element (**restrict: 'E'**).
  
-###Main basic rules
+### Main basic rules
 
  - The plugin must be inside the folder **webcomponent** (app/src/webcomponent).
  - Must be in a single file.
@@ -315,7 +327,7 @@ For the current version of the plugin support there are still some restriction a
  - Must be inside a folder with the same name. Ex: **app/src/webcomponent/mycustompluginname/mycustompluginname.js**.
  - Must be defined on **config.js** file, section **plugin**. You can see the above example **"mycustompluginname"** on the top of the documentation on **config.js** section.
  
- ###Simple plugin example
+ ### Simple plugin example
  
  ```javascript
  'use strict';
